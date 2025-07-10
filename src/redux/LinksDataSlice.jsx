@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getLinks } from "../service/service";
 
 const state = {
-    linkData: []
+    linkData: [],
+    loading: false,
+    error: null
 }
 
 export const getNavlinks = createAsyncThunk('navlinks', async () => {
@@ -18,10 +20,25 @@ export const linkSlice = createSlice({
 
     },
     extraReducers: (builder) => {
+        builder.addCase(getNavlinks.pending, (state) => {
+            state.loading = true
+            state.error = null
+        })
         builder.addCase(getNavlinks.fulfilled, (state, action) => {
+            state.loading = false
             state.linkData = action.payload
         })
+        builder.addCase(getNavlinks.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        })
     }
-}) 
+})
 
 export default linkSlice.reducer
+
+// dispatch(getNavlinks()) ──►
+//    🔹 dispatch({ type: 'navlinks/pending' }) ──►
+//    🔹 getLinks() API çağırışı ──►
+//        └── success? ► dispatch({ type: 'fulfilled', payload })
+//        └── error?   ► dispatch({ type: 'rejected', error })
