@@ -7,8 +7,8 @@ import Logo from '../childComponents/Logo'
 import { FiSearch } from "react-icons/fi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiBag } from "react-icons/pi";
-import NikeManLogo from '../childComponents/NikeManLogo'
-import NikeArrowIcon from '../childComponents/NikeArrowIcon'
+import NikeManLogo from '../childComponents/Nav children/NikeManLogo'
+import NikeArrowIcon from '../childComponents/Nav children/NikeArrowIcon'
 
 function Nav() {
 
