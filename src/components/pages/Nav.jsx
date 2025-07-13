@@ -11,8 +11,14 @@ import NikeManLogo from '../childComponents/Nav children/NikeManLogo'
 import NikeArrowIcon from '../childComponents/Nav children/NikeArrowIcon'
 import HelpModal from '../childComponents/Nav children/HelpModal'
 import { FiUser } from "react-icons/fi";
+import { HiOutlineXMark } from "react-icons/hi2";
+import { SlArrowRight } from "react-icons/sl";
+import { SlArrowLeft } from "react-icons/sl";
 
 function Nav() {
+    const [menuStep, setMenuStep] = useState(0); // 0: name-lər, 1: title-lar, 2: item-lər
+    const [selectedLink, setSelectedLink] = useState(null); // kliklənən name
+    const [selectedTitle, setSelectedTitle] = useState(null); // kliklənən title
 
     const { linkData, loading, error } = useSelector(store => store.links)
     const [altData, setAltData] = useState([])
@@ -55,6 +61,23 @@ function Nav() {
     function openBar() {
         setMenuBar(true)
     }
+    function handleLinkClick(link) {
+        setSelectedLink(link);      // seçilən link saxlanır
+        setMenuStep(1);             // title mərhələsinə keçirik
+    }
+    function handleTitleClick(title) {
+        setSelectedTitle(title);    // seçilən title saxlanır
+        setMenuStep(2);             // item mərhələsinə keçirik
+    }
+    function goBack() {
+        if (menuStep === 2) {
+            setSelectedTitle(null);
+            setMenuStep(1);           // item → title
+        } else if (menuStep === 1) {
+            setSelectedLink(null);
+            setMenuStep(0);           // title → name
+        }
+    }
 
     if (loading) {
         return <p className='links_loading'>Linkler yuklenir...</p>
@@ -94,7 +117,7 @@ function Nav() {
                     <div className="nav_content">
                         <Logo />
                         <div className='links' onMouseLeave={hideAlt}>
-                            <div className={`navlinks ${menuBar ? 'open' : ''}`}  >
+                            <div className={`navlinks`}  >
                                 {linkData?.map(item => (
                                     <NavLink
                                         key={item.id}
@@ -141,6 +164,60 @@ function Nav() {
                     </div>
                 </div>
             </div>
+            {menuBar && (
+                <div className="mobile_menu">
+                    {menuStep > 0 && (
+                        <button onClick={goBack} className="back_btn">
+                            <SlArrowLeft style={{ fontSize: '14px' }} />
+                            <span>{menuStep === 1 ? 'All' : selectedLink.name}</span>
+                        </button>
+                    )}
+                    <button
+                        className="close_btn"
+                        onClick={() => {
+                            setMenuBar(false);
+                            setMenuStep(0);
+                            setSelectedLink(null);
+                            setSelectedTitle(null);
+                        }}><HiOutlineXMark style={{ fontSize: '28px' }} />
+                    </button>
+                    {menuStep === 0 && linkData?.map(link => (
+                        <button
+                            key={link.id}
+                            onClick={() => handleLinkClick(link)}
+                            className="menu_link">
+                            <span>{link.name}</span>
+                            <SlArrowRight style={{ fontSize: '16px' }} />
+                        </button>
+                    ))}
+                    {menuStep === 1 && (
+                        <div>
+                            <Link className="selected_link_title">{selectedLink?.name}</Link>
+                            <div>
+                                {selectedLink?.altCat.map((cat, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => handleTitleClick(cat)}
+                                        className="menu_title">
+                                        <span>{cat.title}</span>
+                                        <SlArrowRight style={{ fontSize: '16px' }} />
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                    {menuStep === 2 && (
+                        <div>
+                            <Link>{selectedTitle?.title}</Link>
+                            {selectedTitle?.items.map((item, index) => (
+                                <Link to="/" key={index} className="menu_item" onClick={() => setMenuBar(false)}>
+                                    {item}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
         </nav>
     )
 }

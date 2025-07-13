@@ -184,7 +184,7 @@
     .toplinks{display: none;overflow: hidden;}
     .navlinks{
         display: none;
-        position: absolute;
+        /* position: absolute;
         right: 0;
         top: 100%;
         z-index: 999;
@@ -193,9 +193,9 @@
         padding: 20px;
         flex-direction: column;
         align-items: baseline;
-        background-color: red;
+        background-color: red; */
     }
-    .navlinks.open{display: flex;}
+    /* .navlinks.open{display: flex;} */
     .nav_content {padding: 18px 0;}
     .right_links{gap: 15px;}
     .cart_icon_box{
@@ -232,5 +232,52 @@
         height: 2px;
         background-color: #111;
     }
-
+    .mobile_menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        min-height: 100vh;
+        background: #fff;
+        z-index: 1000;
+        padding: 50px 30px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        transition: all 0.3s ease;
+    }
+    .menu_link,
+    .menu_title,
+    .menu_item {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 10px 0;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+    .back_btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-weight: bold;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .close_btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
 }
