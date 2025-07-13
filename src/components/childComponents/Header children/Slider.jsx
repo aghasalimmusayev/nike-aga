@@ -6,29 +6,38 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './slider.css';
-import slide1 from '../../../assets/img/nike-slider1.webp'
-import slide2 from '../../../assets/img/nike-slider2.webp'
-import slide3 from '../../../assets/img/nike-slider3.webp'
-import slide4 from '../../../assets/img/nike-slider4.webp'
-
+import slideV1 from '../../../assets/video/Slide1.mp4'
+import slideV2 from '../../../assets/video/Slide3.mp4'
+import slideV3 from '../../../assets/video/Slide4.mp4'
+import slideV4 from '../../../assets/video/Slide7.mp4'
+import slide5 from '../../../assets/img/nike_boots.jpg'
+import { Link } from 'react-router-dom';
 
 export default function Slider() {
     const progressCircle = useRef(null);
     const swiperRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(true);
+    const videoRef = useRef([]);
     const onAutoplayTimeLeft = (s, time, progress) => {
         if (progressCircle.current) {
             progressCircle.current.style.setProperty('--progress', 1 - progress);
         }
     };
+
     // Play/Pause toggle funksiyası
     const toggleAutoplay = () => {
         if (swiperRef.current?.swiper) {
             if (isPlaying) {
-                swiperRef.current.swiper.autoplay.pause(); // stop əvəzinə pause
+                swiperRef.current.swiper.autoplay.pause();
+                videoRef.current.forEach(video => {
+                    if (video && !video.paused) video.pause()
+                })
                 setIsPlaying(false);
             } else {
-                swiperRef.current.swiper.autoplay.resume(); // start əvəzinə resume
+                swiperRef.current.swiper.autoplay.resume();
+                videoRef.current.forEach(video => {
+                    if (video && video.paused) video.play()
+                })
                 setIsPlaying(true);
             }
         }
@@ -41,21 +50,67 @@ export default function Slider() {
                 spaceBetween={30}
                 centeredSlides={true}
                 autoplay={{
-                    delay: 3000,
+                    delay: 8000,
                     disableOnInteraction: false,
                 }}
                 pagination={{
                     clickable: true,
                 }}
+                loop={true}
                 navigation={false}
                 modules={[Autoplay, Pagination, Navigation]}
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
-                className="mySwiper"
-            >
-                <SwiperSlide><img src={slide1} alt="" /></SwiperSlide>
-                <SwiperSlide><img src={slide2} alt="" /></SwiperSlide>
-                <SwiperSlide><img src={slide3} alt="" /></SwiperSlide>
-                <SwiperSlide><img src={slide4} alt="" /></SwiperSlide>
+                className="mySwiper">
+
+                <SwiperSlide className='slide'>
+                    <video
+                        src={slideV1} autoPlay muted loop playsInline ref={(el) => videoRef.current[0] = el} className='slide_video'>
+                    </video>
+                    <div className="slide_content">
+                        <h1>BRING YOUR GAME</h1>
+                        <p>Sport your signature sytle</p>
+                        <Link to={'/'}>Shop</Link>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className='slide'>
+                    <video
+                        src={slideV2} autoPlay muted loop playsInline ref={(el) => videoRef.current[1] = el} className='slide_video'>
+                    </video>
+                    <div className="slide_content">
+                        <h1>SCARY GOOD PACK</h1>
+                        <p>Terrify opposition with boots that bring precition, speed and touch.</p>
+                        <Link to={'/'}>Explore</Link>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className='slide'>
+                    <video
+                        src={slideV3} autoPlay muted loop playsInline ref={(el) => videoRef.current[2] = el} className='slide_video'>
+                    </video>
+                    <div className="slide_content">
+                        <h1>AVA ROWER</h1>
+                        <p>ReaxtX cushioning for every unexpected turn.</p>
+                        <Link to={'/'}>Style Your Ava Rower</Link>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className='slide'>
+                    <video
+                        src={slideV4} autoPlay muted loop playsInline ref={(el) => videoRef.current[4] = el} className='slide_video'>
+                    </video>
+                    <div className="slide_content">
+                        <h1>BRING YOUR GAME</h1>
+                        <p>Sport your signature sytle</p>
+                        <Link to={'/'}>Shop</Link>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide className='slide'>
+                    <img src={slide5} alt="" />
+                    <div className="slide_content">
+                        <h1>BRING YOUR GAME</h1>
+                        <p>Sport your signature sytle</p>
+                        <Link to={'/'}>Shop</Link>
+                    </div>
+                </SwiperSlide>
+
                 <div className="custom-navigation" slot="container-end">
                     <button
                         className="custom-nav-btn custom-nav-prev"

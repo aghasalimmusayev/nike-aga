@@ -37,8 +37,3 @@ export const linkSlice = createSlice({
 
 export default linkSlice.reducer
 
-// dispatch(getNavlinks()) ──►
-//    🔹 dispatch({ type: 'navlinks/pending' }) ──►
-//    🔹 getLinks() API çağırışı ──►
-//        └── success? ► dispatch({ type: 'fulfilled', payload })
-//        └── error?   ► dispatch({ type: 'rejected', error })
