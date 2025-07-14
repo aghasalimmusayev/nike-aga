@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { IoChevronBack, IoChevronForward, IoPlay, IoPause } from 'react-icons/io5';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -9,9 +10,8 @@ import './slider.css';
 import slideV1 from '../../../assets/video/Slide1.mp4'
 import slideV2 from '../../../assets/video/Slide3.mp4'
 import slideV3 from '../../../assets/video/Slide4.mp4'
-import slideV4 from '../../../assets/video/Slide7.mp4'
 import slide5 from '../../../assets/img/nike_boots.jpg'
-import { Link } from 'react-router-dom';
+import slide6 from '../../../assets/img/nike-slider6.jpg'
 
 export default function Slider() {
     const progressCircle = useRef(null);
@@ -93,20 +93,18 @@ export default function Slider() {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
-                    <video
-                        src={slideV4} autoPlay muted loop playsInline ref={(el) => videoRef.current[4] = el} className='slide_video'>
-                    </video>
+                    <img src={slide6} alt="" />
                     <div className="slide_content">
-                        <h1>BRING YOUR GAME</h1>
-                        <p>Sport your signature sytle</p>
+                        <h1>BUILT FOR THIS</h1>
+                        <p>Performance Worthy of Tennis`` Best</p>
                         <Link to={'/'}>Shop</Link>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
                     <img src={slide5} alt="" />
                     <div className="slide_content">
-                        <h1>BRING YOUR GAME</h1>
-                        <p>Sport your signature sytle</p>
+                        <h1>SCARY GOOD</h1>
+                        <p>Celebrate the jersey that paints fair in blue</p>
                         <Link to={'/'}>Shop</Link>
                     </div>
                 </SwiperSlide>

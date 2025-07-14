@@ -1,12 +1,22 @@
 import './App.css'
-import Nav from './components/pages/Nav'
-import Header from './components/pages/Header'
+import { Route, Routes } from 'react-router-dom'
+import Layout from '../src/Layout/Layout'
+import MainPage from './components/pages/MainPage'
+import SignIn from './components/pages/Navigated pages/SignIn'
+import Wishlist from './components/pages/Navigated pages/Whislist'
+import ShoppingCart from './components/pages/Navigated pages/ShoppingCart'
 function App() {
 
   return (
     <>
-      <Nav />
-      <Header />
+      <Routes>
+        <Route path='/' element={<Layout />} >
+          <Route index element={<MainPage />} />
+          <Route path='signIn' element={<SignIn />} />
+          <Route path='wishlist' element={<Wishlist />} />
+          <Route path='shoppingCart' element={<ShoppingCart />} />
+        </Route>
+      </Routes>
     </>
   )
 }

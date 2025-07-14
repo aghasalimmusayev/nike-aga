@@ -115,7 +115,7 @@ function Nav() {
             <div className="navlinks_bg">
                 <div className="container">
                     <div className="nav_content">
-                        <Logo />
+                        <Link to={'/'}><Logo /></Link>
                         <div className='links' onMouseLeave={hideAlt}>
                             <div className={`navlinks`}  >
                                 {linkData?.map(item => (
@@ -146,13 +146,13 @@ function Nav() {
                                 </div>
                                 <input type="text" placeholder='Search' />
                             </div>
-                            <Link to={'/'} className="wish_icon_box">
+                            <Link to={'/wishlist'} className="wish_icon_box">
                                 <IoMdHeartEmpty style={{ fontSize: '24px' }} />
                             </Link>
                             <Link to={'/signIn'} className="user_icon_box">
                                 <FiUser style={{ fontSize: '24px' }} />
                             </Link>
-                            <Link to={'/'} className="cart_icon_box">
+                            <Link to={'/shoppingCart'} className="cart_icon_box">
                                 <PiBag style={{ fontSize: '24px' }} />
                             </Link>
                             <div className="menu_bar" onClick={openBar}>

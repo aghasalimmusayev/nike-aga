@@ -1,5 +1,5 @@
 import React from 'react'
-import Slider from '../childComponents/Header children/Slider'
+import Slider from '../../childComponents/Header children/Slider'
 
 function Header() {
     return (
