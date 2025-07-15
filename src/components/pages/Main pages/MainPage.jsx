@@ -3,6 +3,7 @@ import Header from './Header'
 import '../pageCss/mainPage.css'
 import Jordan from './JordanPic'
 import NikeFields from './NikeFields'
+import Classics from './Classics'
 
 function MainPage() {
     return (
@@ -10,6 +11,7 @@ function MainPage() {
             <Header />
             <Jordan />
             <NikeFields />
+            <Classics />
         </main>
     )
 }
