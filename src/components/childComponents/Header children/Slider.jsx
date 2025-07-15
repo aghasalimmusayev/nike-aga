@@ -12,6 +12,7 @@ import slideV2 from '../../../assets/video/Slide3.mp4'
 import slideV3 from '../../../assets/video/Slide4.mp4'
 import slide5 from '../../../assets/img/nike_boots.jpg'
 import slide6 from '../../../assets/img/nike-slider6.jpg'
+import ButtonLink from '../ButtonLink'
 
 export default function Slider() {
     const progressCircle = useRef(null);
@@ -69,7 +70,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>BRING YOUR GAME</h1>
                         <p>Sport your signature sytle</p>
-                        <Link to={'/'}>Shop</Link>
+                        <ButtonLink text='Shop' to='/'/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -79,7 +80,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>SCARY GOOD PACK</h1>
                         <p>Terrify opposition with boots that bring precition, speed and touch.</p>
-                        <Link to={'/'}>Explore</Link>
+                        <ButtonLink text='Explore' to='/'/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -89,7 +90,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>AVA ROWER</h1>
                         <p>ReaxtX cushioning for every unexpected turn.</p>
-                        <Link to={'/'}>Style Your Ava Rower</Link>
+                        <ButtonLink text='Style Your Ava Rower' to='/'/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -97,7 +98,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>BUILT FOR THIS</h1>
                         <p>Performance Worthy of Tennis`` Best</p>
-                        <Link to={'/'}>Shop</Link>
+                        <ButtonLink text='Shop' to='/'/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -105,7 +106,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>SCARY GOOD</h1>
                         <p>Celebrate the jersey that paints fair in blue</p>
-                        <Link to={'/'}>Shop</Link>
+                        <ButtonLink text='Shop' to='/'/>
                     </div>
                 </SwiperSlide>
 

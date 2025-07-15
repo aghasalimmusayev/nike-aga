@@ -1,7 +1,7 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Layout from '../src/Layout/Layout'
-import MainPage from './components/pages/MainPage'
+import MainPage from './components/pages/Main pages/MainPage'
 import SignIn from './components/pages/Navigated pages/SignIn'
 import Wishlist from './components/pages/Navigated pages/Whislist'
 import ShoppingCart from './components/pages/Navigated pages/ShoppingCart'

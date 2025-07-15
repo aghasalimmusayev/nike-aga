@@ -1,6 +1,4 @@
-.toplinks_bg{
-    background-color: #F5F5F5;
-}
+.toplinks_bg{background-color: #F5F5F5;}
 .toplinks{
     padding: 4px 0;
     display: flex;
@@ -66,7 +64,6 @@
     font-weight: 600;
     color: #666;
 }
-
 .menu_bar{display: none;}
 .navlinks_bg {
     position: relative;
@@ -81,7 +78,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 12px 0; */
 }
 .navlinks {
     padding: 20px 0;
@@ -179,23 +175,62 @@
     align-items: center;
     justify-content: center;
 }
+/* Nike Scroll Behavior - YENİ */
+nav {
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+nav.nav-at-top {position: relative;}
+nav.nav-hide {transform: translateY(-100%);}
+nav.nav-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(0);
+    z-index: 1000;
+}
+.toplinks_bg.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    height: auto;
+}
+.toplinks_bg.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    height: 0;
+    overflow: hidden;
+}
+@keyframes slideDownFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+nav.nav-fixed .toplinks_bg {display: none;}
+.navlinks_bg {transition: all 0.3s ease-in-out;}
+nav.nav-fixed .nav_content {transition: all 0.3s ease;}
 
 @media(max-width:768px){
-    .toplinks{display: none;overflow: hidden;}
-    .navlinks{
-        display: none;
-        /* position: absolute;
-        right: 0;
-        top: 100%;
-        z-index: 999;
-        width: 80%;
-        min-height: 100vh;
-        padding: 20px;
-        flex-direction: column;
-        align-items: baseline;
-        background-color: red; */
+    nav.nav-hide {transform: translateY(-100%);}
+    nav.nav-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform: translateY(0);
+        z-index: 1000;
     }
-    /* .navlinks.open{display: flex;} */
+    .toplinks_bg.hide {display: none;}
+    .toplinks{display: none;overflow: hidden;}
+    .navlinks{display: none;}
     .nav_content {padding: 18px 0;}
     .right_links{gap: 15px;}
     .cart_icon_box{

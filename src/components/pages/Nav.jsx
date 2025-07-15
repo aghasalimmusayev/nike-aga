@@ -16,10 +16,11 @@ import { SlArrowRight } from "react-icons/sl";
 import { SlArrowLeft } from "react-icons/sl";
 
 function Nav() {
-    const [menuStep, setMenuStep] = useState(0); // 0: name-lər, 1: title-lar, 2: item-lər
-    const [selectedLink, setSelectedLink] = useState(null); // kliklənən name
-    const [selectedTitle, setSelectedTitle] = useState(null); // kliklənən title
-
+    // Mobile menu states
+    const [menuStep, setMenuStep] = useState(0);
+    const [selectedLink, setSelectedLink] = useState(null);
+    const [selectedTitle, setSelectedTitle] = useState(null);
+    // Desktop navigation states
     const { linkData, loading, error } = useSelector(store => store.links)
     const [altData, setAltData] = useState([])
     const [hoverAlt, setHoverAlt] = useState(false)
@@ -27,10 +28,46 @@ function Nav() {
     const [help, setHelp] = useState(false)
     const helpRef = useRef(null)
     const [menuBar, setMenuBar] = useState(false)
-    const dispastch = useDispatch()
+    // Nike scroll behavior states - YENİ
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [scrollDirection, setScrollDirection] = useState('up');
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [isAtTop, setIsAtTop] = useState(true);
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        dispastch(getNavlinks())
+        dispatch(getNavlinks())
     }, [])
+
+    // Nike scroll behavior - YENİ
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            // Scroll istiqaməti təyin et
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setScrollDirection('down');
+                setIsScrolled(true);
+            } else if (currentScrollY < lastScrollY) {
+                setScrollDirection('up');
+                setIsScrolled(true);
+            }
+            // Tam yuxarıda olub olmamağını yoxla
+            if (currentScrollY <= 10) {
+                setIsAtTop(true);
+                setIsScrolled(false);
+                setScrollDirection('up');
+            } else {
+                setIsAtTop(false);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY]);
+
+    // Desktop altLinks functions
     function showAlt(linkName) {
         const linkObj = linkData?.find(item => item.name === linkName);
         setAltData(linkObj.altCat);
@@ -62,20 +99,20 @@ function Nav() {
         setMenuBar(true)
     }
     function handleLinkClick(link) {
-        setSelectedLink(link);      // seçilən link saxlanır
-        setMenuStep(1);             // title mərhələsinə keçirik
+        setSelectedLink(link);
+        setMenuStep(1);
     }
     function handleTitleClick(title) {
-        setSelectedTitle(title);    // seçilən title saxlanır
-        setMenuStep(2);             // item mərhələsinə keçirik
+        setSelectedTitle(title);
+        setMenuStep(2);
     }
     function goBack() {
         if (menuStep === 2) {
             setSelectedTitle(null);
-            setMenuStep(1);           // item → title
+            setMenuStep(1);
         } else if (menuStep === 1) {
             setSelectedLink(null);
-            setMenuStep(0);           // title → name
+            setMenuStep(0);
         }
     }
 
@@ -85,9 +122,14 @@ function Nav() {
     if (error) {
         return <p className='links_error'>Error: {error}</p>
     }
+
     return (
-        <nav>
-            <div className="toplinks_bg">
+        <nav className={`
+            ${isAtTop ? 'nav-at-top' : ''} 
+            ${isScrolled && scrollDirection === 'down' ? 'nav-hide' : ''} 
+            ${isScrolled && scrollDirection === 'up' && !isAtTop ? 'nav-fixed' : ''}
+        `}>
+            <div className={`toplinks_bg ${isAtTop ? 'show' : 'hide'}`}>
                 <div className="container">
                     <div className="toplinks">
                         <div className="top_left">
@@ -102,9 +144,7 @@ function Nav() {
                             <li><Link className='top_right_link' to={'/'}>Find a Store</Link></li>
                             <li className='help' onMouseLeave={hideHelpModal}>
                                 <Link className='top_right_link' to={'/'} onMouseOver={showHelpModal}>Help</Link>
-                                {help && <HelpModal
-                                    helpRef={helpRef}
-                                />}
+                                {help && <HelpModal helpRef={helpRef} />}
                             </li>
                             <li><Link className='top_right_link' to={'/'}>Join Us</Link></li>
                             <li><Link className='top_right_link' to={'/signIn'}>Sign In</Link></li>
@@ -117,7 +157,7 @@ function Nav() {
                     <div className="nav_content">
                         <Link to={'/'}><Logo /></Link>
                         <div className='links' onMouseLeave={hideAlt}>
-                            <div className={`navlinks`}  >
+                            <div className='navlinks'>
                                 {linkData?.map(item => (
                                     <NavLink
                                         key={item.id}
@@ -127,13 +167,12 @@ function Nav() {
                                     </NavLink>
                                 ))}
                             </div>
-                            <div className="altLinks"
-                                ref={altLinksRef}>
+                            <div className="altLinks" ref={altLinksRef}>
                                 {altData?.map((item, index) => (
-                                    <div className='altCategories' key={index} >
+                                    <div className='altCategories' key={index}>
                                         <Link className='cat_name' to={'/'}>{item.title}</Link>
-                                        {item.items.map((element, index) => (
-                                            <Link className='category' key={index} to={'/'}>{element}</Link>
+                                        {item.items.map((element, itemIndex) => (
+                                            <Link className='category' key={itemIndex} to={'/'}>{element}</Link>
                                         ))}
                                     </div>
                                 ))}
@@ -179,7 +218,8 @@ function Nav() {
                             setMenuStep(0);
                             setSelectedLink(null);
                             setSelectedTitle(null);
-                        }}><HiOutlineXMark style={{ fontSize: '28px' }} />
+                        }}>
+                        <HiOutlineXMark style={{ fontSize: '28px' }} />
                     </button>
                     {menuStep === 0 && linkData?.map(link => (
                         <button

@@ -18,6 +18,18 @@
     width: 90%;
     margin: auto;
 }
+.button_link:hover {background-color: #ccc;}
+.button_link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111;
+}
+
 
 @media (min-width: 768px) {
     .container {
