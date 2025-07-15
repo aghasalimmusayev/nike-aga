@@ -69,14 +69,58 @@
 
 /*--CLASSICS--**/
 .classics_box{margin: 30px 0;}
+.classic_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+.classics h3{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #111;
+    margin-top: 10px;
+}
+.classic_nav_btns{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.classic_nav_btns button{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #E5E5E5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.classic_nav_btns button.active:hover{background-color: #ccc;}
+.classic_nav_btns button.active{
+    background-color: #E5E5E5;
+    cursor: pointer;
+}
+.classic_nav_btns button.inactive{
+    background-color: #F5F5F5;
+    cursor: default;
+    opacity: 0.6;
+}
 .classics{
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 25px 0;
+    padding: 15px 0 30px;
     overflow-x: scroll;
+    scroll-behavior: smooth;
 }
-.classics::-webkit-scrollbar {height: 8px;}
+.classics img{
+    width: 280px;
+    height: 350px;
+    object-fit: cover;
+}
+.classics::-webkit-scrollbar {height: 10px;}
 .classics::-webkit-scrollbar-track {background: transparent;}
 .classics::-webkit-scrollbar-thumb {
     background: transparent;
@@ -85,14 +129,52 @@
 }
 .classics:hover::-webkit-scrollbar-thumb {background: rgba(0, 0, 0, 0.3);}
 .classics:hover::-webkit-scrollbar-thumb:hover {background: rgba(0, 0, 0, 0.5);}
-.classics img{
-    width: 250px;
-    height: 300px;
-    object-fit: cover;
+
+/*--FOOTER--*/
+footer{
+    padding: 70px 0;
 }
-.classics h3{
+.top_navigations{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+.footer_links{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.footer_links a:hover{color: #707072;}
+.footer_links a{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111;
+    transition: .3s;
+}
+.footer_content_box{
+    display: flex;
+    gap: 30px;
+    height: 200px;
+}
+.footer_content_box:hover{height: fit-content;}
+.f_content{
+    min-width: 200px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.f_content h3{
     font-size: 1.2rem;
     font-weight: 600;
     color: #111;
-    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.f_content a:hover{color: #111;}
+.f_content a{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #717173;
+    transition: .3s;
 }

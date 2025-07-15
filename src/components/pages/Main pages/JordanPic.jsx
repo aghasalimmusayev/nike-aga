@@ -8,22 +8,26 @@ import { Link } from 'react-router-dom'
 function JordanPic() {
     return (
         <div className='jordan_pics'>
-            <Link className="jordan" to={'/'}>
-                <img src={jordan1} alt="jordan" />
+            <div className="jordan">
+                <Link to={'/'}>
+                    <img src={jordan1} alt="jordan" />
+                </Link>
                 <div className="jordan_content">
                     <p className='jordan_text'>Air Jordan 3 'Starfish'</p>
                     <h4 className='jordan_heading'>Light Work, Hevvy Hiter</h4>
                     <ButtonLink to='/' text='Shop' />
                 </div>
-            </Link>
-            <Link className="jordan" to={'/'}>
-                <img src={jordan2} alt="jordan" />
+            </div>
+            <div className="jordan">
+                <Link to={'/'}>
+                    <img src={jordan2} alt="jordan" />
+                </Link>
                 <div className="jordan_content">
                     <p className='jordan_text'>Nike Universa</p>
                     <h4 className='jordan_heading'>Jordan Chiles` Go-To Leggings</h4>
                     <ButtonLink to='/' text='Shop' />
                 </div>
-            </Link>
+            </div>
         </div>
     )
 }

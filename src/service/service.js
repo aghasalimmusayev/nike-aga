@@ -19,4 +19,14 @@ async function classicsData() {
     }
 }
 
-export { getLinks, classicsData };
+async function footerLinks() {
+    try {
+        const res = await axiosInstance.get('/Footer');
+        return res.data
+    }
+    catch (error) {
+        console.log('FooterLinks-de xeta: ' + error)
+    }
+}
+
+export { getLinks, classicsData, footerLinks };

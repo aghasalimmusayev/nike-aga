@@ -4,6 +4,7 @@ import '../pageCss/mainPage.css'
 import Jordan from './JordanPic'
 import NikeFields from './NikeFields'
 import Classics from './Classics'
+import Footer from './Footer'
 
 function MainPage() {
     return (
@@ -12,6 +13,7 @@ function MainPage() {
             <Jordan />
             <NikeFields />
             <Classics />
+            <Footer />
         </main>
     )
 }

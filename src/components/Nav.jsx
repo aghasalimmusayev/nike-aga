@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
-import { getNavlinks } from '../../redux/LinksDataSlice'
-import './pageCss/nav.css'
-import Logo from '../childComponents/Logo'
+import { getNavlinks } from '../../src/redux/LinksDataSlice'
+import './pages/pageCss/nav.css'
 import { FiSearch } from "react-icons/fi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiBag } from "react-icons/pi";
-import NikeManLogo from '../childComponents/Nav children/NikeManLogo'
-import NikeArrowIcon from '../childComponents/Nav children/NikeArrowIcon'
-import HelpModal from '../childComponents/Nav children/HelpModal'
+import Logo from '../components/childComponents/Logo'
+import NikeManLogo from '../components/childComponents/Nav children/NikeManLogo'
+import NikeArrowIcon from '../components/childComponents/Nav children/NikeArrowIcon'
+import HelpModal from '../components/childComponents/Nav children/HelpModal'
 import { FiUser } from "react-icons/fi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { SlArrowRight } from "react-icons/sl";
