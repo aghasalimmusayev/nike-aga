@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { footerLinks } from "../service/service";
 
 const state = {
-    footerData: [],
+    footerData: []
 }
 
-export const getFooterLinks = createAsyncThunk('footerLinks', async () => {
-    const response = await footerLinks()
+export const getFooterLinks = createAsyncThunk("footerLinks", async () => {
+    const response = await footerLinks();
     console.log(response)
     return response
 })

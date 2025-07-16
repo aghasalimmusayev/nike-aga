@@ -1,5 +1,4 @@
 import axiosInstance from "./instance";
-
 async function getLinks() {
     try {
         const res = await axiosInstance.get("/Navlinks");
@@ -8,7 +7,6 @@ async function getLinks() {
         console.warn("Navlinks sorgusunda xeta: " + error);
     }
 }
-
 async function classicsData() {
     try {
         const res = await axiosInstance.get('/Classics');
@@ -18,15 +16,32 @@ async function classicsData() {
         console.warn('Classics sorgusunda xeta: ' + error)
     }
 }
-
-async function footerLinks() {
+async function navigationsLinks() {
     try {
-        const res = await axiosInstance.get('/Footer');
+        const res = await axiosInstance.get('/Navigations');
         return res.data
     }
     catch (error) {
-        console.log('FooterLinks-de xeta: ' + error)
+        console.log('NavigationsLinks-de xeta: ' + error)
+    }
+}
+async function footerLinks() {
+    try {
+        const res = await axiosInstance.get("/Footer");
+        return res.data
+    }
+    catch (error) {
+        console.log("FooterLinks-de xeta: " + error)
+    }
+}
+async function countryLinks() {
+    try {
+        const res = await axiosInstance.get("/Countries");
+        return res.data
+    }
+    catch (error) {
+        console.log("CountryLinks-de xeta: " + error)
     }
 }
 
-export { getLinks, classicsData, footerLinks };
+export { getLinks, classicsData, navigationsLinks, footerLinks, countryLinks };
