@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCountryLinks } from '../../../redux/CountrySlice'
 import { IoLocationOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom'
-function CountryLinks() {
+import { createPortal } from 'react-dom';
+import { HiXMark } from "react-icons/hi2";
+import '../pageCss/modal.css'
+
+function CountryLinks({ closeCModal }) {
 
     const [regions, setRegions] = useState([])
     const { countryData } = useSelector(state => state.countries)
@@ -17,29 +21,38 @@ function CountryLinks() {
         setRegions([...reg])
     }, [countryData])
 
-    return (
-        <div className="container">
-            <section>
+    const countryModal = (
+        <section className='country_modal'>
+            <div className="container">
+                <button className='cModal_close_btn'
+                    onClick={closeCModal}>
+                    <HiXMark style={{ color: "#fff", fontSize: "28px" }} />
+                </button>
                 <h1>Select your Location</h1>
                 <div className="countries">
                     {regions &&
                         regions?.map((item, index) => (
-                            <>
-                                <h3 key={index}>{item}</h3>
-                                {countryData?.filter(element => element.continent === item)
-                                    .map(country => (
-                                        <Link>
-                                            <IoLocationOutline />
-                                            <span>{country.name}</span>
-                                            <span>{country.officialLanguage}</span>
-                                        </Link>
-                                    ))}
-                            </>
+                            <div className='regions' key={index}>
+                                <h3>{item}</h3>
+                                <div className='region_countries'>
+                                    {countryData?.filter(element => element.continent === item)
+                                        .map(country => (
+                                            <Link to={'/'} key={country.id}>
+                                                <IoLocationOutline style={{ color: "#CACACB", fontSize:"24px" }} />
+                                                <div className="country_info">
+                                                    <span>{country.name}</span>
+                                                    <span>{country.officialLanguage}</span>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                </div>
+                            </div>
                         ))}
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     )
+    return createPortal(countryModal, document.getElementById("modal_root"));
 }
 
 export default CountryLinks

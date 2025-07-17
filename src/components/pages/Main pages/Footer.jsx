@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getFooterLinks } from '../../../redux/FooterSlice'
 import CountryBtn from '../../childComponents/CountryBtn'
 
-function Footer() {
+function Footer({ openCModal }) {
 
     const { footerData } = useSelector(state => state.footer)
     const dispatch = useDispatch()
@@ -25,7 +25,7 @@ function Footer() {
                             ))}
                         </div>
                     ))}
-                <CountryBtn />
+                    <CountryBtn openCModal={openCModal} />
                 </div>
             </div>
         </footer>

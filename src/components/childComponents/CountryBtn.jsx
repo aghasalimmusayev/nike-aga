@@ -1,7 +1,7 @@
 import React from 'react'
 import { HiOutlineGlobeAlt } from "react-icons/hi2";
 
-function CountryBtn() {
+function CountryBtn({ openCModal }) {
 
     const buttonStyle = {
         border: "none",
@@ -23,7 +23,8 @@ function CountryBtn() {
 
     return (
         <div>
-            <button style={buttonStyle}>
+            <button style={buttonStyle}
+                onClick={openCModal}>
                 <HiOutlineGlobeAlt style={globeStyle} />
                 <span style={spanStyle}>United States</span>
             </button>
