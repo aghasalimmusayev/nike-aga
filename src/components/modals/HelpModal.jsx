@@ -1,10 +1,10 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 
 function HelpModal({ helpRef }) {
 
-
-    return (
+    const navHelpModal = (
         <div className='help_modal' ref={helpRef}>
             <Link className='help_title' to={'/'}>Help</Link>
             <Link className='help_link' to={'/'}>Order Status</Link>
@@ -19,6 +19,7 @@ function HelpModal({ helpRef }) {
             <Link className='help_link' to={'/'}>Send Us Feedback</Link>
         </div>
     )
+    return createPortal(navHelpModal, document.getElementById("modal_root"))
 }
 
 export default HelpModal

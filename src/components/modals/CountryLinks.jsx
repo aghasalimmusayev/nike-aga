@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCountryLinks } from '../../../redux/CountrySlice'
+import { getCountryLinks } from '../../redux/CountrySlice'
+import { setCountryName } from '../../redux/CountryNameSlice';
 import { IoLocationOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom'
 import { createPortal } from 'react-dom';
 import { HiXMark } from "react-icons/hi2";
-import '../pageCss/modal.css'
+import '../pages/pageCss/modal.css'
 
 function CountryLinks({ closeCModal }) {
 
@@ -37,8 +38,14 @@ function CountryLinks({ closeCModal }) {
                                 <div className='region_countries'>
                                     {countryData?.filter(element => element.continent === item)
                                         .map(country => (
-                                            <Link to={'/'} key={country.id}>
-                                                <IoLocationOutline style={{ color: "#CACACB", fontSize:"24px" }} />
+                                            <Link
+                                                to={`/${country.code}`}
+                                                key={country.id}
+                                                onClick={() => {
+                                                    closeCModal();
+                                                    dispatch(setCountryName(country.name));
+                                                }}>
+                                                <IoLocationOutline style={{ color: "#CACACB", fontSize: "24px" }} />
                                                 <div className="country_info">
                                                     <span>{country.name}</span>
                                                     <span>{country.officialLanguage}</span>

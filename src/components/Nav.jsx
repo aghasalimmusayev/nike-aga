@@ -2,18 +2,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { getNavlinks } from '../../src/redux/LinksDataSlice'
-import './pages/pageCss/nav.css'
-import { FiSearch } from "react-icons/fi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiBag } from "react-icons/pi";
-import Logo from '../components/childComponents/Logo'
-import NikeManLogo from '../components/childComponents/Nav children/NikeManLogo'
-import NikeArrowIcon from '../components/childComponents/Nav children/NikeArrowIcon'
-import HelpModal from '../components/childComponents/Nav children/HelpModal'
 import { FiUser } from "react-icons/fi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { SlArrowRight } from "react-icons/sl";
 import { SlArrowLeft } from "react-icons/sl";
+import './pages/pageCss/nav.css'
+import Logo from '../components/childComponents/Logo'
+import NikeManLogo from '../components/childComponents/Nav children/NikeManLogo'
+import NikeArrowIcon from '../components/childComponents/Nav children/NikeArrowIcon'
+import HelpModal from '../components/modals/HelpModal'
+import SearchBox from './childComponents/Nav children/SearchBox';
+import { openSearch } from '../redux/ToggleSearchSlice';
 
 function Nav() {
     // Mobile menu states
@@ -179,12 +180,7 @@ function Nav() {
                             </div>
                         </div>
                         <div className="right_links">
-                            <div className="search_box">
-                                <div className="search_icon">
-                                    <FiSearch style={{ fontSize: '20px', cursor: 'pointer' }} />
-                                </div>
-                                <input type="text" placeholder='Search' />
-                            </div>
+                            <SearchBox onClick={() => dispatch(openSearch())} />
                             <Link to={'/wishlist'} className="wish_icon_box">
                                 <IoMdHeartEmpty style={{ fontSize: '24px' }} />
                             </Link>

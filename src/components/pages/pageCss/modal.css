@@ -1,3 +1,37 @@
+/**--HELP--*/
+.help_modal{
+    position: absolute;
+    background-color: #fff;
+    padding: 20px;
+    top: 35px;
+    right: 150px;
+    z-index: 9999;
+    min-width: 230px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 10px 10px;
+}
+.help_modal .help_link:hover{color: #111;}
+.help_modal .help_title{
+    display: block;
+    width: 100%;
+    color: #111;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding: 0;
+}
+.help_modal .help_link{
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    padding: 5px 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #666;
+}
+
+/**--COUNTRY--*/
 .country_modal{
     padding: 50px 0;
     position: fixed;
@@ -23,7 +57,6 @@
     background-color: #111;
     cursor: pointer;
 }
-
 .country_modal h1{
     font-size: 2rem;
     font-weight: 500;
@@ -56,4 +89,26 @@
         font-size: 1rem;
         font-weight: 600;
     }
+}
+
+/*--SEARCH--*/
+#search{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: red;
+}
+.search_content{
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+.popular_terms{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+
 }

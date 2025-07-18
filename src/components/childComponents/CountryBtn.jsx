@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiOutlineGlobeAlt } from "react-icons/hi2";
+import { useSelector } from 'react-redux';
 
 function CountryBtn({ openCModal }) {
+
+    const { countryName } = useSelector(state => state.country)
 
     const buttonStyle = {
         border: "none",
@@ -26,7 +29,7 @@ function CountryBtn({ openCModal }) {
             <button style={buttonStyle}
                 onClick={openCModal}>
                 <HiOutlineGlobeAlt style={globeStyle} />
-                <span style={spanStyle}>United States</span>
+                <span style={spanStyle}>{countryName}</span>
             </button>
         </div>
     )

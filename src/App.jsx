@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />} >
           <Route index element={<MainPage />} />
+          <Route path=':code' element={<MainPage />} />
           <Route path='signIn' element={<SignIn />} />
           <Route path='wishlist' element={<Wishlist />} />
           <Route path='shoppingCart' element={<ShoppingCart />} />

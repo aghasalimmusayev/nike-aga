@@ -4,6 +4,8 @@ import classicSlice from './ClassicsData'
 import navigationSlice from './NavigationSlice'
 import footerSlice from './FooterSlice'
 import countrySlice from './CountrySlice'
+import countryNameSlice from './CountryNameSlice'
+import toggleSearchSlice from './ToggleSearchSlice'
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +13,8 @@ export const store = configureStore({
         classics: classicSlice,
         navigation: navigationSlice,
         footer: footerSlice,
-        countries: countrySlice
+        countries: countrySlice,
+        country: countryNameSlice,
+        toggleSearch: toggleSearchSlice
     }
 })
