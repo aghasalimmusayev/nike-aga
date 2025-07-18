@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { closeSearch, openSearch } from '../../redux/ToggleSearchSlice'
 import { createPortal } from 'react-dom'
+import './modal.css'
 
 function SearchModal() {
     const dispatch = useDispatch()

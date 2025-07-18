@@ -6,7 +6,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom'
 import { createPortal } from 'react-dom';
 import { HiXMark } from "react-icons/hi2";
-import '../pages/pageCss/modal.css'
+import './modal.css'
 
 function CountryLinks({ closeCModal }) {
 
@@ -47,8 +47,8 @@ function CountryLinks({ closeCModal }) {
                                                 }}>
                                                 <IoLocationOutline style={{ color: "#CACACB", fontSize: "24px" }} />
                                                 <div className="country_info">
-                                                    <span>{country.name}</span>
-                                                    <span>{country.officialLanguage}</span>
+                                                    <span className='country_name'>{country.name}</span>
+                                                    <span className='country_lang'>{country.officialLanguage}</span>
                                                 </div>
                                             </Link>
                                         ))}
