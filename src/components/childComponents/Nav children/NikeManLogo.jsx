@@ -1,15 +1,15 @@
 import React from 'react'
 
-function NikeManLogo() {
+function NikeManLogo({ width, height }) {
     return (
-        <div>
+        <div className='nike_man'>
             <svg
                 aria-hidden="true"
                 focusable="false"
                 viewBox="0 0 24 24"
                 role="img"
-                width="24px"
-                height="24px"
+                width={width}
+                height={height}
                 fill="none">
                 <path
                     fill="currentColor"
@@ -18,6 +18,7 @@ function NikeManLogo() {
                     clipRule="evenodd">
                 </path>
             </svg>
+            <span>Jordan</span>
         </div>
     )
 }

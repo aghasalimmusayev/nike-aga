@@ -1,0 +1,85 @@
+import React, { useEffect, useRef, useState } from 'react'
+import Logo from '../Logo'
+import { Link, NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { IoMdHeartEmpty } from "react-icons/io";
+import { PiBag } from "react-icons/pi";
+import { FiUser } from "react-icons/fi";
+import SearchBox from './SearchBox';
+import { openSearch } from '../../../redux/ToggleSearchSlice';
+
+function Navlinks({ openBar }) {
+
+    const { linkData } = useSelector(store => store.links)
+    const [altData, setAltData] = useState([])
+    const [hoverAlt, setHoverAlt] = useState(false)
+    const altLinksRef = useRef(null)
+    function showAlt(linkName) {
+        const linkObj = linkData?.find(item => item.name === linkName);
+        setAltData(linkObj.altCat);
+        setHoverAlt(true)
+    }
+    function hideAlt() {
+        setAltData([])
+        setHoverAlt(false)
+    }
+    useEffect(() => {
+        if (altLinksRef.current) {
+            if (hoverAlt) altLinksRef.current.style.maxHeight = altLinksRef.current.scrollHeight + 'px';
+            else altLinksRef.current.style.maxHeight = '0px';
+        }
+    }, [hoverAlt, altData])
+
+    return (
+        <div>
+            <div className="navlinks_bg">
+                <div className="container">
+                    <div className="nav_content">
+                        <Link to={'/'}><Logo /></Link>
+                        <div className='links' onMouseLeave={hideAlt}>
+                            <div className='navlinks'>
+                                {linkData?.map(item => (
+                                    <NavLink
+                                        key={item.id}
+                                        to={'/'}
+                                        onMouseOver={(e) => showAlt(item.name)}>
+                                        {item.name}
+                                    </NavLink>
+                                ))}
+                            </div>
+                            <div className="altLinks" ref={altLinksRef}>
+                                {altData?.map((item, index) => (
+                                    <div className='altCategories' key={index}>
+                                        <Link className='cat_name' to={'/'}>{item.title}</Link>
+                                        {item.items.map((element, itemIndex) => (
+                                            <Link className='category' key={itemIndex} to={'/'}>{element}</Link>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="right_links">
+                            <SearchBox onClick={() => dispatch(openSearch())} />
+                            <Link to={'/wishlist'} className="wish_icon_box">
+                                <IoMdHeartEmpty style={{ fontSize: '24px' }} />
+                            </Link>
+                            <Link to={'/signIn'} className="user_icon_box">
+                                <FiUser style={{ fontSize: '24px' }} />
+                            </Link>
+                            <Link to={'/shoppingCart'} className="cart_icon_box">
+                                <PiBag style={{ fontSize: '24px' }} />
+                            </Link>
+                            <div className="menu_bar" onClick={openBar}>
+                                <div className="bar1"></div>
+                                <div className="bar2"></div>
+                                <div className="bar3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Navlinks

@@ -1,15 +1,15 @@
 import React from 'react'
 
-function NikeArrowIcon() {
+function NikeArrowIcon({ width, height }) {
     return (
-        <div>
+        <div className='nike_arrow'>
             <svg
                 aria-hidden="true"
                 focusable="false"
                 viewBox="0 0 24 24"
                 role="img"
-                width="24px"
-                height="24px"
+                width={width}
+                height={height}
                 fill="none">
                 <path
                     fill="currentColor"
@@ -18,6 +18,7 @@ function NikeArrowIcon() {
                     clipRule="evenodd">
                 </path>
             </svg>
+            <span>Converse</span>
         </div>
     )
 }

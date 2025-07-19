@@ -43,6 +43,8 @@
     width: 100%;
     cursor: pointer;
 }
+.nike_arrow span{display: none;}
+.nike_man span{display: none;}
 .nav_content {
     display: flex;
     justify-content: space-between;
@@ -202,6 +204,69 @@ nav.nav-fixed .nav_content {transition: all 0.3s ease;}
     .toplinks_bg.hide {display: none;}
     .toplinks{display: none;overflow: hidden;}
     .navlinks{display: none;}
+    .nike_logos{
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nike_arrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .nike_man {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .nike_arrow span{display: inline-block;}
+    .nike_man span{display: inline-block;}
+    .becom_member{
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #666;
+        margin: 40px 0 20px;
+    }
+    .becom_member a{
+        font-size: 1.3rem;
+        color: #111;
+    }
+    .auth_btns{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .auth_btns a{
+        border-radius: 20px;
+        padding: 7px 15px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .auth_btns > :first-child{
+        border: 1px solid #111;
+        background-color: #111;
+        color: #fff;
+    }
+    .auth_btns > :last-child{
+        border: 1px solid #D3D3D4;
+        background-color: #fff;
+        color: #111;
+    }
+    .mobile_navigations{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 40px;
+    }
+    .mobile_navigations a{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: #111;
+        font-size: 1rem;
+        font-weight: 600;
+    }
     .nav_content {padding: 18px 0;}
     .right_links{gap: 15px;}
     .cart_icon_box{
@@ -243,28 +308,86 @@ nav.nav-fixed .nav_content {transition: all 0.3s ease;}
         top: 0;
         right: 0;
         width: 80%;
-        min-height: 100vh;
+        height: 100vh;
         background: #fff;
-        z-index: 1000;
+        z-index: 9999;
         padding: 50px 30px;
         display: flex;
         flex-direction: column;
         overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
         transition: all 0.3s ease;
     }
-    .menu_link,
-    .menu_title,
-    .menu_item {
+    /* .mobile_menu::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+        background: rgba(0, 0, 0, 0.3);
+        transition: opacity 0.3s ease;
+    } */
+    .menu_link{
+        width: 100%;
         background: none;
         border: none;
         font-size: 1.5rem;
         font-weight: 500;
+        color: #111;
+        text-align: left;
         margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+    .menu_title,
+    .menu_item {
+        width: 100%;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #666;
+        /* margin: 25px 0; */
         text-align: left;
         display: flex;
         justify-content: space-between;
         align-items: center;
         cursor: pointer;
+        flex-shrink: 0;
+    }
+    .link_titles{
+        padding: 20px 0;
+    }
+    .selected_link_title{
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #111;
+        margin-top: 20px;
+    }
+    .titles{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
+    }
+    .title_items > :first-child{
+        margin: 20px 0 10px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #111;
+    }
+    .title_items{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px 0 30px;
     }
     .back_btn {
         position: absolute;
