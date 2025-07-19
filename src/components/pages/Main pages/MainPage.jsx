@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import '../pageCss/mainPage.css'
 import Header from './Header'
 import Jordan from './JordanPic'
 import NikeFields from './NikeFields'
 import Classics from './Classics'
+import '../pageCss/mainPage.css'
 import Navigations from './Navigations'
 import Footer from './Footer'
 import CountryLinks from '../../modals/CountryLinks'
@@ -23,7 +23,7 @@ function MainPage() {
     return (
         <main>
             <Header />
-            <Jordan />
+            {/* <Jordan /> */}
             <NikeFields />
             <Classics />
             <Navigations />

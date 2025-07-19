@@ -29,17 +29,14 @@ function Footer({ openCModal }) {
         if (!content || !icon) return;
         if (accActive === index) {
             content.style.height = '0px';
-            content.style.paddingBottom = '0px';
             icon.style.transform = 'rotate(0deg)';
             setAccActive(null);
         } else {
             if (accActive !== null && contentRef.current[accActive]) {
                 contentRef.current[accActive].style.height = '0px';
-                contentRef.current[accActive].style.paddingBottom = '0px';
                 contentIconRef.current[accActive].style.transform = 'rotate(0deg)';
             }
             content.style.height = content.scrollHeight + 'px';
-            content.style.paddingBottom = '30px';
             icon.style.transform = 'rotate(180deg)';
             setAccActive(index);
         }
@@ -54,10 +51,12 @@ function Footer({ openCModal }) {
                         <div className="footer_content" key={item.id}>
                             <h3 onClick={() => toggleContent(index)}>
                                 <span>{item.name}</span>
-                                <IoIosArrowDown
-                                    ref={el => contentIconRef.current[index] = el}
-                                    style={{ fontSize: "20px", color: "#111", transition: '0.3s' }}
-                                />
+                                <div className="footer_content_icon">
+                                    <IoIosArrowDown
+                                        ref={el => contentIconRef.current[index] = el}
+                                        style={{ fontSize: "20px", color: "#111", transition: '0.3s' }}
+                                    />
+                                </div>
                             </h3>
                             <div
                                 className="footer_content_items"
@@ -68,7 +67,9 @@ function Footer({ openCModal }) {
                             </div>
                         </div>
                     ))}
-                    <CountryBtn openCModal={openCModal} />
+                    <div className="location_btn">
+                        <CountryBtn openCModal={openCModal} />
+                    </div>
                 </div>
                 <div className="last_line">
                     <p>© {new Date().getFullYear()} Nike, Inc. All Rights Reserved</p>
@@ -78,7 +79,7 @@ function Footer({ openCModal }) {
                         onMouseLeave={hideGuides}>
                         <p>
                             <span>Guides</span>
-                            <IoIosArrowDown style={{ fontSize: "18px", marginTop: '3px' }} />
+                            <IoIosArrowDown style={{ fontSize: "18px" }} />
                         </p>
                         {guides && <Guides />}
                     </div>
@@ -94,3 +95,5 @@ function Footer({ openCModal }) {
 }
 
 export default Footer
+
+// content.style.paddingBottom = '30px';  //! bu setir islemir

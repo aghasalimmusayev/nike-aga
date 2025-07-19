@@ -2,7 +2,6 @@ import React from 'react'
 import jordan1 from '../../../assets/img/jordan.jpg'
 import jordan2 from '../../../assets/img/jordan2.jpg'
 import ButtonLink from '../../childComponents/ButtonLink'
-import '../pageCss/mainPage.css'
 import { Link } from 'react-router-dom'
 
 function JordanPic() {
