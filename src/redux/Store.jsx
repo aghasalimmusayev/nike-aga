@@ -6,6 +6,8 @@ import footerSlice from './FooterSlice'
 import countrySlice from './CountrySlice'
 import countryNameSlice from './CountryNameSlice'
 import toggleSearchSlice from './ToggleSearchSlice'
+import productsSlice from './ProductsSlice'
+import getProduct from './ByIdSlice'
 
 export const store = configureStore({
     reducer: {
@@ -15,6 +17,8 @@ export const store = configureStore({
         footer: footerSlice,
         countries: countrySlice,
         country: countryNameSlice,
-        toggleSearch: toggleSearchSlice
+        toggleSearch: toggleSearchSlice,
+        products: productsSlice,
+        objById: getProduct
     }
 })

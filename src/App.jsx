@@ -6,6 +6,9 @@ import SignIn from './components/pages/Navigated pages/SignIn'
 import SignUp from './components/pages/Navigated pages/SignUp'
 import Wishlist from './components/pages/Navigated pages/Whislist'
 import ShoppingCart from './components/pages/Navigated pages/ShoppingCart'
+import Products from './components/pages/Navigated pages/Products'
+import Details from './components/pages/Navigated pages/Details'
+
 function App() {
 
   return (
@@ -14,6 +17,8 @@ function App() {
         <Route path='/' element={<Layout />} >
           <Route index element={<MainPage />} />
           <Route path=':code' element={<MainPage />} />
+          <Route path='products' element={<Products />} />
+          <Route path='details/:id' element={<Details />} />
           <Route path='signIn' element={<SignIn />} />
           <Route path='signUp' element={<SignUp />} />
           <Route path='wishlist' element={<Wishlist />} />

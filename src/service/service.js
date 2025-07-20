@@ -22,7 +22,7 @@ async function navigationsLinks() {
         return res.data
     }
     catch (error) {
-        console.log('NavigationsLinks-de xeta: ' + error)
+        console.warn('NavigationsLinks-de xeta: ' + error)
     }
 }
 async function footerLinks() {
@@ -31,7 +31,7 @@ async function footerLinks() {
         return res.data
     }
     catch (error) {
-        console.log("FooterLinks-de xeta: " + error)
+        console.warn("FooterLinks-de xeta: " + error)
     }
 }
 async function countryLinks() {
@@ -40,8 +40,34 @@ async function countryLinks() {
         return res.data
     }
     catch (error) {
-        console.log("CountryLinks-de xeta: " + error)
+        console.warn("CountryLinks-de xeta: " + error)
+    }
+}
+async function products() {
+    try {
+        const res = await axiosInstance.get('/Products');
+        return res.data
+    }
+    catch (error) {
+        console.warn('Products sorgusunda xeta: ' + error)
+    }
+}
+async function productById(id) {
+    try {
+        const res = await axiosInstance.get(`/Products/${id}`)
+        return res.data
+    }
+    catch (error) {
+        console.warn('Product by ID sorugusunda xeta: ' + error)
     }
 }
 
-export { getLinks, classicsData, navigationsLinks, footerLinks, countryLinks };
+export {
+    getLinks,
+    classicsData,
+    navigationsLinks,
+    footerLinks,
+    countryLinks,
+    products,
+    productById
+};

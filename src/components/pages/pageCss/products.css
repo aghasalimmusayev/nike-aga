@@ -1,0 +1,88 @@
+.all_product{
+    display: flex;
+    position: relative;
+}
+.filter_box{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    /* position: sticky;
+    top: 0;
+    left: 0; */
+}
+.category_filter{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.price_filter{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+.price_chooes{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.price_chooes label{
+    cursor: pointer;
+}
+.products_items{
+    width: 85%;
+}
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.product{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.product img{
+    width: 100%;
+}
+.product_top_line{
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: green;
+}
+.sort_btn{
+    position: relative;
+}
+.sort_btn button{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.sort_modal{
+    position: absolute;
+    top: 200%;
+    right: 0;
+    width: fit-content;
+    padding: 20px 30px 20px 20px;
+    border-radius: 15px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.sort_modal button{
+    white-space: nowrap;
+}
