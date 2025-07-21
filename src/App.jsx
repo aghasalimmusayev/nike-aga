@@ -11,7 +11,6 @@ import Details from './components/pages/Navigated pages/Details'
 
 function App() {
 
-  
   return (
     <>
       <Routes>
