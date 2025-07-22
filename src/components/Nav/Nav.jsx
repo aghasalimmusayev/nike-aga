@@ -94,7 +94,7 @@ function Nav() {
                                 <Link className='top_right_link' to={'/'} onMouseOver={showHelpModal}>Help</Link>
                                 {help && <HelpModal helpRef={helpRef} />}
                             </li>
-                            <li><Link className='top_right_link' to={'/signUp'}>Join Us</Link></li>
+                            <li><Link className='top_right_link' to={'/membership'}>Join Us</Link></li>
                             <li><Link className='top_right_link' to={'/signIn'}>Sign In</Link></li>
                         </ul>
                     </div>
