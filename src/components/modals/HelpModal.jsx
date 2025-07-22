@@ -1,7 +1,7 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
-import './modal.css'
+import '../modals/modal.css'
 
 function HelpModal({ helpRef }) {
 

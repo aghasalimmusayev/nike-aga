@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Logo from '../Logo'
+import Logo from '../childComponents/Logo'
 import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiBag } from "react-icons/pi";
 import { FiUser } from "react-icons/fi";
 import SearchBox from './SearchBox';
-import { openSearch } from '../../../redux/ToggleSearchSlice';
+import { openSearch } from '../../redux/ToggleSearchSlice';
 
 function Navlinks({ openBar }) {
 

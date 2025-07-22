@@ -23,7 +23,7 @@ function MainPage() {
     return (
         <main>
             <Header />
-            {/* <Jordan /> */}
+            <Jordan />
             <NikeFields />
             <Classics />
             <Navigations />

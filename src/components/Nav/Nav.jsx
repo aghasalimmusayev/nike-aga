@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getNavlinks } from '../../src/redux/LinksDataSlice'
-import './pages/pageCss/nav.css'
-import NikeManLogo from '../components/childComponents/Nav children/NikeManLogo'
-import NikeArrowIcon from '../components/childComponents/Nav children/NikeArrowIcon'
-import HelpModal from '../components/modals/HelpModal'
-import MobileNav from './childComponents/Nav children/MobileNav';
-import Navlinks from './childComponents/Nav children/Navlinks'
+import { getNavlinks } from '../../redux/LinksDataSlice'
+import './nav.css'
+import NikeManLogo from './NikeManLogo'
+import NikeArrowIcon from './NikeArrowIcon'
+import HelpModal from '../modals/HelpModal'
+import MobileNav from './MobileNav';
+import Navlinks from './Navlinks'
 
 function Nav() {
 
@@ -94,7 +94,7 @@ function Nav() {
                                 <Link className='top_right_link' to={'/'} onMouseOver={showHelpModal}>Help</Link>
                                 {help && <HelpModal helpRef={helpRef} />}
                             </li>
-                            <li><Link className='top_right_link' to={'/'}>Join Us</Link></li>
+                            <li><Link className='top_right_link' to={'/signUp'}>Join Us</Link></li>
                             <li><Link className='top_right_link' to={'/signIn'}>Sign In</Link></li>
                         </ul>
                     </div>

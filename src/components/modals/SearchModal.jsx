@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../childComponents/Logo'
-import SearchBox from '../childComponents/Nav children/SearchBox'
+import SearchBox from '../Nav/SearchBox'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { closeSearch, openSearch } from '../../redux/ToggleSearchSlice'
