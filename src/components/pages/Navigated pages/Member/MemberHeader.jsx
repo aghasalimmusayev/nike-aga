@@ -2,7 +2,7 @@ import React from 'react'
 import memberday from '../../../../assets/img/membership.avif'
 import ButtonLink from '../../../childComponents/ButtonLink'
 
-function MembershipHeader() {
+function MemberHeader() {
     console.log('MemberHeader + rendered')
 
     return (
@@ -27,4 +27,4 @@ function MembershipHeader() {
     )
 }
 
-export default MembershipHeader
+export default MemberHeader

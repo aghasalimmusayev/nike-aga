@@ -8,7 +8,7 @@ function MemberBenefit() {
     return (
         <div className="container">
             <div className='member_box'>
-                <h2>Member Benefits</h2>
+                <h2 className='member_header'>Member Benefits</h2>
                 <div className="benefit_content">
                     <div className="benefit">
                         <img src={sekil1} alt="benefitPhoto" />
@@ -18,8 +18,8 @@ function MemberBenefit() {
                             <ButtonLink to='/' text={'Explore'} />
                         </div>
                     </div>
-                    <div className="benefit">
-                        <img src={sekil2} alt="benefitPhoto" />
+                    <div className="benefit second_one">
+                        <img src={sekil3} alt="benefitPhoto" />
                         <div className="benefit_text">
                             <h5>Nike By You</h5>
                             <h4>Your Customization Service</h4>
@@ -27,7 +27,7 @@ function MemberBenefit() {
                         </div>
                     </div>
                     <div className="benefit">
-                        <img src={sekil3} alt="benefitPhoto" />
+                        <img src={sekil2} alt="benefitPhoto" />
                         <div className="benefit_text">
                             <h5>Nike Run Club</h5>
                             <h4>Let`s Run Together</h4>

@@ -8,7 +8,7 @@ import Wishlist from './components/pages/Navigated pages/Whislist'
 import ShoppingCart from './components/pages/Navigated pages/ShoppingCart'
 import Products from './components/pages/Navigated pages/Products'
 import Details from './components/pages/Navigated pages/Details'
-import Membership from './components/pages/Navigated pages/Member/Membership'
+import Member from './components/pages/Navigated pages/Member/Member'
 
 function App() {
 
@@ -22,7 +22,7 @@ function App() {
           <Route path='details/:id' element={<Details />} />
           <Route path='signIn' element={<SignIn />} />
           <Route path='signUp' element={<SignUp />} />
-          <Route path='membership' element={<Membership />} />
+          <Route path='member' element={<Member />} />
           <Route path='wishlist' element={<Wishlist />} />
           <Route path='shoppingCart' element={<ShoppingCart />} />
         </Route>

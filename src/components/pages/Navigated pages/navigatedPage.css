@@ -42,6 +42,11 @@
 }
 .member_box{
     width: 100%;
+    padding: 70px 0;
+}
+.member_header{
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 .benefit_content{
     width: 100%;
@@ -83,6 +88,82 @@
     line-height: 2rem;
     margin-bottom: 10px;
 }
+.second_one h5{color: #111;}
+.second_one h4{color: #111;}
+.second_one a{color: #fff;background-color: #111;}
+.second_one a:hover{background-color: #666;}
+/*--MEMBER CAN GET--*/
+.members_info_content{
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 60px;
+    padding: 50px 0;
+}
+.m_i_content{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 250px;
+    margin: auto;
+}
+.m_i_content h5{
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+.m_i_content p{
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.5rem;
+}
+.membership_line{
+    background: #ff0000;
+    background: linear-gradient(265deg, rgba(255, 0, 0, 1) 0%, rgba(247, 86, 5, 1) 96%);
+    width: 100%;
+    margin: 50px 0;
+    padding: 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    overflow: hidden;
+    object-position: top center;
+}
+.line_content{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.membership_line img{width: 30px;}
+.membership_line h4{
+    font: 400 1rem Times;
+    color: #fff;
+    line-height: 0;
+}
+/**--CONNECT--*/
+.member_connect_content{
+    display: flex;
+    flex-direction: column;
+    padding: 70px 0;
+}
+.connect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.connect p{
+    text-align: center;
+}
+.connect img{
+    width: 80px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #dddddd;
+}
+.membership_logo{
+    width: 100%;
+    img{width: 100%;}
+}
 
 @media(min-width:768px){
     .membership_text{display: none;}
@@ -106,6 +187,49 @@
     .signUp_header_content p{
         margin-bottom: 20px;
         text-align: center;
+    }
+    .benefit_content{
+        overflow: inherit;
+        padding: 40px;
+    }
+    .benefit{
+        flex: initial;
+        width: 33.33%;
+        height: 70vh;
+    }
+    .benefit_text{
+        left: 10%;
+        bottom: 10%;
+    }
+    .benefit_text h5{font-size: 1.2rem;}
+    .benefit_text h4{font-size: 1.6rem;}
+    .members_info_content{
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: initial;
+        padding: 50px;
+    }
+    .m_i_content{
+        gap: 15px;
+        width: 220px;
+        margin: 0;
+    }
+    .m_i_content h5{font-size: 1.4rem;}
+    .m_i_content p{font-size: 1.1rem;}
+
+    .membership_line{gap: 200px;}
+    .membership_line img{width: 80px;}
+    .membership_line h4{
+        font: 400 2rem Times;
+        line-height: 0;
+    }
+    
+    .member_connect_content{
+        flex-direction: row;
+        justify-content: space-between;
     }
 
 }
