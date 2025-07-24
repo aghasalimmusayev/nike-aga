@@ -41,7 +41,8 @@ function Navlinks({ openBar }) {
                                 {linkData?.map(item => (
                                     <NavLink
                                         key={item.id}
-                                        to={'/products'}
+                                        to={`/products/${item.name}`}
+                                        onClick={hideAlt}
                                         onMouseOver={(e) => showAlt(item.name)}>
                                         {item.name}
                                     </NavLink>

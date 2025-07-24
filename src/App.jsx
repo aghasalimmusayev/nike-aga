@@ -19,6 +19,7 @@ function App() {
           <Route index element={<MainPage />} />
           <Route path=':code' element={<MainPage />} />
           <Route path='products' element={<Products />} />
+          <Route path='products/:category' element={<Products />} />
           <Route path='details/:id' element={<Details />} />
           <Route path='signIn' element={<SignIn />} />
           <Route path='signUp' element={<SignUp />} />

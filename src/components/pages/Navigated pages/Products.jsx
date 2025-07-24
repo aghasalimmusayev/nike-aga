@@ -2,18 +2,24 @@ import React, { useEffect, useState } from 'react'
 import Items from './Items'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../../../redux/ProductsSlice'
+import { useParams } from 'react-router-dom'
 import Arrow from '../../childComponents/Arrow'
 import '../pageCss/products.css'
 
 function Products() {
 
+    const { category } = useParams()
     const [productsData, setProductsData] = useState([])
     const [categories, setCategories] = useState([])
-    const [selectedCat, setSelectedCat] = useState('All')
+    const [selectedCat, setSelectedCat] = useState(category || 'All')
     const [priceRange, setPriceRange] = useState('All')
     const [sortModal, setSortModal] = useState(false)
     const { products } = useSelector(state => state.products)
     const dispatch = useDispatch()
+    useEffect(() => {
+        if (category) setSelectedCat(category)
+        else setSelectedCat('All')
+    }, [category])
     useEffect(() => {
         dispatch(getProducts())
     }, [])

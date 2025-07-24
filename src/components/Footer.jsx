@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getFooterLinks } from '../../../redux/FooterSlice'
+import { getFooterLinks } from '../redux/FooterSlice'
 import { IoIosArrowDown } from "react-icons/io";
-import CountryBtn from '../../childComponents/CountryBtn'
-import Guides from '../../childComponents/Footer children/Guides'
+import CountryBtn from './childComponents/CountryBtn'
+import Guides from './childComponents/Footer children/Guides'
 
 function Footer({ openCModal }) {
 
@@ -96,4 +96,3 @@ function Footer({ openCModal }) {
 
 export default Footer
 
-// content.style.paddingBottom = '30px';  //! bu setir islemir

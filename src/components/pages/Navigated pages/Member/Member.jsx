@@ -3,6 +3,7 @@ import MemberHeader from './MemberHeader'
 import MemberBenefit from './MemberBenefit'
 import MembersGet from './MembersGet'
 import MemberConnect from './MemberConnect'
+import MemberFag from './MemberFag'
 import '../navigatedPage.css'
 
 function Member() {
@@ -13,6 +14,7 @@ function Member() {
             <MemberBenefit />
             <MembersGet />
             <MemberConnect />
+            <MemberFag />
         </div>
     )
 }
