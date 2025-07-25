@@ -92,6 +92,7 @@
 .second_one h4{color: #111;}
 .second_one a{color: #fff;background-color: #111;}
 .second_one a:hover{background-color: #666;}
+
 /*--MEMBER CAN GET--*/
 .members_info_content{
     display: flex;
@@ -141,6 +142,7 @@
     color: #fff;
     line-height: 0;
 }
+
 /**--CONNECT--*/
 .member_connect_content{
     display: flex;
@@ -160,6 +162,7 @@
     border-radius: 20px;
     box-shadow: 0 0 10px #dddddd;
 }
+
 /*--FAG--*/
 .mem_fag_content{
     display: flex;
@@ -211,6 +214,7 @@
         line-height: 0;
     }
 }
+
 /**--DETAILS--*/
 .detail_page{padding: 50px 0;}
 .detail_page .container{width: 100%;}
@@ -218,17 +222,17 @@
     display: flex;
     flex-direction: column;
 }
-.product_img{
+.product_detail_img{
     width: 100%;
     height: 500px;
     background-color: #eee;
 }
-.product_img img{
+.product_detail_img img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.product_info{
+.product_detail_info{
     width: 90%;
     margin: auto;
     padding: 30px 0;
@@ -236,22 +240,22 @@
     flex-direction: column;
     gap: 10px;
 }
-.product_name{
+.product_datail_name{
     font-size: 1.5rem;
     font-weight: 500;
     color: #111;
 }
-.product_category{
+.product_ditail_category{
     font-size: 1.1rem;
     font-weight: 700;
     color: #D33918;
 }
-.product_price{
+.product_datail_price{
     font-size: 1.1rem;
     font-weight: 600;
     color: #007B47;
 }
-.product_description{
+.product_detail_description{
     font-size: 1.1rem;
     font-weight: 400;
     margin: 20px 0;
@@ -288,7 +292,6 @@
     line-height: 0;
     font-size: 1.7rem;
 }
-
 
 @media(min-width:768px){
     .member_header{font-size: 2rem;}
@@ -386,24 +389,24 @@
 
     .detail_page .container{width: 90%;margin: auto;}
     .product_detail{flex-direction: row;}
-    .product_img{
+    .product_detail_img{
         width: 45%;
         height: 900px;
         border-radius: 20px;
         overflow: hidden;
     }
-    .product_info{
+    .product_detail_info{
         width: 40%;
         padding: 50px;
         margin: 0;
     }
-    .product_name{font-size: 2.5rem;}
-    .product_category{
+    .product_datail_name{font-size: 2.5rem;}
+    .product_ditail_category{
         font-size: 2.1rem;
         font-weight: 500;
     }
-    .product_price{font-size: 1.5rem;}
-    .product_description{
+    .product_datail_price{font-size: 1.5rem;}
+    .product_detail_description{
         font-size: 1.5rem;
         font-style: italic;
     }

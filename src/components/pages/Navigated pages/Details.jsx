@@ -19,15 +19,15 @@ function Details() {
             <div className='container'>
                 {objById && (
                     <div className='product_detail'>
-                        <div className="product_img">
+                        <div className="product_detail_img">
                             <img src={objById.images && objById.images[0]} alt="" />
                         </div>
-                        <div className="product_info">
-                            <h3 className='product_category'>{objById.category}</h3>
-                            <h2 className='product_name'>{objById.title}</h2>
-                            <p className='product_price'>{objById.price} $</p>
-                            <p className='product_stock'>Stock: {objById.stock}</p>
-                            <p className='product_description'>{objById.description}</p>
+                        <div className="product_detail_info">
+                            <h3 className='product_ditail_category'>{objById.category}</h3>
+                            <h2 className='product_datail_name'>{objById.title}</h2>
+                            <p className='product_datail_price'>{objById.price} $</p>
+                            <p className='product_detail_stock'>Stock: {objById.stock}</p>
+                            <p className='product_detail_description'>{objById.description}</p>
                             <div className="detail_btns">
                                 <button className='add_to_cart'>Add to Cart</button>
                                 <button className='fav_btn'>

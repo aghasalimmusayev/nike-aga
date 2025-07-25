@@ -26,19 +26,18 @@ function Items({ selectedCat, priceRange, productsData, setProductsData }) {
     }, [selectedCat, priceRange, products])
 
     return (
-        <div>
-            <h2>{selectedCat === 'All' ? 'All Products' : selectedCat}</h2>
-            <div className='products'>
-                {productsData &&
-                    productsData?.map(item => (
-                        <Link to={`/details/${item.id}`} className='product' key={item.id}>
-                            <img src={item.images[0]} alt="" />
-                            <h3>{item.title}</h3>
-                            <h5>{item.category}</h5>
-                            <p>{item.price} $</p>
-                        </Link>
-                    ))}
-            </div>
+        <div className='products'>
+            {productsData &&
+                productsData?.map(item => (
+                    <Link to={`/details/${item.id}`} className='product' key={item.id}>
+                        <img src={item.images[0]} alt="" />
+                        <div className="product_info">
+                            <h3 className='product_name'>{item.title}</h3>
+                            <h5 className='product_cat'>{item.category}</h5>
+                            <p className='product_price'>{item.price} $</p>
+                        </div>
+                    </Link>
+                ))}
         </div>
     )
 }

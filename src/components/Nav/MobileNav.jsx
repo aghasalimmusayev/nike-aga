@@ -65,7 +65,11 @@ function MobileNav({ setMenuBar }) {
             ))}
             {menuStep === 1 && (
                 <div className='link_titles'>
-                    <Link to={'/'} className="selected_link_title">{selectedLink?.name}</Link>
+                    <Link
+                        to={`/products/${selectedLink?.name}`}
+                        onClick={() => setMenuBar(false)}
+                        className="selected_link_title">{selectedLink?.name}
+                    </Link>
                     <div className='titles'>
                         {selectedLink?.altCat.map((cat, index) => (
                             <button
