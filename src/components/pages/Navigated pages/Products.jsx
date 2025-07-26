@@ -37,7 +37,7 @@ function Products() {
     return (
         <div className='product_page'>
             <div className="container">
-                <div className='all_product'>
+                <div className='product_box'>
                     <div className="product_top_line">
                         <div className="product_length">{selectedCat} {`(${productsData.length})`}</div>
                         <div className='sort_btn'>
@@ -45,134 +45,136 @@ function Products() {
                                 <span>Sort By</span>
                                 <Arrow />
                             </button>
-                            {filterModal &&
-                                <div className='filter_box1'>
-                                    <div className="filter_close_btn">
-                                        <HiOutlineXMark onClick={toggleSortBtns} />
-                                    </div>
-                                    <div className='sort_modal'>
-                                        <h5>Sort by</h5>
-                                        <div className="sort">
-                                            <input type="radio" id='sortTypeDown' name='sortPrice' onClick={() => setFilterModal(false)} />
-                                            <label htmlFor="sortTypeDown">Price: High-Low</label>
-                                        </div>
-                                        <div className="sort">
-                                            <input type="radio" id='sortTypeUp' name='sortPrice' onClick={() => setFilterModal(false)} />
-                                            <label htmlFor="sortTypeUp">Price: Low-High</label>
-                                        </div>
-                                    </div>
-                                    <div className="price_filter">
-                                        <h5>Shop by Price</h5>
-                                        <div className='price_chooes'>
-                                            <input
-                                                type="radio"
-                                                name='filterPrice'
-                                                id='qiymetAll'
-                                                onChange={() => { setPriceRange('All') }} onClick={() => setFilterModal(false)} />
-                                            <label htmlFor="qiymetAll">All</label>
-                                        </div>
-                                        <div className='price_chooes'>
-                                            <input
-                                                type="radio"
-                                                name='filterPrice'
-                                                id='qiymet50'
-                                                onChange={() => { setPriceRange('0-50') }} onClick={() => setFilterModal(false)} />
-                                            <label htmlFor="qiymet50">$0 - $50</label>
-                                        </div>
-                                        <div className='price_chooes'>
-                                            <input
-                                                type="radio"
-                                                name='filterPrice'
-                                                id='qiymet100'
-                                                onChange={() => { setPriceRange('50-100') }} onClick={() => setFilterModal(false)} />
-                                            <label htmlFor="qiymet100">$50 - $100</label>
-                                        </div>
-                                        <div className='price_chooes'>
-                                            <input
-                                                type="radio"
-                                                name='filterPrice'
-                                                id='qiymet150'
-                                                onChange={() => { setPriceRange('100-150') }} onClick={() => setFilterModal(false)} />
-                                            <label htmlFor="qiymet150">$100 - $150</label>
-                                        </div>
-                                        <div className='price_chooes'>
-                                            <input
-                                                type="radio"
-                                                name='filterPrice'
-                                                id='qiymetUpper'
-                                                onChange={() => setPriceRange(`150-${maxPrice}`)} />
-                                            <label htmlFor="qiymetUpper">$150 - upper</label>
-                                        </div>
-                                    </div>
-                                </div>}
                         </div>
+                        {filterModal &&
+                            <div className='filter_box1'>
+                                <div className="filter_close_btn">
+                                    <HiOutlineXMark onClick={toggleSortBtns} />
+                                </div>
+                                <div className='sort_modal'>
+                                    <h5>Sort by</h5>
+                                    <div className="sort">
+                                        <input type="radio" id='sortTypeDown' name='sortPrice' onClick={() => setFilterModal(false)} />
+                                        <label htmlFor="sortTypeDown">Price: High-Low</label>
+                                    </div>
+                                    <div className="sort">
+                                        <input type="radio" id='sortTypeUp' name='sortPrice' onClick={() => setFilterModal(false)} />
+                                        <label htmlFor="sortTypeUp">Price: Low-High</label>
+                                    </div>
+                                </div>
+                                <div className="price_filter">
+                                    <h5>Shop by Price</h5>
+                                    <div className='price_chooes'>
+                                        <input
+                                            type="radio"
+                                            name='filterPrice'
+                                            id='qiymetAll'
+                                            onChange={() => { setPriceRange('All') }} onClick={() => setFilterModal(false)} />
+                                        <label htmlFor="qiymetAll">All</label>
+                                    </div>
+                                    <div className='price_chooes'>
+                                        <input
+                                            type="radio"
+                                            name='filterPrice'
+                                            id='qiymet50'
+                                            onChange={() => { setPriceRange('0-50') }} onClick={() => setFilterModal(false)} />
+                                        <label htmlFor="qiymet50">$0 - $50</label>
+                                    </div>
+                                    <div className='price_chooes'>
+                                        <input
+                                            type="radio"
+                                            name='filterPrice'
+                                            id='qiymet100'
+                                            onChange={() => { setPriceRange('50-100') }} onClick={() => setFilterModal(false)} />
+                                        <label htmlFor="qiymet100">$50 - $100</label>
+                                    </div>
+                                    <div className='price_chooes'>
+                                        <input
+                                            type="radio"
+                                            name='filterPrice'
+                                            id='qiymet150'
+                                            onChange={() => { setPriceRange('100-150') }} onClick={() => setFilterModal(false)} />
+                                        <label htmlFor="qiymet150">$100 - $150</label>
+                                    </div>
+                                    <div className='price_chooes'>
+                                        <input
+                                            type="radio"
+                                            name='filterPrice'
+                                            id='qiymetUpper'
+                                            onChange={() => setPriceRange(`150-${maxPrice}`)} />
+                                        <label htmlFor="qiymetUpper">$150 - upper</label>
+                                    </div>
+                                </div>
+                            </div>}
                     </div>
-                    <div className="filter_box2">
-                        <div className="category_filter">
-                            <button
-                                className={`category_btn ${selectedCat === 'All' ? 'active' : ''}`}
-                                onClick={() => { setSelectedCat('All') }}
-                                defaultChecked>
-                                All</button>
-                            {categories &&
-                                categories?.map((item, index) => (
-                                    <button
-                                        className={`category_btn ${selectedCat === item ? 'active' : ''}`}
-                                        key={index}
-                                        onClick={() => { setSelectedCat(item) }}>
-                                        {`${item[0].toUpperCase()}${item.slice(1)}`}
-                                    </button>
-                                ))}
+                    <div className="all_product">
+                        <div className="filter_box2">
+                            <div className="category_filter">
+                                <button
+                                    className={`category_btn ${selectedCat === 'All' ? 'active' : ''}`}
+                                    onClick={() => { setSelectedCat('All') }}
+                                    defaultChecked>
+                                    All</button>
+                                {categories &&
+                                    categories?.map((item, index) => (
+                                        <button
+                                            className={`category_btn ${selectedCat === item ? 'active' : ''}`}
+                                            key={index}
+                                            onClick={() => { setSelectedCat(item) }}>
+                                            {`${item[0].toUpperCase()}${item.slice(1)}`}
+                                        </button>
+                                    ))}
+                            </div>
+                            <div className="price_filter">
+                                <div className='price_chooes'>
+                                    <input
+                                        type="radio"
+                                        name='filterPrice'
+                                        id='qiymetAll'
+                                        onChange={() => { setPriceRange('All') }} />
+                                    <label htmlFor="qiymetAll">All</label>
+                                </div>
+                                <div className='price_chooes'>
+                                    <input
+                                        type="radio"
+                                        name='filterPrice'
+                                        id='qiymet50'
+                                        onChange={() => { setPriceRange('0-50') }} />
+                                    <label htmlFor="qiymet50">$0 - $50</label>
+                                </div>
+                                <div className='price_chooes'>
+                                    <input
+                                        type="radio"
+                                        name='filterPrice'
+                                        id='qiymet100'
+                                        onChange={() => { setPriceRange('50-100') }} />
+                                    <label htmlFor="qiymet100">$50 - $100</label>
+                                </div>
+                                <div className='price_chooes'>
+                                    <input
+                                        type="radio"
+                                        name='filterPrice'
+                                        id='qiymet150'
+                                        onChange={() => { setPriceRange('100-150') }} />
+                                    <label htmlFor="qiymet150">$100 - $150</label>
+                                </div>
+                                <div className='price_chooes'>
+                                    <input
+                                        type="radio"
+                                        name='filterPrice'
+                                        id='qiymetUpper'
+                                        onChange={() => setPriceRange(`150-${maxPrice}`)} />
+                                    <label htmlFor="qiymetUpper">$150 - upper</label>
+                                </div>
+                            </div>
                         </div>
-                        <div className="price_filter">
-                            <div className='price_chooes'>
-                                <input
-                                    type="radio"
-                                    name='filterPrice'
-                                    id='qiymetAll'
-                                    onChange={() => { setPriceRange('All') }} />
-                                <label htmlFor="qiymetAll">All</label>
-                            </div>
-                            <div className='price_chooes'>
-                                <input
-                                    type="radio"
-                                    name='filterPrice'
-                                    id='qiymet50'
-                                    onChange={() => { setPriceRange('0-50') }} />
-                                <label htmlFor="qiymet50">$0 - $50</label>
-                            </div>
-                            <div className='price_chooes'>
-                                <input
-                                    type="radio"
-                                    name='filterPrice'
-                                    id='qiymet100'
-                                    onChange={() => { setPriceRange('50-100') }} />
-                                <label htmlFor="qiymet100">$50 - $100</label>
-                            </div>
-                            <div className='price_chooes'>
-                                <input
-                                    type="radio"
-                                    name='filterPrice'
-                                    id='qiymet150'
-                                    onChange={() => { setPriceRange('100-150') }} />
-                                <label htmlFor="qiymet150">$100 - $150</label>
-                            </div>
-                            <div className='price_chooes'>
-                                <input
-                                    type="radio"
-                                    name='filterPrice'
-                                    id='qiymetUpper'
-                                    onChange={() => setPriceRange(`150-${maxPrice}`)} />
-                                <label htmlFor="qiymetUpper">$150 - upper</label>
-                            </div>
+                        <div className="products_items">
+                            <Items
+                                selectedCat={selectedCat}
+                                priceRange={priceRange}
+                                productsData={productsData}
+                                setProductsData={setProductsData} />
                         </div>
-                    </div>
-                    <div className="products_items">
-                        <Items
-                            selectedCat={selectedCat}
-                            priceRange={priceRange}
-                            productsData={productsData}
-                            setProductsData={setProductsData} />
                     </div>
                 </div>
             </div>

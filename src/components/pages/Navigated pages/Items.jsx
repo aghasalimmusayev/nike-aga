@@ -30,7 +30,9 @@ function Items({ selectedCat, priceRange, productsData, setProductsData }) {
             {productsData &&
                 productsData?.map(item => (
                     <Link to={`/details/${item.id}`} className='product' key={item.id}>
-                        <img src={item.images[0]} alt="" />
+                        <div className="product_img">
+                            <img src={item.images[0]} alt="product" />
+                        </div>
                         <div className="product_info">
                             <h3 className='product_name'>{item.title}</h3>
                             <h5 className='product_cat'>{item.category}</h5>
