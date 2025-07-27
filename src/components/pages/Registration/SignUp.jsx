@@ -12,6 +12,7 @@ function SignUp() {
 
     const navigate = useNavigate()
     const [type, setType] = useState(false)
+    const [typeAgain, setTypeAgain] = useState(false)
     const [passwordAgain, setPasswordAgain] = useState('')
     const [user, setUser] = useState({
         id: nanoid(),
@@ -25,10 +26,12 @@ function SignUp() {
     function toggleType() {
         setType(!type)
     }
+    function toggleTypeAgain() {
+        setTypeAgain(!typeAgain)
+    }
     function getValues(e) {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
-    console.log(user, passwordAgain)
     async function signUpSubmit(e) {
         e.preventDefault()
         if (user.password === passwordAgain) {
@@ -38,10 +41,10 @@ function SignUp() {
                 role: 'user',
                 active: true
             }
+            console.log(userData)
             const result = await registerUser(userData)
-            if (result) {
+            if (result.success) {
                 setUser({
-                    id: '',
                     name: '',
                     surname: '',
                     phone: '',
@@ -52,6 +55,7 @@ function SignUp() {
                 setPasswordAgain('')
                 navigate('/signIn')
             }
+            console.log(result.message)
         }
         else {
             alert('The password is not match')
@@ -75,23 +79,25 @@ function SignUp() {
                     <input
                         name='password'
                         placeholder='Password'
+                        type={type ? 'text' : 'password'}
                         onChange={getValues}
                         value={user.password}
                         required />
                     {type
-                        ? <FaRegEye onClick={toggleType} />
-                        : <FaEyeSlash onClick={toggleType} />}
+                        ? <div className="eye_icon"><FaRegEye onClick={toggleType} /></div>
+                        : <div className="eye_icon"><FaEyeSlash onClick={toggleType} /></div>}
                 </div>
                 <div className="password_inp">
                     <input
                         name='passwordAgain'
                         placeholder='Repeat password'
+                        type={typeAgain ? 'text' : 'password'}
                         onChange={(e) => { setPasswordAgain(e.target.value) }}
                         value={passwordAgain}
                         required />
-                    {type
-                        ? <FaRegEye onClick={toggleType} />
-                        : <FaEyeSlash onClick={toggleType} />}
+                    {typeAgain
+                        ? <div className="eye_icon"><FaRegEye onClick={toggleTypeAgain} /></div>
+                        : <div className="eye_icon"><FaEyeSlash onClick={toggleTypeAgain} /></div>}
                 </div>
                 <div className="gender">
                     <div className="male">

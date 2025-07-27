@@ -9,7 +9,7 @@ import HelpModal from '../modals/HelpModal'
 import MobileNav from './MobileNav';
 import Navlinks from './Navlinks'
 
-function Nav() {
+function Nav({ toggleDashModal, user }) {
 
     const [menuBar, setMenuBar] = useState(false)
     const { linkData, loading, error } = useSelector(store => store.links)
@@ -63,7 +63,6 @@ function Nav() {
     function openBar() {
         setMenuBar(true)
     }
-
     if (loading) {
         return <p className='links_loading'>Linkler yuklenir...</p>
     }
@@ -94,8 +93,14 @@ function Nav() {
                                 <Link className='top_right_link' to={'/'} onMouseOver={showHelpModal}>Help</Link>
                                 {help && <HelpModal helpRef={helpRef} />}
                             </li>
-                            <li><Link className='top_right_link' to={'/member'}>Join Us</Link></li>
-                            <li><Link className='top_right_link' to={'/signIn'}>Sign In</Link></li>
+                            {user
+                                ? <li><button onClick={toggleDashModal}
+                                    className='top_right_link'>{user.name}</button></li>
+                                : <>
+                                    <li><Link className='top_right_link' to={'/signUp'}>Sign Up</Link></li>
+                                    <li><Link className='top_right_link' to={'/signIn'}>Sign In</Link></li>
+                                </>
+                            }
                         </ul>
                     </div>
                 </div>

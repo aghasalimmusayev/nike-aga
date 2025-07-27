@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import './reg.css'
+import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../service/regService'
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 function SignIn() {
 
+    const navigate = useNavigate()
     const [type, setType] = useState(false)
     const [user, setUser] = useState({
         email: '',
@@ -30,11 +32,10 @@ function SignIn() {
                 localStorage.setItem("user", JSON.stringify(item))
                 setUser({
                     email: '',
-                    parol: ''
+                    password: ''
                 })
-                if (item.role === 'SuperAdmin') {
-                    navigate('/Admin')
-                } else navigate('/')
+                if (item.role === 'SuperAdmin') navigate('/Admin')
+                else navigate('/')
             })
             .catch(err => {
                 alert('Your email or password is not correct');
@@ -62,8 +63,8 @@ function SignIn() {
                         placeholder='Parol'
                     />
                     {type
-                        ? <FaRegEye onClick={toggleType} />
-                        : <FaEyeSlash onClick={toggleType} />}
+                        ? <div className="eye_icon"><FaRegEye onClick={toggleType} /></div>
+                        : <div className="eye_icon"><FaEyeSlash onClick={toggleType} /></div>}
                 </div>
                 <button type='submit' className='reg_btn'>Log in</button>
                 <div className='go_to_signup'>

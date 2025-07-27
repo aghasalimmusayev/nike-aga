@@ -11,6 +11,7 @@ import Products from './components/pages/Navigated pages/Products'
 import Details from './components/pages/Navigated pages/Details'
 import Member from './components/pages/Navigated pages/Member/Member'
 import Checkout from './components/pages/Navigated pages/Checkout'
+import Profile from './components/pages/Registration/Profile'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='details/:id' element={<Details />} />
           <Route path='checkout' element={<Checkout />} />
           <Route path='member' element={<Member />} />
+          <Route path='profile' element={<Profile />} />
           <Route path='wishlist' element={<Wishlist />} />
           <Route path='shoppingCart' element={<ShoppingCart />} />
         </Route>

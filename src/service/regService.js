@@ -2,8 +2,9 @@ import axiosInstance from "./instance";
 
 async function registerUser(userData) {
     try {
-        const userVarsa = axiosInstance.get(`/Users?email=${userData.email}`)
-        if (userVarsa) {
+        const userVarsa = await axiosInstance.get(`/Users?email=${userData.email}`)
+        console.log("Email check:", userVarsa.data);
+        if (userVarsa.data.length > 0) {
             return {
                 success: false,
                 message: "This email address is already in use!"

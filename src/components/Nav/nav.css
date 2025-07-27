@@ -1,5 +1,6 @@
 .toplinks_bg{background-color: #F5F5F5;}
 .toplinks{
+    position: relative;
     padding: 4px 0;
     display: flex;
     justify-content: space-between;
@@ -26,6 +27,9 @@
 .top_right .top_right_link:hover{color: #707072;}
 .top_right .top_right_link{
     width: fit-content;
+    background: none;
+    border: none;
+    cursor: pointer;
     padding: 10px 0;
     font-size: 0.8rem;
     font-weight: 600;
@@ -33,6 +37,37 @@
 }
 .top_right li:last-child{border-right: none;}
 .help{position: relative !important;}
+.dash_modal{
+    background-color: #fff;
+    box-shadow: 0 2px 5px #707072;
+    border-radius: 10px;
+    position: absolute;
+    top: 35px;
+    right: 5%;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    overflow: hidden;
+}
+.dash_modal h3{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111;
+    padding: 10px;
+    border-bottom: 1px solid #CACACB;
+}
+.dash_modal a:hover, .dash_modal button:hover{background-color: #E5E5E5;}
+.dash_modal a, .dash_modal button{
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111;
+    padding: 10px;
+    cursor: pointer;
+}
 .menu_bar{display: none;}
 .navlinks_bg {
     position: relative;
@@ -310,7 +345,7 @@ nav.nav-fixed .nav_content {transition: all 0.3s ease;}
         width: 80%;
         height: 100vh;
         background: #fff;
-        z-index: 9999;
+        z-index: 2000;
         padding: 50px 30px;
         display: flex;
         flex-direction: column;
