@@ -1,11 +1,11 @@
 import React from 'react'
 
-function SignIn() {
+function Admin() {
     return (
         <div>
-            <h1>Sing in</h1>
+            ADMIN PAGE
         </div>
     )
 }
 
-export default SignIn
+export default Admin
