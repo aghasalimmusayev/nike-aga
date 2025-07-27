@@ -97,10 +97,11 @@ function MobileNav({ setMenuBar }) {
                 <NikeManLogo width={'30px'} height={'30px'} />
                 <NikeArrowIcon width={'30px'} height={'30px'} />
             </div>
-            <p className='becom_member'>Become a Nike Member for the best products, inspriration and stories in sport. <Link>Learn more</Link></p>
+            <p className='becom_member'>Become a Nike Member for the best products, inspriration and stories in sport.
+                <Link onClick={() => setMenuBar(false)} to={'/'}> Learn more</Link></p>
             <div className="auth_btns">
-                <Link to={'/signIn'}>Join Us</Link>
-                <Link to={'/signUp'}>Sign In</Link>
+                <Link onClick={() => setMenuBar(false)} to={'/signIn'}>Join Us</Link>
+                <Link onClick={() => setMenuBar(false)} to={'/signUp'}>Sign In</Link>
             </div>
             <div className="mobile_navigations">
                 <Link>

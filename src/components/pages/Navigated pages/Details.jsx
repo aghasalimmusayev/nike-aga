@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getProductById } from '../../../redux/ByIdSlice'
 import { CiHeart } from "react-icons/ci";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -44,6 +44,8 @@ function Details() {
     }
     const isInWishList = wishLis.some(item => item.id == objById?.id)
 
+    const cartItems = useSelector(state => state.cartList.cartList)
+    const inCart = cartItems.some(p => p.id == objById.id)
     const dispatch2 = useDispatch()
     function addInCart() {
         dispatch2(addToCart(objById))
@@ -70,7 +72,9 @@ function Details() {
                             <p className='product_detail_stock'>Stock: {objById.stock}</p>
                             <p className='product_detail_description'>{objById.description}</p>
                             <div className="detail_btns">
-                                <button className='add_to_cart' onClick={addInCart}>Add to Cart</button>
+                                {inCart
+                                    ? <Link to={'/shoppingCart'} className='go_to_cart' >Go to Cart</Link>
+                                    : <button className='add_to_cart' onClick={addInCart}>Add to Cart</button>}
                                 <button className='fav_btn'>
                                     <span>Favorite</span>
                                     <div className="fav_btn_icon">

@@ -17,9 +17,23 @@ export const cartSlice = createSlice({
         removeFromCart: (state, action) => {
             const id = action.payload
             state.cartList = state.cartList.filter(p => p.id !== id)
+        },
+        incrementCount: (state, action) => {
+            const id = action.payload
+            const item = state.cartList.find(i => i.id == id)
+            if (item) {
+                item.count += 1
+            }
+        },
+        decrementCount: (state, action) => {
+            const id = action.payload
+            const item = state.cartList.find(i => i.id == id)
+            if (item && item.count > 1) {
+                item.count -= 1
+            }
         }
     }
 })
 
-export const { addToCart, removeFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, incrementCount, decrementCount } = cartSlice.actions
 export default cartSlice.reducer
