@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const state = {
-    cartList: []
+const initialState = {
+    cartList: JSON.parse(localStorage.getItem('cartList')) || [],
+    selectedItems: []
 }
 
 export const cartSlice = createSlice({
     name: 'cartList',
-    initialState: state,
+    initialState,
     reducers: {
         addToCart: (state, action) => {
             const item = action.payload
@@ -31,9 +32,27 @@ export const cartSlice = createSlice({
             if (item && item.count > 1) {
                 item.count -= 1
             }
+        },
+        toggleSelectItem: (state, action) => {
+            const id = action.payload
+            if (state.selectedItems.includes(id)) {
+                state.selectedItems = state.selectedItems.filter(itemId => itemId !== id)
+            }
+            else state.selectedItems.push(id)
+        },
+        clearSelection: (state) => {
+            state.selectedItems = []
         }
     }
 })
 
-export const { addToCart, removeFromCart, incrementCount, decrementCount } = cartSlice.actions
+export const {
+    addToCart,
+    removeFromCart,
+    incrementCount,
+    decrementCount,
+    toggleSelectItem,
+    clearSelection
+} = cartSlice.actions
+
 export default cartSlice.reducer

@@ -332,6 +332,7 @@
 }
 .cart_box{width: 100%;}
 .cartItem{
+    position: relative;
     width: 100%;
     display: flex;
     gap: 20px;
@@ -340,6 +341,30 @@
     padding: 15px;
     margin: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.remove_btn{
+    position: absolute;
+    right: 15px;
+    bottom: 17px;
+}
+.remove_btn button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+.remove_btn span{display: none;}
+.selection{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+}
+.selection input{
+    width: 15px;
+    height: 15px;
+    accent-color: #111;
+    cursor: pointer;
 }
 .cartItem_img{
     width: 130px;
@@ -430,9 +455,7 @@
     align-items: center;
     padding: 20px 0;
 }
-.checkout_btn{
-    padding: 20px 0;
-}
+.checkout_btn{padding: 20px 0;}
 .checkout_btn a{
     width: 100%;
     height: 60px;
@@ -461,6 +484,32 @@
     white-space: nowrap;
     line-height: 2rem;
 }
+
+/*--CHECKOUT PAGE--*/
+#checkout_page{padding: 100px 0;}
+.order_count{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.payment_btn{
+    display: flex;
+    justify-content: end;
+}
+.payment_btn button{
+    background-color: #111;
+    border: 1px solid #111;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 30px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.payment_btn button:hover{background-color: #666;}
 
 
 @media(min-width:768px){
@@ -606,6 +655,29 @@
     .cart_box{
         width: 70%;
     }
+    .selection{
+        top: 40px;
+        left: 10px;
+    }
+    .selection input{
+        width: 20px;
+        height: 20px;
+    }
+    .remove_btn{
+        top: 30px;
+        right: 20px;
+        bottom: auto;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .remove_btn button{font-size: 1.5rem;}
+    .remove_btn span{
+        display: initial; 
+        line-height: 0;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
     .shopping_info{
         flex-direction: row;
         justify-content: space-between;
@@ -630,4 +702,11 @@
     .cart_item_count button{font-size: 1.7rem;}
     .cart_item_count{padding: 5px 15px; border-radius: 25px;}
     .summary{width: 30%;}
+
+    .payment_btn button{
+        border-radius: 30px;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+    }
+
 }

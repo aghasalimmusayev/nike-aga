@@ -12,6 +12,8 @@ import Details from './components/pages/Navigated pages/Details'
 import Member from './components/pages/Navigated pages/Member/Member'
 import Checkout from './components/pages/Navigated pages/Checkout'
 import Profile from './components/pages/Registration/Profile'
+import ProtectedRoute from './components/pages/Protection/ProtectedRoute'
+import Admin from './components/pages/Registration/Admin'
 
 function App() {
 
@@ -27,7 +29,10 @@ function App() {
           <Route path='details/:id' element={<Details />} />
           <Route path='checkout' element={<Checkout />} />
           <Route path='member' element={<Member />} />
-          <Route path='profile' element={<Profile />} />
+          <Route path='profile' element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>} />
           <Route path='wishlist' element={<Wishlist />} />
           <Route path='shoppingCart' element={<ShoppingCart />} />
         </Route>
@@ -36,6 +41,10 @@ function App() {
           <Route element={<BlanckLayout />} >
             <Route path='signIn' element={<SignIn />} />
             <Route path='signUp' element={<SignUp />} />
+            <Route path='admin' element={
+              <ProtectedRoute role='superAdmin'>
+                <Admin />
+              </ProtectedRoute>} />
           </Route>
         </Route>
 

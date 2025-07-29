@@ -55,6 +55,9 @@
     white-space: nowrap;
     background: none;
     border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
 }
 .price_filter{
     width: 100%;

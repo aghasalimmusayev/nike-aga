@@ -1,11 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { decrementCount, incrementCount } from '../../../redux/CartSlice'
+import { decrementCount, incrementCount, toggleSelectItem, removeFromCart } from '../../../redux/CartSlice'
 import { Link } from 'react-router-dom'
+import { IoTrashOutline } from "react-icons/io5";
+import './navigatedPage.css'
 
 function ShoppingCart() {
 
     const cartItems = useSelector(state => state.cartList.cartList)
+    const selectedItems = useSelector(state => state.cartList.selectedItems)
     const total = (cartItems?.reduce((acc, item) => (acc + (item.price * item.count)), 0)).toFixed(2)
     const dispatch = useDispatch()
     function countDown(id) {
@@ -13,6 +16,12 @@ function ShoppingCart() {
     }
     function countUp(id) {
         dispatch(incrementCount(id))
+    }
+    function handleSelect(id) {
+        dispatch(toggleSelectItem(id))
+    }
+    function removeItem(id){
+        dispatch(removeFromCart(id))
     }
 
     return (
@@ -24,6 +33,19 @@ function ShoppingCart() {
                         {cartItems.length > 0
                             ? cartItems.map(item => (
                                 <div className="cartItem" key={item.id}>
+                                    <div className="selection">
+                                        <input
+                                            type="checkbox"
+                                            onChange={() => handleSelect(item.id)}
+                                            checked={selectedItems.includes(item.id)}
+                                        />
+                                    </div>
+                                    <div className="remove_btn">
+                                        <button onClick={() => removeItem(item.id)}>
+                                            <IoTrashOutline />
+                                            <span>Remove</span>
+                                        </button>
+                                    </div>
                                     <div className="cartItem_img">
                                         <img src={item.images[0]} alt="" />
                                     </div>

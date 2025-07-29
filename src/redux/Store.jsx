@@ -24,3 +24,8 @@ export const store = configureStore({
         cartList: cartSlice
     }
 })
+
+store.subscribe(() => {
+    const state = store.getState()
+    localStorage.setItem('cartList', JSON.stringify(state.cartList.cartList))
+})

@@ -4,6 +4,7 @@ import './profile.css'
 function Profile() {
 
     const user = JSON.parse(localStorage.getItem('user'))
+    if (!user) return null;
 
     return (
         <div className="my_profile">
