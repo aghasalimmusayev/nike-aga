@@ -13,7 +13,7 @@ import Member from './components/pages/Navigated pages/Member/Member'
 import Checkout from './components/pages/Navigated pages/Checkout'
 import Profile from './components/pages/Registration/Profile'
 import ProtectedRoute from './components/pages/Protection/ProtectedRoute'
-import Admin from './components/pages/Registration/Admin'
+import Admin from './components/pages/Admin/Admin'
 
 function App() {
 
@@ -42,7 +42,7 @@ function App() {
             <Route path='signIn' element={<SignIn />} />
             <Route path='signUp' element={<SignUp />} />
             <Route path='admin' element={
-              <ProtectedRoute role='superAdmin'>
+              <ProtectedRoute role='SuperAdmin'>
                 <Admin />
               </ProtectedRoute>} />
           </Route>

@@ -9,7 +9,8 @@ function ShoppingCart() {
 
     const cartItems = useSelector(state => state.cartList.cartList)
     const selectedItems = useSelector(state => state.cartList.selectedItems)
-    const total = (cartItems?.reduce((acc, item) => (acc + (item.price * item.count)), 0)).toFixed(2)
+    const checkoutItems = cartItems.filter(item => selectedItems.includes(item.id))
+    const total = (checkoutItems?.reduce((acc, item) => (acc + (item.price * item.count)), 0)).toFixed(2)
     const dispatch = useDispatch()
     function countDown(id) {
         dispatch(decrementCount(id))
@@ -20,7 +21,7 @@ function ShoppingCart() {
     function handleSelect(id) {
         dispatch(toggleSelectItem(id))
     }
-    function removeItem(id){
+    function removeItem(id) {
         dispatch(removeFromCart(id))
     }
 
@@ -85,7 +86,11 @@ function ShoppingCart() {
                                 <Link to={'/SignIn'}>Sign-in</Link>
                             </p>
                             <div className="checkout_btn">
-                                <Link to={'/checkout'}>Chekcout</Link>
+                                <Link
+                                    to={selectedItems.length > 0 ? '/checkout' : '#'}
+                                    className={selectedItems.length > 0 ? 'enabled' : 'disabled'}>
+                                    Checkout
+                                </Link>
                             </div>
                         </div>}
                 </div>

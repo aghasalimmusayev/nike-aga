@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { getProductById } from '../../../redux/ByIdSlice'
@@ -6,50 +6,22 @@ import { CiHeart } from "react-icons/ci";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { addToCart } from '../../../redux/CartSlice';
+import { addToWish, removeFromWish } from '../../../redux/WishSlice';
 
 function Details() {
 
     const { id } = useParams()
     const dispatch = useDispatch()
     const { objById } = useSelector(state => state.objById)
-    const [wishLis, setWishList] = useState([])
+    const cartItems = useSelector(state => state.cartList.cartList)
+    const { wishList } = useSelector(state => state.wishList)
+
     useEffect(() => {
         dispatch(getProductById(id))
     }, [dispatch, id])
-    useEffect(() => {
-        const isWishList = JSON.parse(localStorage.getItem('wishList')) || []
-        setWishList(isWishList)
-    }, [])
-    function addToWish(obj) {
-        const localWishList = JSON.parse(localStorage.getItem('wishList')) || []
-        const wishVar = localWishList.some(item => item.id == obj.id)
-        if (!wishVar) {
-            const wishItem = {
-                id: id,
-                title: objById.title,
-                category: objById.category
-            }
-            const updatedWish = [...localWishList, wishItem]
-            localStorage.setItem('wishList', JSON.stringify(updatedWish))
-            setWishList(updatedWish)
-            console.log('Wish elave edildi: ' + updatedWish)
-        }
-        console.log('AGA')
-    }
-    function removeWish(obj) {
-        const localWishList = JSON.parse(localStorage.getItem('wishList')) || []
-        const updatedWish = localWishList.filter(item => item.id !== obj.id)
-        localStorage.setItem('wishList', JSON.stringify(updatedWish))
-        setWishList(updatedWish)
-    }
-    const isInWishList = wishLis.some(item => item.id == objById?.id)
 
-    const cartItems = useSelector(state => state.cartList.cartList)
     const inCart = cartItems.some(p => p.id == objById.id)
-    const dispatch2 = useDispatch()
-    function addInCart() {
-        dispatch2(addToCart(objById))
-    }
+    const isInWishList = wishList.some(item => item.id === objById?.id);
 
     return (
         <div className="detail_page">
@@ -60,8 +32,8 @@ function Details() {
                             <img src={objById.images && objById.images[0]} alt="" />
                             <div className="wishIcon">
                                 {isInWishList
-                                    ? <IoMdHeartEmpty style={{ cursor: 'pointer' }} onClick={() => addToWish(objById)} />
-                                    : <IoMdHeart style={{ cursor: 'pointer' }} onClick={() => removeWish(objById)} />
+                                    ? <IoMdHeart style={{ cursor: 'pointer' }} onClick={() => dispatch(removeFromWish(objById.id))} />
+                                    : <IoMdHeartEmpty style={{ cursor: 'pointer' }} onClick={() => dispatch(addToWish(objById))} />
                                 }
                             </div>
                         </div>
@@ -74,11 +46,11 @@ function Details() {
                             <div className="detail_btns">
                                 {inCart
                                     ? <Link to={'/shoppingCart'} className='go_to_cart' >Go to Cart</Link>
-                                    : <button className='add_to_cart' onClick={addInCart}>Add to Cart</button>}
-                                <button className='fav_btn'>
+                                    : <button className='add_to_cart' onClick={() => dispatch(addToCart(objById))}>Add to Cart</button>}
+                                <button className='fav_btn' onClick={() => dispatch(addToWish(objById))} >
                                     <span>Favorite</span>
                                     <div className="fav_btn_icon">
-                                        <CiHeart onClick={() => addToWish(objById)} />
+                                        <CiHeart />
                                     </div>
                                 </button>
                             </div>

@@ -1,7 +1,11 @@
 import React from 'react'
 import './navigatedPage.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import WithAuth from '../Protection/Withauth'
+import { sellProduct } from '../../../service/sellService'
+import { clearSelection } from '../../../redux/CartSlice'
+import { Link } from 'react-router-dom'
+import { TbArrowBackUp } from "react-icons/tb";
 
 function Checkout() {
 
@@ -10,6 +14,25 @@ function Checkout() {
     const checkoutItems = cartItems.filter(item => selectedItems.includes(item.id))
     const total = checkoutItems.reduce((acc, item) => acc + (item.price * item.count), 0).toFixed(2);
     const countOrders = checkoutItems.reduce((acc, item) => item.count + acc, 0)
+    const dispatch = useDispatch()
+    async function completeOrder() {
+        try {
+            for (let item of checkoutItems) {
+                const stokSayi = item.stock - item.count
+                const satis = (item.sold || 0) + item.count
+                const updatedData = {
+                    stock: stokSayi,
+                    sold: satis
+                }
+                await sellProduct(item.id, updatedData)
+            }
+            dispatch(clearSelection())
+            alert('Sifaris ugurla tamamlandi')
+        }
+        catch (error) {
+            console.error('Satis-da xeta: ' + error)
+        }
+    }
 
     return (
         <section id='checkout_page'>
@@ -18,6 +41,10 @@ function Checkout() {
                     <div className="cart_box">
                         {checkoutItems.length > 0 && (
                             <>
+                                <Link className='backToShopping' to={'/shoppingCart'}>
+                                    <TbArrowBackUp />
+                                    <span>Back to Cart</span>
+                                </Link>
                                 <h1 className='shoppingCart_header'>Your orders</h1>
                                 {checkoutItems.map(item => (
                                     <div className="cartItem" key={item.id}>
@@ -49,7 +76,7 @@ function Checkout() {
                                 <span>{total} $</span>
                             </div>
                             <div className='payment_btn'>
-                                <button>Complete payment</button>
+                                <button onClick={completeOrder}>Complete payment</button>
                             </div>
                         </div>}
                 </div>

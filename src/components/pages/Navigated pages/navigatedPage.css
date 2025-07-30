@@ -317,9 +317,7 @@
     font-size: 1.7rem;
 }
 /*--SHOPPING CART--*/
-#shoppingCart{
-    padding: 30px 0;
-}
+#shoppingCart{padding: 30px 0;}
 .shoppingCart_header{
     font-size: 1.7rem;
     font-weight: 500;
@@ -436,14 +434,17 @@
     color: #D33918;
     margin: 20px;
 }
-.summary{
-    width: 100%;
-}
+.summary{width: 100%;}
 .total{
+    width: 90%;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 50;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 10px 0;
     border-top: 1px solid #CACACB;
     border-bottom: 1px solid #CACACB;
     font-size: 1.2rem;
@@ -465,12 +466,21 @@
     border-radius: 40px;
     font-size: 1.2rem;
     font-weight: 500;
+}
+.checkout_btn a.enabled{
     cursor: pointer;
     background-color: #111;
     border: 1px solid #111;
     color: #fff;
 }
-.checkout_btn a:hover{background-color: #666;}
+.checkout_btn a.enabled:hover{background-color: #666;}
+.checkout_btn a.disabled{
+    cursor: unset;
+    background-color: #999;
+    border: 1px solid #999;
+    color: #fff;    
+}
+.checkout_btn a.disabled:hover{background-color: #999;}
 .joining_info{
     padding: 20px 0;
     font-size: 1rem;
@@ -487,6 +497,15 @@
 
 /*--CHECKOUT PAGE--*/
 #checkout_page{padding: 100px 0;}
+.backToShopping{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 20px;
+}
 .order_count{
     display: flex;
     justify-content: space-between;
@@ -511,6 +530,66 @@
 }
 .payment_btn button:hover{background-color: #666;}
 
+/*--WISH LIST--*/
+#wish_list{min-height: 60vh;}
+.wish_box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.wish_header{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 20px;
+}
+.wishItem{
+    display: flex;
+    gap: 20px;
+}
+.wish_item_img{
+    width: 90px;
+    height: 90px;
+}
+.wish_item_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.wishItem_info{min-width: 0; width: 100%;}
+.wishItem_name{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.wishItem_cat{
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #D33918;
+    margin: 5px 0;
+}
+.wishItem_price{
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #007B47;
+}
+.wish_remove{
+    background: none;
+    border: none;
+    padding: 5px 0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ff0000;
+}
+.empty_wish_info{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #D33918;
+}
 
 @media(min-width:768px){
     .member_header{font-size: 2rem;}
@@ -681,6 +760,7 @@
     .shopping_info{
         flex-direction: row;
         justify-content: space-between;
+        align-items: flex-start;
     }
     .cartItem{
         border: none;
@@ -701,12 +781,47 @@
     .cart_item_count span{font-size: 1.2rem;}
     .cart_item_count button{font-size: 1.7rem;}
     .cart_item_count{padding: 5px 15px; border-radius: 25px;}
-    .summary{width: 30%;}
+    .total{
+        width: 100%;
+        position: static;
+        padding: 20px 0;
+        font-size: 1.5rem;
+    }
+    .summary{
+        width: 30%;
+        position: sticky;
+        top: 60px;
+    }
 
     .payment_btn button{
         border-radius: 30px;
         padding: 15px 30px;
         font-size: 1.2rem;
+    }
+
+    .wish_box{flex-direction: row;}
+    .wish_header{
+        font-size: 1.5rem;
+        margin: 20px 0;
+    }
+    .wishItem{
+        width: 400px;
+        padding: 10px;
+        border: 1px solid #CACACB;
+        border-radius: 15px;
+    }
+    .wish_item_img img{border-radius: 10px;}
+    .wish_item_img{
+        width: 200px;
+        height: 150px;
+    }
+    .wishItem_cat{font-size: 1rem;}
+    .wishItem_price{font-size: 1rem;}
+    .wish_remove{font-size: 1.3rem;}
+    .empty_wish_info{
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #D33918;
     }
 
 }

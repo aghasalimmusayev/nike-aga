@@ -9,6 +9,8 @@ import toggleSearchSlice from './ToggleSearchSlice'
 import productsSlice from './ProductsSlice'
 import getProduct from './ByIdSlice'
 import cartSlice from './CartSlice'
+import wishSlice from './WishSlice'
+import localStorageMiddleware from './Middleware/LocaleStorageMiddleware'
 
 export const store = configureStore({
     reducer: {
@@ -21,11 +23,9 @@ export const store = configureStore({
         toggleSearch: toggleSearchSlice,
         products: productsSlice,
         objById: getProduct,
-        cartList: cartSlice
-    }
+        cartList: cartSlice,
+        wishList: wishSlice
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware)
 })
 
-store.subscribe(() => {
-    const state = store.getState()
-    localStorage.setItem('cartList', JSON.stringify(state.cartList.cartList))
-})

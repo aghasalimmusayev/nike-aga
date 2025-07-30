@@ -8,12 +8,10 @@ export default function ProtectedRoute({ children, role }) {
     }
 
     if (role) {
-        if (user.role === 'superAdmin') {
-            return children;
-        }
         if (user.role !== role) {
             return <Navigate to="/" replace />;
         }
     }
+    
     return children;
 }

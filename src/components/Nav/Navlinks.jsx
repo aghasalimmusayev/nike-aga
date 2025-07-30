@@ -12,7 +12,7 @@ function Navlinks({ openBar }) {
 
     const { linkData } = useSelector(store => store.links)
     const cartItems = useSelector(state => state.cartList.cartList)
-    const wishList = JSON.parse(localStorage.getItem('wishList')) || []
+    const { wishList } = useSelector(state => state.wishList)
     const [altData, setAltData] = useState([])
     const [hoverAlt, setHoverAlt] = useState(false)
     const altLinksRef = useRef(null)
@@ -65,14 +65,16 @@ function Navlinks({ openBar }) {
                             <SearchBox onClick={() => dispatch(openSearch())} />
                             <Link to={'/wishlist'} className="wish_icon_box">
                                 <IoMdHeartEmpty style={{ fontSize: '24px' }} />
-                                <span className='wish_length'>{wishList.length}</span>
+                                {wishList.length > 0 &&
+                                    <span className='wish_length'>{wishList.length}</span>}
                             </Link>
                             <Link to={'/signIn'} className="user_icon_box">
                                 <FiUser style={{ fontSize: '24px' }} />
                             </Link>
                             <Link to={'/shoppingCart'} className="cart_icon_box">
                                 <PiBag style={{ fontSize: '24px' }} />
-                                <span className='cart_length'>{cartItems.length}</span>
+                                {cartItems.length > 0 &&
+                                    <span className='cart_length'>{cartItems.length}</span>}
                             </Link>
                             <div className="menu_bar" onClick={openBar}>
                                 <div className="bar1"></div>

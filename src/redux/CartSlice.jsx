@@ -41,6 +41,7 @@ export const cartSlice = createSlice({
             else state.selectedItems.push(id)
         },
         clearSelection: (state) => {
+            state.cartList = state.cartList.filter(item => !state.selectedItems.includes(item.id))
             state.selectedItems = []
         }
     }

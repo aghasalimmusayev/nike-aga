@@ -3,9 +3,10 @@ import Nav from '../components/Nav/Nav'
 import Footer from '../components/Footer'
 import CountryLinks from '../components/modals/CountryLinks'
 import DashModal from '../components/modals/DashModal'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 function Layout() {
+    const navigate = useNavigate()
     const [cModal, setCModal] = useState(false)
     const [dashModal, setDashModal] = useState(false)
     const [user, setUser] = useState(() => {
@@ -35,6 +36,7 @@ function Layout() {
         localStorage.removeItem('user');
         setUser(null)
         setDashModal(false)
+        navigate('/')
     }
 
     return (
