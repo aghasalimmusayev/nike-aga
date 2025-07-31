@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 function NikeArrowIcon({ width, height }) {
     return (
@@ -23,4 +23,4 @@ function NikeArrowIcon({ width, height }) {
     )
 }
 
-export default NikeArrowIcon
+export default memo(NikeArrowIcon)

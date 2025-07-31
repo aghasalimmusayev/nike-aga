@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { HiOutlineGlobeAlt } from "react-icons/hi2";
 import { useSelector } from 'react-redux';
 
 function CountryBtn({ openCModal }) {
-
+    console.log('CountryBtn rendered')
     const { countryName } = useSelector(state => state.country)
 
     const buttonStyle = {
@@ -35,4 +35,4 @@ function CountryBtn({ openCModal }) {
     )
 }
 
-export default CountryBtn
+export default memo(CountryBtn)

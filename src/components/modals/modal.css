@@ -116,22 +116,71 @@
 /*--SEARCH--*/
 #search{
     width: 100%;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 10000;
-    background-color: red;
+    z-index: 1000;
+    background-color: #fff;
 }
 .search_content{
-    width: 800px;
+    padding: 20px 0;
+    margin-bottom: 30px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+}
+.search_modal_box{position: relative;}
+.search_modal_logo{display: none;}
+.search_close_btn button{
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.search_modal_box input:focus{background-color: #e5e5e5;}
+.search_modal_box input{
+    width: 80%;
+    height: 35px;
+    padding: 10px 10px 10px 40px;
+    border: none;
+    border-radius: 25px;
+    background-color: #F5F5F5;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.search_modal_icon{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #F5F5F5;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search_modal_box input::placeholder{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.search_modal_header{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
 }
 .popular_terms{
+    padding: 20px 0;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 15px;
+}
+.popular_terms a{
+    background-color: #eee;    
+    font-size: 0.9rem;
 }
 
 @media(min-width:768px){
@@ -158,4 +207,22 @@
     .region_countries a{width: 200px;}
     .region_countries a:hover{background-color: #e5e5e5;}
     .region_countries > :last-child{margin: 0;}
+
+    .search_modal_logo{display: initial;}
+    .search_modal_logo{width: 20%;}
+    .search_close_btn{
+        width: 20%;
+        display: flex;
+        justify-content: end;
+    }
+    .search_modal_box{width: 60%;}
+    .search_modal_box input{width: 100%;}
+    .search_modal_header{
+        width: 60%;
+        margin: auto;
+    }
+    .popular_terms{
+        width: 60%;
+        margin: auto;
+    }
 }

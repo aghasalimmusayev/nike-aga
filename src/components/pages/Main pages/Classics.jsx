@@ -6,7 +6,6 @@ import { SlArrowRight } from "react-icons/sl";
 import { SlArrowLeft } from "react-icons/sl";
 
 function Classics() {
-
     const dispatch = useDispatch()
     const { classics, loading, error } = useSelector(state => state.classics)
     const [left, setLeft] = useState(false)

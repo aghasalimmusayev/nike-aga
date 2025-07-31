@@ -9,7 +9,7 @@ import { addToCart } from '../../../redux/CartSlice';
 import { addToWish, removeFromWish } from '../../../redux/WishSlice';
 
 function Details() {
-
+    console.log('Details render')
     const { id } = useParams()
     const dispatch = useDispatch()
     const { objById } = useSelector(state => state.objById)

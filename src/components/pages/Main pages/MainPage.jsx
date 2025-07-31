@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 
 function MainPage() {
 
-    const { toggleSearch } = useSelector(state => state.toggleSearch)
+    const { searchToggle } = useSelector(state => state.toggleSearch)
     return (
         <main>
             <Header />
@@ -18,7 +18,7 @@ function MainPage() {
             <NikeFields />
             <Classics />
             <Navigations />
-            {toggleSearch && <SearchModal />}
+            {searchToggle && <SearchModal />}
         </main>
     )
 }

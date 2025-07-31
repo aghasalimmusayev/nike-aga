@@ -7,7 +7,6 @@ const state = {
 
 export const getProductById = createAsyncThunk('objById', async (id) => {
     const response = await productById(id)
-    console.log(response)
     return response
 })
 

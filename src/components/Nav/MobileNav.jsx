@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { HiOutlineXMark } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
 import { SlArrowRight } from "react-icons/sl";
@@ -10,9 +10,9 @@ import { IoHelpCircleOutline } from "react-icons/io5";
 import { IoBagOutline } from "react-icons/io5";
 import { VscFolder } from "react-icons/vsc";
 import { LiaStoreSolid } from "react-icons/lia";
+import { SlUserFollowing } from "react-icons/sl";
 
-function MobileNav({ setMenuBar }) {
-
+function MobileNav({ setMenuBar, user, toggleDashModal }) {
     const { linkData } = useSelector(store => store.links)
     const [menuStep, setMenuStep] = useState(0);
     const [selectedLink, setSelectedLink] = useState(null);
@@ -99,10 +99,15 @@ function MobileNav({ setMenuBar }) {
             </div>
             <p className='becom_member'>Become a Nike Member for the best products, inspriration and stories in sport.
                 <Link onClick={() => setMenuBar(false)} to={'/'}> Learn more</Link></p>
-            <div className="auth_btns">
-                <Link onClick={() => setMenuBar(false)} to={'/signIn'}>Join Us</Link>
-                <Link onClick={() => setMenuBar(false)} to={'/signUp'}>Sign In</Link>
-            </div>
+            {user
+                ? <div className='user_name' onClick={toggleDashModal}>
+                    <SlUserFollowing />
+                    <span>{user.name} {user.surname}</span>
+                </div>
+                : <div className="auth_btns">
+                    <Link onClick={() => setMenuBar(false)} to={'/signUp'}>Join Us</Link>
+                    <Link onClick={() => setMenuBar(false)} to={'/signIn'}>Sign In</Link>
+                </div>}
             <div className="mobile_navigations">
                 <Link>
                     <IoHelpCircleOutline />
@@ -125,4 +130,4 @@ function MobileNav({ setMenuBar }) {
     )
 }
 
-export default MobileNav
+export default memo(MobileNav)

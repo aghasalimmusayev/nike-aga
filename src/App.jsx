@@ -14,11 +14,14 @@ import Checkout from './components/pages/Navigated pages/Checkout'
 import Profile from './components/pages/Registration/Profile'
 import ProtectedRoute from './components/pages/Protection/ProtectedRoute'
 import Admin from './components/pages/Admin/Admin'
+import ErrorPage from './components/ErrorPage'
+import Scroll from './components/Scroll'
 
 function App() {
 
   return (
     <>
+      <Scroll />
       <Routes>
 
         <Route path='/' element={<Layout />} >
@@ -47,6 +50,8 @@ function App() {
               </ProtectedRoute>} />
           </Route>
         </Route>
+
+        <Route path="*" element={<ErrorPage />} />
 
       </Routes>
     </>

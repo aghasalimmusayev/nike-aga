@@ -1,14 +1,14 @@
 /**--JORDAN--*/
 .jordan_pics {
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .jordan_pics img {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    display: block;
     object-fit: cover;
 }
 .jordan {
@@ -39,7 +39,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.250), rgba(0, 0, 0, 0.250));
     z-index: 10;
 }
@@ -150,10 +150,11 @@
     align-items: flex-start;
 }
 .navigation_content h3 {
+    width: 100%;
     font-size: 1.2rem;
     font-weight: 500;
     color: #111;
-    margin: 20px 0;
+    padding: 15px 0;
 }
 .navigation_content_items {
     display: flex;
@@ -268,7 +269,7 @@ footer hr {
 /* --DESKTOP OVERRIDES-- */
 @media (min-width: 768px) {
     .jordan_pics {flex-direction: row;}
-    .jordan {width: 50%;}
+    .jordan {width: 50%;height: 100vh;}
     .jordan_heading {font-size: 2rem;}
     .jordan_text {font-size: 1.5rem;}
     .nike_fields {overflow: auto;}
@@ -313,7 +314,7 @@ footer hr {
         gap: 30px;
         width: fit-content;
         margin: auto;
-        height: 240px;
+        height: 250px;
         overflow: hidden;
     }
     .navigation_content_box:hover {

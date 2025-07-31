@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getNavlinks } from '../../redux/LinksDataSlice'
@@ -18,7 +18,8 @@ function Nav({ toggleDashModal, user }) {
     // Nike scroll behavior states - YENİ
     const [isScrolled, setIsScrolled] = useState(false);
     const [scrollDirection, setScrollDirection] = useState('up');
-    const [lastScrollY, setLastScrollY] = useState(0);
+    // const [lastScrollY, setLastScrollY] = useState(0);
+    const lastScrollY = useRef(0);
     const [isAtTop, setIsAtTop] = useState(true);
     const dispatch = useDispatch()
     useEffect(() => {
@@ -28,25 +29,26 @@ function Nav({ toggleDashModal, user }) {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-            // Scroll istiqaməti təyin et
-            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
                 setScrollDirection('down');
                 setIsScrolled(true);
-            } else if (currentScrollY < lastScrollY) {
+            } else if (currentScrollY < lastScrollY.current) {
                 setScrollDirection('up');
                 setIsScrolled(true);
             }
-            // Tam yuxarıda olub olmamağını yoxla
             if (currentScrollY <= 10) {
                 setIsAtTop(true);
                 setIsScrolled(false);
                 setScrollDirection('up');
-            } else setIsAtTop(false);
-            setLastScrollY(currentScrollY);
+            } else {
+                setIsAtTop(false);
+            }
+            lastScrollY.current = currentScrollY;
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
+    }, []);
+
     // Desktop altLinks functions
     function showHelpModal() {
         setHelp(true)
@@ -60,9 +62,9 @@ function Nav({ toggleDashModal, user }) {
             else helpRef.current.style.maxHeight = '0px';
         }
     }, [help])
-    function openBar() {
-        setMenuBar(true)
-    }
+    const openBar = useCallback(() => {
+        setMenuBar(true);
+    }, []);
     if (loading) {
         return <p className='links_loading'>Linkler yuklenir...</p>
     }
@@ -105,10 +107,13 @@ function Nav({ toggleDashModal, user }) {
                     </div>
                 </div>
             </div>
-            <Navlinks openBar={openBar} />
-            {menuBar && <MobileNav setMenuBar={setMenuBar} />}
+            <Navlinks openBar={openBar} user={user} />
+            {menuBar && <MobileNav
+                setMenuBar={setMenuBar}
+                user={user}
+                toggleDashModal={toggleDashModal} />}
         </nav>
     )
 }
 
-export default Nav
+export default memo(Nav)

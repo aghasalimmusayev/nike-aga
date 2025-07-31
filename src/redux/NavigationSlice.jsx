@@ -7,7 +7,6 @@ const state = {
 
 export const getNavigationsLinks = createAsyncThunk('navigationsLinks', async () => {
     const response = await navigationsLinks()
-    console.log(response)
     return response
 })
 

@@ -1,29 +1,36 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import Logo from '../childComponents/Logo'
 import { Link, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IoMdHeartEmpty } from "react-icons/io";
 import { PiBag } from "react-icons/pi";
 import { FiUser } from "react-icons/fi";
 import SearchBox from './SearchBox';
 import { openSearch } from '../../redux/ToggleSearchSlice';
 
-function Navlinks({ openBar }) {
-
+function Navlinks({ openBar, user }) {
     const { linkData } = useSelector(store => store.links)
     const cartItems = useSelector(state => state.cartList.cartList)
     const { wishList } = useSelector(state => state.wishList)
+    // console.log('Navlinks rendered', {
+    //     linkData,
+    //     cartItemsLength: cartItems.length,
+    //     wishListLength: wishList.length
+    // });
     const [altData, setAltData] = useState([])
     const [hoverAlt, setHoverAlt] = useState(false)
     const altLinksRef = useRef(null)
+    const dispatch = useDispatch()
     function showAlt(linkName) {
         const linkObj = linkData?.find(item => item.name === linkName);
         setAltData(linkObj.altCat);
         setHoverAlt(true)
+        console.log('ShowAlt render')
     }
     function hideAlt() {
         setAltData([])
         setHoverAlt(false)
+        console.log('HideAlt render')
     }
     useEffect(() => {
         if (altLinksRef.current) {
@@ -31,6 +38,9 @@ function Navlinks({ openBar }) {
             else altLinksRef.current.style.maxHeight = '0px';
         }
     }, [hoverAlt, altData])
+    const handleSearchOpen = useCallback(() => {
+        dispatch(openSearch());
+    }, [dispatch]);
 
     return (
         <div>
@@ -62,17 +72,17 @@ function Navlinks({ openBar }) {
                             </div>
                         </div>
                         <div className="right_links">
-                            <SearchBox onClick={() => dispatch(openSearch())} />
+                            <SearchBox onClick={handleSearchOpen} />
+                            <Link to={`${user ? '/profile' : '/signIn'}`} className="user_icon_box">
+                                <FiUser style={{ fontSize: '26px' }} />
+                            </Link>
                             <Link to={'/wishlist'} className="wish_icon_box">
-                                <IoMdHeartEmpty style={{ fontSize: '24px' }} />
+                                <IoMdHeartEmpty style={{ fontSize: '26px' }} />
                                 {wishList.length > 0 &&
                                     <span className='wish_length'>{wishList.length}</span>}
                             </Link>
-                            <Link to={'/signIn'} className="user_icon_box">
-                                <FiUser style={{ fontSize: '24px' }} />
-                            </Link>
                             <Link to={'/shoppingCart'} className="cart_icon_box">
-                                <PiBag style={{ fontSize: '24px' }} />
+                                <PiBag style={{ fontSize: '26px' }} />
                                 {cartItems.length > 0 &&
                                     <span className='cart_length'>{cartItems.length}</span>}
                             </Link>
@@ -89,4 +99,4 @@ function Navlinks({ openBar }) {
     )
 }
 
-export default Navlinks
+export default memo(Navlinks)

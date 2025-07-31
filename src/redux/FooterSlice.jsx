@@ -7,7 +7,6 @@ const state = {
 
 export const getFooterLinks = createAsyncThunk("footerLinks", async () => {
     const response = await footerLinks();
-    console.log(response)
     return response
 })
 

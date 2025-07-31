@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 function Arrow() {
+    console.log('Arrow rendered')
 
     const arrowStyle = {
         display: 'flex',
@@ -30,4 +31,4 @@ function Arrow() {
     )
 }
 
-export default Arrow
+export default memo(Arrow)

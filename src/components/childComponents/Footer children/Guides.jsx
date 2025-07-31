@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Guides() {
+    console.log('Guide rendered')
     return (
         <div className='guides_modal'>
             <Link to={'/'}>Nike Air</Link>

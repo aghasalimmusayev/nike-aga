@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 function NikeManLogo({ width, height }) {
     return (
@@ -23,4 +23,4 @@ function NikeManLogo({ width, height }) {
     )
 }
 
-export default NikeManLogo
+export default memo(NikeManLogo)

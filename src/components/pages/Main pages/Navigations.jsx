@@ -6,7 +6,7 @@ import { getNavigationsLinks } from '../../../redux/NavigationSlice'
 
 
 function Navigations() {
-
+    console.log('Navigation render')
     const [items, setItems] = useState(false)
     const itemsRef = useRef([])
     const dispatch = useDispatch()
@@ -15,6 +15,7 @@ function Navigations() {
         dispatch(getNavigationsLinks())
     }, [])
     function itemToggle(index) {
+        console.log('itemToggle render')
         const item = itemsRef.current[index]
         if (!item) return
         if (items === index) {

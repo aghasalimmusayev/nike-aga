@@ -47,14 +47,14 @@ function ShoppingCart() {
                                             <span>Remove</span>
                                         </button>
                                     </div>
-                                    <div className="cartItem_img">
+                                    <Link to={`/details/${item.id}`} className="cartItem_img">
                                         <img src={item.images[0]} alt="" />
-                                    </div>
+                                    </Link>
                                     <div className="cartItem_info">
                                         <h3 className='cartItem_name'>{item.title}</h3>
                                         <h4 className='cartItem_cat'>{item.category}</h4>
                                         <p className='cartItem_price'>Price: {item.price} $</p>
-                                        <p className='counted_price'>Total: {item.count * item.price} $</p>
+                                        <p className='counted_price'>Total: {(item.count * item.price).toFixed(2)} $</p>
                                         <div className='cart_item_count'>
                                             <button onClick={() => countDown(item.id)}>-</button>
                                             <span>{item.count}</span>

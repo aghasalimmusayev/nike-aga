@@ -2,6 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoTrashBin } from "react-icons/io5";
 import { removeFromWish } from '../../../redux/WishSlice';
+import { Link } from 'react-router-dom';
+
 function Whislist() {
 
     const { wishList } = useSelector(state => state.wishList)
@@ -14,7 +16,7 @@ function Whislist() {
                 <div className="wish_box">
                     {wishList.length > 0
                         ? wishList.map(item => (
-                            <div className="wishItem" key={item.id}>
+                            <Link to={`/details/${item.id}`} className="wishItem" key={item.id}>
                                 <div className="wish_item_img">
                                     <img src={item.images[0]} alt="wish_img" />
                                 </div>
@@ -24,7 +26,7 @@ function Whislist() {
                                     <p className='wishItem_price'>Price: {item.price} $</p>
                                     <button className='wish_remove' onClick={() => dispatch(removeFromWish(item.id))}><IoTrashBin /></button>
                                 </div>
-                            </div>
+                            </Link>
                         ))
                         : <p className='empty_wish_info'>There are no items in your WishList.</p>
                     }

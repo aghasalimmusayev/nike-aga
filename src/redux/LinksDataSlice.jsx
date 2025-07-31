@@ -9,7 +9,6 @@ const state = {
 
 export const getNavlinks = createAsyncThunk('navlinks', async () => {
     const response = await getLinks()
-    console.log(response)
     return response
 })
 

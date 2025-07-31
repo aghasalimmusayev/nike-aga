@@ -39,7 +39,7 @@ function Checkout() {
             <div className="container">
                 <div className='shopping_info'>
                     <div className="cart_box">
-                        {checkoutItems.length > 0 && (
+                        {checkoutItems.length > 0 ? (
                             <>
                                 <Link className='backToShopping' to={'/shoppingCart'}>
                                     <TbArrowBackUp />
@@ -55,13 +55,14 @@ function Checkout() {
                                             <h3 className='cartItem_name'>{item.title}</h3>
                                             <h4 className='cartItem_cat'>{item.category}</h4>
                                             <p className='cartItem_price'>Price: {item.price} $</p>
-                                            <p className='counted_price'>Total: {item.count * item.price} $</p>
+                                            <p className='counted_price'>Total: {(item.count * item.price).toFixed(2)} $</p>
                                             <div className='cart_item_count'>Count: {item.count}</div>
                                         </div>
                                     </div>
                                 ))}
                             </>
-                        )}
+                        )
+                            : <p className='emptyCart_info'>There is nothing to pay for. Go back to see the quality again</p>}
                     </div>
                     {checkoutItems.length > 0 &&
                         <div className="summary">

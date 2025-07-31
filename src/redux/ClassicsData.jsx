@@ -9,7 +9,6 @@ const state = {
 
 export const getClassics = createAsyncThunk('classics', async () => {
     const response = await classicsData();
-    console.log(response)
     return response
 })
 

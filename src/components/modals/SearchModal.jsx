@@ -1,32 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../childComponents/Logo'
-import SearchBox from '../Nav/SearchBox'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import ButtonLink from '../childComponents/ButtonLink'
+import { useDispatch, useSelector } from 'react-redux'
 import { closeSearch, openSearch } from '../../redux/ToggleSearchSlice'
 import { createPortal } from 'react-dom'
+import { FiSearch } from "react-icons/fi";
+import { getProducts } from '../../redux/ProductsSlice'
 import './modal.css'
 
 function SearchModal() {
+    const { products } = useSelector(state => state.products)
+    const [cat, setCat] = useState([])
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [])
+    useEffect(() => {
+        const categs = new Set([...products?.map(item => item.category)])
+        setCat([...categs])
+    }, [products])
+
+    console.log('SearchModal render')
     const dispatch = useDispatch()
     const searchModal = (
         <section id='search'>
             <div className="container">
-                <Logo />
-                <button onClick={() => dispatch(closeSearch())}>Cancel</button>
                 <div className='search_content'>
-                    <SearchBox onClick={() => dispatch(openSearch())} />
-                    <h4>Populat Search Terms</h4>
-                    <div className="popular_terms">
-                        <Link to={'/'}>slides</Link>
-                        <Link to={'/'}>football cleats</Link>
-                        <Link to={'/'}>air max</Link>
-                        <Link to={'/'}>jordan</Link>
-                        <Link to={'/'}>jordan4</Link>
-                        <Link to={'/'}>dunks</Link>
-                        <Link to={'/'}>air forces</Link>
-                        <Link to={'/'}>soccer cleats</Link>
+                    <div className="search_modal_logo"><Logo /></div>
+                    <div className="search_modal_box" >
+                        <div className="search_modal_icon">
+                            <FiSearch style={{ fontSize: '20px', cursor: 'pointer' }} />
+                        </div>
+                        <input type="text" placeholder='Search' />
                     </div>
+                    <div className='search_close_btn'>
+                        <button onClick={() => dispatch(closeSearch())}>Cancel</button>
+                    </div>
+                </div>
+                <h4 className='search_modal_header'>Populat Search Terms</h4>
+                <div className="popular_terms">
+                    {cat?.map((item, index) => (
+                        <ButtonLink
+                            key={index}
+                            to={`/products/${item}`}
+                            text={item}
+                            onClick={() => dispatch(closeSearch())} />
+                    ))}
                 </div>
             </div>
         </section>
