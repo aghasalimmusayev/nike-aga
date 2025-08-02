@@ -16,7 +16,7 @@ function Classics() {
         dispatch(getClassics())
     }, [])
 
-    const checkButton = () => {
+    function checkButton() {
         const container = classicRef.current
         if (container) {
             const { scrollLeft, scrollWidth, clientWidth } = container
@@ -24,13 +24,13 @@ function Classics() {
             setRigth(scrollLeft < scrollWidth - clientWidth - 1)
         }
     }
-    const scrollLeft = () => {
+    function scrollLeft() {
         if (classicRef.current) {
             classicRef.current.scrollLeft -= 290;
             setTimeout(checkButton, 300)
         }
     }
-    const scrollRigth = () => {
+    function scrollRigth() {
         if (classicRef.current) {
             classicRef.current.scrollLeft += 290;
             setTimeout(checkButton, 300)

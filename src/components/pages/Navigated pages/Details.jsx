@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { getProductById } from '../../../redux/ByIdSlice'
@@ -12,16 +12,21 @@ function Details() {
     console.log('Details render')
     const { id } = useParams()
     const dispatch = useDispatch()
-    const { objById } = useSelector(state => state.objById)
-    const cartItems = useSelector(state => state.cartList.cartList)
+    const { objById } = useSelector(state => state.objById);
+    const { cartList } = useSelector(state => state.cartList)
     const { wishList } = useSelector(state => state.wishList)
-
     useEffect(() => {
         dispatch(getProductById(id))
     }, [dispatch, id])
 
-    const inCart = cartItems.some(p => p.id == objById.id)
-    const isInWishList = wishList.some(item => item.id === objById?.id);
+    const inCart = useMemo(
+        () => cartList.some(p => p.id == objById.id),
+        [cartList, objById.id]
+    )
+    const isInWishList = useMemo(
+        () => wishList.some(item => item.id === objById.id),
+        [wishList, objById.id]
+    )
 
     return (
         <div className="detail_page">

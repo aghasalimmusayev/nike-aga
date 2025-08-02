@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import './navigatedPage.css'
 import { useDispatch, useSelector } from 'react-redux'
 import WithAuth from '../Protection/Withauth'
@@ -11,9 +11,19 @@ function Checkout() {
 
     const cartItems = useSelector(state => state.cartList.cartList)
     const selectedItems = useSelector(state => state.cartList.selectedItems)
-    const checkoutItems = cartItems.filter(item => selectedItems.includes(item.id))
-    const total = checkoutItems.reduce((acc, item) => acc + (item.price * item.count), 0).toFixed(2);
-    const countOrders = checkoutItems.reduce((acc, item) => item.count + acc, 0)
+
+    const checkoutItems = useMemo(
+        () => cartItems.filter(item => selectedItems.includes(item.id)),
+        [cartItems, selectedItems]
+    )
+    const total = useMemo(
+        () => checkoutItems.reduce((acc, item) => acc + (item.price * item.count), 0).toFixed(2),
+        [checkoutItems]
+    )
+    const countOrders = useMemo(
+        () => checkoutItems.reduce((acc, item) => item.count + acc, 0),
+        [checkoutItems]
+    )
     const dispatch = useDispatch()
     async function completeOrder() {
         try {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Items from './Items'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../../../redux/ProductsSlice'
@@ -11,7 +11,7 @@ function Products() {
 
     const { category } = useParams()
     const [productsData, setProductsData] = useState([])
-    const [categories, setCategories] = useState([])
+    // const [categories, setCategories] = useState([])
     const [selectedCat, setSelectedCat] = useState(category || 'All')
     const [priceRange, setPriceRange] = useState('All')
     const [filterModal, setFilterModal] = useState(false)
@@ -24,15 +24,11 @@ function Products() {
     useEffect(() => {
         dispatch(getProducts())
     }, [])
-    useEffect(() => {
-        const categs = new Set([...products?.map(item => item.category)])
-        setCategories([...categs])
-    }, [products])
-    const prices = [...products?.map(item => item.price)]
-    const maxPrice = Math.max(...prices)
-    function toggleSortBtns() {
-        setFilterModal(!filterModal)
-    }
+    const categories = useMemo(() => [...new Set(products?.map(item => item.category))], [products]);
+    const maxPrice = useMemo(() => Math.max(...products.map(item => item.price)), [products])
+    const toggleSortBtns = useCallback(() => {
+        setFilterModal(prev => !prev);
+    }, []);
 
     return (
         <div className='product_page'>
@@ -43,7 +39,7 @@ function Products() {
                         <div className='sort_btn'>
                             <button onClick={toggleSortBtns}>
                                 <span>Sort By</span>
-                                <Arrow />
+                                <Arrow filterModal={filterModal} />
                             </button>
                         </div>
                         {filterModal &&

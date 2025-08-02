@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProducts } from '../../../redux/ProductsSlice';
 import { Link } from 'react-router-dom';
@@ -11,19 +11,18 @@ function Items({ selectedCat, priceRange, productsData, setProductsData }) {
         dispatch(getProducts());
     }, [dispatch])
 
-    useEffect(() => {
-        const filterProducts = () => {
-            let filtered = products
-            if (selectedCat !== 'All') filtered = filtered?.filter(item => item.category === selectedCat)
-            if (priceRange && priceRange !== 'All') {
-                const [min, max] = priceRange.split('-').map(Number)
-                filtered = filtered?.filter(item => item.price >= min && item.price <= max)
-            }
-            return filtered
+    const filterProducts = useMemo(() => {
+        let filtered = products
+        if (selectedCat !== 'All') filtered = filtered?.filter(item => item.category === selectedCat)
+        if (priceRange && priceRange !== 'All') {
+            const [min, max] = priceRange.split('-').map(Number)
+            filtered = filtered?.filter(item => item.price >= min && item.price <= max)
         }
-        const filtered = filterProducts();
-        setProductsData(filtered)
+        return filtered
     }, [selectedCat, priceRange, products])
+    useEffect(() => {
+        setProductsData(filterProducts)
+    }, [filterProducts, setProductsData])
 
     return (
         <div className='products'>
@@ -44,4 +43,4 @@ function Items({ selectedCat, priceRange, productsData, setProductsData }) {
     )
 }
 
-export default Items
+export default memo(Items)

@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-function Arrow() {
+function Arrow({ filterModal }) {
     console.log('Arrow rendered')
 
     const arrowStyle = {
@@ -13,14 +13,14 @@ function Arrow() {
         height: '2px',
         backgroundColor: '#111',
         transition: '0.3s',
-        transform: 'rotate(45deg)',
+        transform: `${filterModal ? 'rotate(45deg)' : 'rotate(-45deg)'}`,
     }
     const line2Style = {
         width: '10px',
         height: '2px',
         backgroundColor: '#111',
         transition: '0.3s',
-        transform: 'translateX(-4px)rotate(-45deg)'
+        transform: `translateX(-4px)${filterModal ? 'rotate(-45deg) ' : 'rotate(45deg)'}`
     }
 
     return (

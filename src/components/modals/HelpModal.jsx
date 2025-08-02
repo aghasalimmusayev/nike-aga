@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import '../modals/modal.css'
 
 function HelpModal({ helpRef }) {
-
+    console.log('HelpModal render')
     const navHelpModal = (
         <div className='help_modal' ref={helpRef}>
             <Link className='help_title' to={'/'}>Help</Link>
@@ -23,4 +23,4 @@ function HelpModal({ helpRef }) {
     return createPortal(navHelpModal, document.getElementById("modal_root"))
 }
 
-export default HelpModal
+export default memo(HelpModal)

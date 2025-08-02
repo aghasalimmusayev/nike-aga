@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Logo from '../childComponents/Logo'
 import ButtonLink from '../childComponents/ButtonLink'
 import { useDispatch, useSelector } from 'react-redux'
-import { closeSearch, openSearch } from '../../redux/ToggleSearchSlice'
+import { closeSearch } from '../../redux/ToggleSearchSlice'
 import { createPortal } from 'react-dom'
 import { FiSearch } from "react-icons/fi";
 import { getProducts } from '../../redux/ProductsSlice'
@@ -10,14 +10,10 @@ import './modal.css'
 
 function SearchModal() {
     const { products } = useSelector(state => state.products)
-    const [cat, setCat] = useState([])
     useEffect(() => {
         dispatch(getProducts())
     }, [])
-    useEffect(() => {
-        const categs = new Set([...products?.map(item => item.category)])
-        setCat([...categs])
-    }, [products])
+    const cat = usememo(() => new Set([...products?.map(item => item.category)]), [products])
 
     console.log('SearchModal render')
     const dispatch = useDispatch()

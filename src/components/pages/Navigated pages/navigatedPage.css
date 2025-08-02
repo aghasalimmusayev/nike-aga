@@ -430,10 +430,9 @@
     color: #111;
 }
 .emptyCart_info{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 500;
     color: #D33918;
-    margin: 20px;
 }
 .summary{width: 100%;}
 .total{
@@ -494,6 +493,20 @@
     border-bottom: 1px solid #111;
     white-space: nowrap;
     line-height: 2rem;
+}
+.cart_clear_btn button:hover, .wish_clear_btn button:hover {background-color: #111; color: #fff;}
+.cart_clear_btn button, .wish_clear_btn button{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff;
+    color: black;
+    border: 2px solid #111;
+    padding: 8px 20px;
+    margin: 20px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    font: 600 0.8rem "Roboto", sans-serif;
 }
 
 /*--CHECKOUT PAGE--*/
@@ -732,10 +745,7 @@
         font-size: 1.5rem;
     }
 
-    #shoppingCart{padding: 70px;}
-    .cart_box{
-        width: 70%;
-    }
+    .cart_box{width: 70%;}
     .selection{
         top: 40px;
         left: 10px;

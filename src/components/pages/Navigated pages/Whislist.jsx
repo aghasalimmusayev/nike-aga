@@ -1,8 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoTrashBin } from "react-icons/io5";
-import { removeFromWish } from '../../../redux/WishSlice';
+import { clearWishList, removeFromWish } from '../../../redux/WishSlice';
 import { Link } from 'react-router-dom';
+import { AiOutlineClear } from "react-icons/ai";
 
 function Whislist() {
 
@@ -30,6 +31,12 @@ function Whislist() {
                         ))
                         : <p className='empty_wish_info'>There are no items in your WishList.</p>
                     }
+                    <div className="wish_clear_btn">
+                        <button onClick={dispatch(clearWishList())}>
+                            <AiOutlineClear />
+                            <span>Clear Cart</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

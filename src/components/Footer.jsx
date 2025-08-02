@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getFooterLinks } from '../redux/FooterSlice'
@@ -7,23 +7,23 @@ import CountryBtn from './childComponents/CountryBtn'
 import Guides from './childComponents/Footer children/Guides'
 
 function Footer({ openCModal }) {
-
+    console.log('footer render')
     const [guides, setGuides] = useState(false)
     const [accActive, setAccActive] = useState(null)
     const { footerData } = useSelector(state => state.footer)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getFooterLinks())
-    }, [])
-    function showGuides() {
+    }, [dispatch])
+    const showGuides = useCallback(() => {
         setGuides(true)
-    }
-    function hideGuides() {
+    }, [])
+    const hideGuides = useCallback(() => {
         setGuides(false)
-    }
+    }, [])
     const contentRef = useRef([])
     const contentIconRef = useRef([])
-    const toggleContent = (index) => {
+    const toggleContent = useCallback((index) => {
         const content = contentRef.current[index];
         const icon = contentIconRef.current[index];
         if (!content || !icon) return;
@@ -40,7 +40,7 @@ function Footer({ openCModal }) {
             icon.style.transform = 'rotate(180deg)';
             setAccActive(index);
         }
-    }
+    }, [accActive])
 
     return (
         <footer>

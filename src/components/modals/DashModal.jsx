@@ -1,7 +1,9 @@
+import { memo } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 function DashModal({ user, logOut, close }) {
+    console.log('dashModal render')
     const navDashModal = (
         <div className="dash_modal">
             <h3>{user.name} {user.surname}</h3>
@@ -15,4 +17,4 @@ function DashModal({ user, logOut, close }) {
     return createPortal(navDashModal, document.getElementById('modal_root'));
 }
 
-export default DashModal
+export default memo(DashModal)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Nav from '../components/Nav/Nav'
 import Footer from '../components/Footer'
 import CountryLinks from '../components/modals/CountryLinks'
@@ -22,22 +22,23 @@ function Layout() {
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
     }, [dashModal]);
-    function openCModal() {
+    const openCModal = useCallback(() => {
         setCModal(true)
-    }
-    function closeCModal() {
+    }, [])
+    const closeCModal = useCallback(() => {
         setCModal(false)
-    }
+    }, [])
     function toggleDashModal(e) {
         e.stopPropagation()
         setDashModal(!dashModal)
     }
-    function logOut() {
+    const logOut = useCallback(() => {
         localStorage.removeItem('user');
         setUser(null)
         setDashModal(false)
         navigate('/')
-    }
+    }, [navigate])
+
 
     return (
         <>

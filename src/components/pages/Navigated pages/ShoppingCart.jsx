@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { decrementCount, incrementCount, toggleSelectItem, removeFromCart } from '../../../redux/CartSlice'
+import { decrementCount, incrementCount, toggleSelectItem, removeFromCart, clearCart } from '../../../redux/CartSlice'
 import { Link } from 'react-router-dom'
 import { IoTrashOutline } from "react-icons/io5";
+import { AiOutlineClear } from "react-icons/ai";
 import './navigatedPage.css'
 
 function ShoppingCart() {
@@ -10,7 +11,10 @@ function ShoppingCart() {
     const cartItems = useSelector(state => state.cartList.cartList)
     const selectedItems = useSelector(state => state.cartList.selectedItems)
     const checkoutItems = cartItems.filter(item => selectedItems.includes(item.id))
-    const total = (checkoutItems?.reduce((acc, item) => (acc + (item.price * item.count)), 0)).toFixed(2)
+    const total = useMemo(
+        () => (checkoutItems?.reduce((acc, item) => (acc + (item.price * item.count)), 0)).toFixed(2),
+        [checkoutItems]
+    )
     const dispatch = useDispatch()
     function countDown(id) {
         dispatch(decrementCount(id))
@@ -23,6 +27,9 @@ function ShoppingCart() {
     }
     function removeItem(id) {
         dispatch(removeFromCart(id))
+    }
+    function remoreAll() {
+        dispatch(clearCart())
     }
 
     return (
@@ -65,6 +72,13 @@ function ShoppingCart() {
                             ))
                             : <p className='emptyCart_info'>There are no items in your Cart.</p>
                         }
+                        {cartItems.length > 0 &&
+                            <div className="cart_clear_btn">
+                                <button onClick={remoreAll}>
+                                    <AiOutlineClear />
+                                    <span>Clear Cart</span>
+                                </button>
+                            </div>}
                     </div>
                     {cartItems.length > 0 &&
                         <div className="summary">

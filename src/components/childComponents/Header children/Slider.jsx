@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { memo, useCallback, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { IoChevronBack, IoChevronForward, IoPlay, IoPause } from 'react-icons/io5';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -13,19 +13,19 @@ import slide5 from '../../../assets/img/nike_boots.jpg'
 import slide6 from '../../../assets/img/nike-slider6.jpg'
 import ButtonLink from '../ButtonLink'
 
-export default function Slider() {
+function Slider() {
     const progressCircle = useRef(null);
     const swiperRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(true);
     const videoRef = useRef([]);
-    const onAutoplayTimeLeft = (s, time, progress) => {
+    const onAutoplayTimeLeft = useCallback((s, time, progress) => {
         if (progressCircle.current) {
             progressCircle.current.style.setProperty('--progress', 1 - progress);
         }
-    };
+    }, []);
 
     // Play/Pause toggle funksiyası
-    const toggleAutoplay = () => {
+    const toggleAutoplay = useCallback(() => {
         if (swiperRef.current?.swiper) {
             if (isPlaying) {
                 swiperRef.current.swiper.autoplay.pause();
@@ -41,7 +41,7 @@ export default function Slider() {
                 setIsPlaying(true);
             }
         }
-    };
+    }, []);
 
     return (
         <>
@@ -69,7 +69,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>BRING YOUR GAME</h1>
                         <p>Sport your signature sytle</p>
-                        <ButtonLink text='Shop' to='/'/>
+                        <ButtonLink text='Shop' to='/' />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -79,7 +79,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>SCARY GOOD PACK</h1>
                         <p>Terrify opposition with boots that bring precition, speed and touch.</p>
-                        <ButtonLink text='Explore' to='/'/>
+                        <ButtonLink text='Explore' to='/' />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -89,7 +89,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>AVA ROWER</h1>
                         <p>ReaxtX cushioning for every unexpected turn.</p>
-                        <ButtonLink text='Style Your Ava Rower' to='/'/>
+                        <ButtonLink text='Style Your Ava Rower' to='/' />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -97,7 +97,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>BUILT FOR THIS</h1>
                         <p>Performance Worthy of Tennis`` Best</p>
-                        <ButtonLink text='Shop' to='/'/>
+                        <ButtonLink text='Shop' to='/' />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -105,7 +105,7 @@ export default function Slider() {
                     <div className="slide_content">
                         <h1>SCARY GOOD</h1>
                         <p>Celebrate the jersey that paints fair in blue</p>
-                        <ButtonLink text='Shop' to='/'/>
+                        <ButtonLink text='Shop' to='/' />
                     </div>
                 </SwiperSlide>
 
@@ -135,3 +135,5 @@ export default function Slider() {
         </>
     );
 }
+
+export default memo(Slider)

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCountryLinks } from '../../redux/CountrySlice'
 import { setCountryName } from '../../redux/CountryNameSlice';
@@ -11,21 +11,18 @@ import './modal.css'
 
 function CountryLinks({ closeCModal }) {
 
-    const [regions, setRegions] = useState([])
     const { countryData } = useSelector(state => state.countries)
     const dispatch = useDispatch()
     const [contr, setContr] = useState(false)
     const contrRef = useRef([])
     const contrIconRef = useRef([])
 
-
     useEffect(() => {
         dispatch(getCountryLinks())
-    }, [])
-    useEffect(() => {
-        const reg = new Set([...countryData?.map(region => region.continent)])
-        setRegions([...reg])
-    }, [countryData])
+    }, [dispatch])
+    const regions = useMemo(() => {
+        return [...new Set(countryData?.map(region => region.continent))];
+    }, [countryData]);
 
     const toggleContr = (index) => {
         const content = contrRef.current[index];
@@ -94,4 +91,4 @@ function CountryLinks({ closeCModal }) {
     return createPortal(countryModal, document.getElementById("modal_root"));
 }
 
-export default CountryLinks
+export default memo(CountryLinks)

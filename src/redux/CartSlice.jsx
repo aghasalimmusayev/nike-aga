@@ -4,7 +4,6 @@ const initialState = {
     cartList: JSON.parse(localStorage.getItem('cartList')) || [],
     selectedItems: []
 }
-
 export const cartSlice = createSlice({
     name: 'cartList',
     initialState,
@@ -18,6 +17,9 @@ export const cartSlice = createSlice({
         removeFromCart: (state, action) => {
             const id = action.payload
             state.cartList = state.cartList.filter(p => p.id !== id)
+        },
+        clearCart: (state) => {
+            state.cartList = []
         },
         incrementCount: (state, action) => {
             const id = action.payload
@@ -50,6 +52,7 @@ export const cartSlice = createSlice({
 export const {
     addToCart,
     removeFromCart,
+    clearCart,
     incrementCount,
     decrementCount,
     toggleSelectItem,

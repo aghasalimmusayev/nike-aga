@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getNavigationsLinks } from '../../../redux/NavigationSlice'
 
-
 function Navigations() {
     console.log('Navigation render')
     const [items, setItems] = useState(false)
@@ -13,7 +12,7 @@ function Navigations() {
     const { navigationData } = useSelector(state => state.navigation)
     useEffect(() => {
         dispatch(getNavigationsLinks())
-    }, [])
+    }, [dispatch])
     function itemToggle(index) {
         console.log('itemToggle render')
         const item = itemsRef.current[index]
