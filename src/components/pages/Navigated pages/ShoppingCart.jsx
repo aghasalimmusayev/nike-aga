@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { decrementCount, incrementCount, toggleSelectItem, removeFromCart, clearCart } from '../../../redux/CartSlice'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,9 @@ import './navigatedPage.css'
 
 function ShoppingCart() {
 
+    useEffect(() => {
+        document.title = 'Have a good Shopping'
+    }, [])
     const cartItems = useSelector(state => state.cartList.cartList)
     const selectedItems = useSelector(state => state.cartList.selectedItems)
     const checkoutItems = cartItems.filter(item => selectedItems.includes(item.id))

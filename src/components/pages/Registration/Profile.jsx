@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './profile.css'
 
 function Profile() {
 
     const user = JSON.parse(localStorage.getItem('user'))
+    useEffect(() => {
+        document.title = `${user.name}'s Profile`
+    }, [])
     if (!user) return null;
 
     return (

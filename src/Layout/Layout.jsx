@@ -4,11 +4,14 @@ import Footer from '../components/Footer'
 import CountryLinks from '../components/modals/CountryLinks'
 import DashModal from '../components/modals/DashModal'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import SearchModal from '../components/modals/SearchModal';
 
 function Layout() {
     const navigate = useNavigate()
     const [cModal, setCModal] = useState(false)
     const [dashModal, setDashModal] = useState(false)
+    const { searchToggle } = useSelector(state => state.toggleSearch)
     const [user, setUser] = useState(() => {
         return JSON.parse(localStorage.getItem('user')) || null;
     });
@@ -49,6 +52,7 @@ function Layout() {
             {dashModal && <DashModal user={user} logOut={logOut} close={() => setDashModal(false)} />}
             <Footer openCModal={openCModal} />
             {cModal && <CountryLinks closeCModal={closeCModal} cModal={cModal} />}
+            {searchToggle && <SearchModal />}
         </>
     )
 }

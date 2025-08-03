@@ -7,7 +7,6 @@ import CountryBtn from './childComponents/CountryBtn'
 import Guides from './childComponents/Footer children/Guides'
 
 function Footer({ openCModal }) {
-    console.log('footer render')
     const [guides, setGuides] = useState(false)
     const [accActive, setAccActive] = useState(null)
     const { footerData } = useSelector(state => state.footer)

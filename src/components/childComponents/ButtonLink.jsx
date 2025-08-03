@@ -1,10 +1,9 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 
-function ButtonLink({ text, to = '/' }) {
-    console.log('ButtonLink rendered')
+function ButtonLink({ text, to = '/', onClick }) {
     return (
-        <Link className='button_link' to={to}>{text}</Link>
+        <Link className='button_link' to={to} onClick={onClick}>{text}</Link>
     )
 }
 

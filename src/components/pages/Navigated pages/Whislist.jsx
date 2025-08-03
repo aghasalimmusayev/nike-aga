@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoTrashBin } from "react-icons/io5";
 import { clearWishList, removeFromWish } from '../../../redux/WishSlice';
@@ -7,6 +7,9 @@ import { AiOutlineClear } from "react-icons/ai";
 
 function Whislist() {
 
+    useEffect(() => {
+        document.title = 'Look the details of your Wishes'
+    }, [])
     const { wishList } = useSelector(state => state.wishList)
     const dispatch = useDispatch()
 
@@ -31,13 +34,14 @@ function Whislist() {
                         ))
                         : <p className='empty_wish_info'>There are no items in your WishList.</p>
                     }
+                </div>
+                {wishList.length > 0 &&
                     <div className="wish_clear_btn">
-                        <button onClick={dispatch(clearWishList())}>
+                        <button onClick={() => dispatch(clearWishList())}>
                             <AiOutlineClear />
                             <span>Clear Cart</span>
                         </button>
-                    </div>
-                </div>
+                    </div>}
             </div>
         </section>
     )

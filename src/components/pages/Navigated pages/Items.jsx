@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getProducts } from '../../../redux/ProductsSlice';
 import { Link } from 'react-router-dom';
 
-function Items({ selectedCat, priceRange, productsData, setProductsData }) {
+function Items({ selectedCat, priceRanges, productsData, setProductsData, sortOrder, searchText }) {
 
     const { products } = useSelector(state => state.products);
     const dispatch = useDispatch()
@@ -12,14 +12,31 @@ function Items({ selectedCat, priceRange, productsData, setProductsData }) {
     }, [dispatch])
 
     const filterProducts = useMemo(() => {
-        let filtered = products
-        if (selectedCat !== 'All') filtered = filtered?.filter(item => item.category === selectedCat)
-        if (priceRange && priceRange !== 'All') {
-            const [min, max] = priceRange.split('-').map(Number)
-            filtered = filtered?.filter(item => item.price >= min && item.price <= max)
+        let filtered = products;
+        if (searchText) {
+            filtered = filtered.filter(item =>
+                item.title.toLowerCase().includes(searchText.toLowerCase())
+            );
         }
-        return filtered
-    }, [selectedCat, priceRange, products])
+        if (selectedCat !== 'All') {
+            filtered = filtered?.filter(item => item.category === selectedCat);
+        }
+        if (priceRanges.length > 0) {
+            filtered = filtered.filter(item =>
+                priceRanges.some(range => {
+                    const [min, max] = range.split('-').map(Number);
+                    return item.price >= min && item.price <= (isNaN(max) ? Infinity : max);
+                })
+            );
+        }
+        if (sortOrder === 'asc') {
+            filtered = [...filtered].sort((a, b) => a.price - b.price);
+        } else if (sortOrder === 'desc') {
+            filtered = [...filtered].sort((a, b) => b.price - a.price);
+        }
+        return filtered;
+    }, [selectedCat, priceRanges, products, sortOrder, searchText]);
+
     useEffect(() => {
         setProductsData(filterProducts)
     }, [filterProducts, setProductsData])

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './reg.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../service/regService'
@@ -7,6 +7,9 @@ import { FaEyeSlash } from "react-icons/fa";
 
 function SignIn() {
 
+    useEffect(() => {
+        document.title = 'Log in - Nike.com'
+    }, [])
     const navigate = useNavigate()
     const [type, setType] = useState(false)
     const [user, setUser] = useState({
@@ -53,6 +56,7 @@ function SignIn() {
                     value={user.email}
                     onChange={getValues}
                     placeholder='Email'
+                    autoFocus
                 />
                 <div className="password_inp">
                     <input

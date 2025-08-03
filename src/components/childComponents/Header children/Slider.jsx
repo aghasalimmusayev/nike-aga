@@ -89,7 +89,7 @@ function Slider() {
                     <div className="slide_content">
                         <h1>AVA ROWER</h1>
                         <p>ReaxtX cushioning for every unexpected turn.</p>
-                        <ButtonLink text='Style Your Ava Rower' to='/' />
+                        <ButtonLink text='Style Your Ava Rower' to='/products' />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -97,7 +97,7 @@ function Slider() {
                     <div className="slide_content">
                         <h1>BUILT FOR THIS</h1>
                         <p>Performance Worthy of Tennis`` Best</p>
-                        <ButtonLink text='Shop' to='/' />
+                        <ButtonLink text='Shop' to='/products' />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
@@ -105,7 +105,7 @@ function Slider() {
                     <div className="slide_content">
                         <h1>SCARY GOOD</h1>
                         <p>Celebrate the jersey that paints fair in blue</p>
-                        <ButtonLink text='Shop' to='/' />
+                        <ButtonLink text='Shop' to='/products' />
                     </div>
                 </SwiperSlide>
 

@@ -14,7 +14,7 @@ function NikeFields() {
                         <img src={nikeRunning} alt="nikeField" />
                     </Link>
                     <div className="field_btn">
-                        <ButtonLink text='Shop Runnig' to='/' />
+                        <ButtonLink text='Shop Runnig' to='/products/Sport' />
                     </div>
                 </div>
                 <div className='nikeField'>
@@ -22,7 +22,7 @@ function NikeFields() {
                         <img src={nikeTennis} alt="nikeField" />
                     </Link>
                     <div className="field_btn">
-                        <ButtonLink text='Shop Tennis' to='/' />
+                        <ButtonLink text='Shop Tennis' to='/products/Sport' />
                     </div>
                 </div>
                 <div className='nikeField'>
@@ -30,7 +30,7 @@ function NikeFields() {
                         <img src={nikeGolf} alt="nikeField" />
                     </Link>
                     <div className="field_btn">
-                        <ButtonLink text='Shop Golf' to='/' />
+                        <ButtonLink text='Shop Golf' to='/products/Sport' />
                     </div>
                 </div>
             </div>

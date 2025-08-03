@@ -27,6 +27,9 @@ function Details() {
         () => wishList.some(item => item.id === objById.id),
         [wishList, objById.id]
     )
+    useEffect(() => {
+        document.title = objById.title
+    }, [objById])
 
     return (
         <div className="detail_page">

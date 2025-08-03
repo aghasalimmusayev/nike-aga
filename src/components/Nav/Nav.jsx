@@ -108,10 +108,12 @@ function Nav({ toggleDashModal, user }) {
                 </div>
             </div>
             <Navlinks openBar={openBar} user={user} />
-            {menuBar && <MobileNav
+
+            <MobileNav
+                menuBar={menuBar}
                 setMenuBar={setMenuBar}
                 user={user}
-                toggleDashModal={toggleDashModal} />}
+                toggleDashModal={toggleDashModal} />
         </nav>
     )
 }

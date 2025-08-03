@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getNavigationsLinks } from '../../../redux/NavigationSlice'
 
 function Navigations() {
-    console.log('Navigation render')
     const [items, setItems] = useState(false)
     const itemsRef = useRef([])
     const dispatch = useDispatch()
@@ -34,9 +33,9 @@ function Navigations() {
                 <div className="navigation_box">
                     <Logo />
                     <div className="navigation_links">
-                        <Link to={'/'}>Find a Store</Link>
+                        <Link to={'/products'}>Find a Store</Link>
                         <Link to={'/'} >Help</Link>
-                        <Link to={'/'}>Join Us</Link>
+                        <Link to={'/signUp'}>Join Us</Link>
                         <Link to={'/signIn'}>Sign In</Link>
                     </div>
                     <div className="navigation_content_box">
@@ -45,7 +44,7 @@ function Navigations() {
                                 <h3 onClick={() => itemToggle(item.id)}>{item.name}</h3>
                                 <div ref={el => itemsRef.current[item.id] = el} className="navigation_content_items">
                                     {item.items?.map((element, index) => (
-                                        <Link to={'/'} key={index}>{element}</Link>
+                                        <Link to={'/products'} key={index}>{element}</Link>
                                     ))}
                                 </div>
                             </div>

@@ -1,73 +1,103 @@
 import React, { useState } from 'react';
 import './adminCSS/modal.css';
 import { nanoid } from 'nanoid';
+import { postNewProduct } from '../../../service/adminService';
+import { getProducts } from '../../../redux/ProductsSlice';
+import { useDispatch } from 'react-redux';
 
 function AddModal({ AddClose }) {
 
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     id: nanoid(),
-    Title: "",
-    OriginalPrice: 0,
-    DiscountPrice: 0,
-    sekil: "",
-    CategoryName: "",
-    Dil: "",
-    Müəllif: "",
-    stokSayi: 0,
-    satildi: 0,
-    baxildi: 0,
+    title: "",
+    price: 0,
+    discountPercentage: 0,
+    images: [],
+    category: "",
+    stock: 0,
     description: ""
   });
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "images") {
+      setFormData((prev) => ({
+        ...prev,
+        images: value.split(",").map(img => img.trim())
+      }));
+    }
+    else if (name === "price" || name === "discountPercentage" || name === "stock") {
+      const numericValue = value === "" ? 0 : Number(value);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: isNaN(numericValue) ? 0 : numericValue
+      }));
+    }
+    else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
+  async function createProduct(e) {
+    e.preventDefault()
+    try {
+      const res = await postNewProduct(formData)
+      if (res.status === 200 || res.status === 201) {
+        dispatch(getProducts())
+        AddClose()
+        alert('Məhsul əlavə edildi')
+      } else {
+        alert('Məhsul əlavə olunmadı - status: ' + res.status)
+      }
+    }
+    catch (error) {
+      console.error('Error caught:', error);
+      alert('Məhsul əlavə olunmadı - Error: ' + (error.message || 'Naməlum xəta'))
+    }
+  }
   return (
     <div className="modal-overlay" onClick={AddClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2 className="modal-title">Kitab elave Et</h2>
+        <h2 className="modal-title">Add new product</h2>
 
-        <form onSubmit={postBook}>
+        <form onSubmit={createProduct}>
           <div className="modal-body">
             <div className="modal-fields">
               <label>
-                Başlıq:
-                <input name='Title' type="text" value={formData.Title} onChange={handleChange} />
+                Name:
+                <input name='title' type="text" value={formData.title} onChange={handleChange} autoFocus />
               </label>
               <label>
-                Müəllif:
-                <input name='Müəllif' type="text" value={formData.Müəllif} onChange={handleChange} />
+                Price:
+                <input name='price' type="text" value={formData.price} onChange={handleChange} />
               </label>
               <label>
-                Qiymət:
-                <input name='OriginalPrice' type="number" value={formData.OriginalPrice} onChange={handleChange} />
+                Discounted price:
+                <input name='discountPercentage' type="text" value={formData.discountPercentage} onChange={handleChange} />
               </label>
               <label>
-                Endirimli Qiymət:
-                <input name='DiscountPrice' type="number" value={formData.DiscountPrice} onChange={handleChange} />
+                Category:
+                <input name='category' type="text" value={formData.category} onChange={handleChange} />
               </label>
               <label>
-                Dil:
-                <input name='Dil' type="text" value={formData.Dil} onChange={handleChange} />
+                Stock:
+                <input name='stock' type="text" value={formData.stock} onChange={handleChange} />
               </label>
               <label>
-                Kateqoriya:
-                <input name='CategoryName' type="text" value={formData.CategoryName} onChange={handleChange} />
+                Image:
+                <input name='images' type="text" value={formData.images} onChange={handleChange} placeholder="url1, url2, url3, ..." />
               </label>
               <label>
-                Stok Sayı:
-                <input name='stokSayi' type="number" value={formData.stokSayi} onChange={handleChange} />
-              </label>
-              <label>
-                Şəkil URL:
-                <input name='sekil' type="text" value={formData.sekil} onChange={handleChange} />
-              </label>
-              <label>
-                Təsvir:
+                Description:
                 <textarea name='description' rows="4" value={formData.description} onChange={handleChange} />
               </label>
             </div>
           </div>
           <div className="modal-actions">
-            <button className="save-btn" type='submit'>Gonder</button>
-            <button className="cancel-btn" type='button' onClick={AddClose}>Bağla</button>
+            <button className="save-btn" type='submit'>Send data</button>
+            <button className="cancel-btn" type='button' onClick={AddClose}>Close</button>
           </div>
         </form>
       </div>

@@ -1,34 +1,64 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Items from './Items'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../../../redux/ProductsSlice'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import Arrow from '../../childComponents/Arrow'
 import '../pageCss/products.css'
 import { HiOutlineXMark } from "react-icons/hi2";
 
 function Products() {
-
-    const { category } = useParams()
-    const [productsData, setProductsData] = useState([])
-    // const [categories, setCategories] = useState([])
-    const [selectedCat, setSelectedCat] = useState(category || 'All')
-    const [priceRange, setPriceRange] = useState('All')
-    const [filterModal, setFilterModal] = useState(false)
-    const { products } = useSelector(state => state.products)
-    const dispatch = useDispatch()
+    const { category } = useParams();
+    const [productsData, setProductsData] = useState([]);
+    const [selectedCat, setSelectedCat] = useState(category || 'All');
+    const [priceRanges, setPriceRanges] = useState([]);
+    const [filterModal, setFilterModal] = useState(false);
+    const [sortOrder, setSortOrder] = useState(null);
+    const location = useLocation()
+    const searchText = new URLSearchParams(location.search).get('search')
+    const modalRef = useRef()
+    const buttonRef = useRef(null);
+    const { products } = useSelector(state => state.products);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        document.title = selectedCat == 'All' ? 'All Nike Productions' : selectedCat + ' - Nike'
+    }, [selectedCat])
     useEffect(() => {
         if (category) setSelectedCat(category)
         else setSelectedCat('All')
-    }, [category])
+    }, [category]);
     useEffect(() => {
-        dispatch(getProducts())
-    }, [])
+        dispatch(getProducts());
+    }, [dispatch]);
     const categories = useMemo(() => [...new Set(products?.map(item => item.category))], [products]);
-    const maxPrice = useMemo(() => Math.max(...products.map(item => item.price)), [products])
+    const maxPrice = useMemo(() => Math.max(...products.map(item => item.price)), [products]);
     const toggleSortBtns = useCallback(() => {
         setFilterModal(prev => !prev);
     }, []);
+    const handlePriceChange = useCallback((range) => {
+        setPriceRanges(prev =>
+            prev.includes(range)
+                ? prev.filter(item => item !== range)
+                : [...prev, range]
+        );
+    }, []);
+    const handleClickOutside = (event) => {
+        if (
+            filterModal &&
+            modalRef.current &&
+            !modalRef.current.contains(event.target) &&
+            buttonRef.current &&
+            !buttonRef.current.contains(event.target)
+        ) {
+            setFilterModal(false);
+        }
+    };
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [filterModal]);
 
     return (
         <div className='product_page'>
@@ -37,69 +67,63 @@ function Products() {
                     <div className="product_top_line">
                         <div className="product_length">{selectedCat} {`(${productsData.length})`}</div>
                         <div className='sort_btn'>
-                            <button onClick={toggleSortBtns}>
+                            <button onClick={toggleSortBtns} ref={buttonRef}>
                                 <span>Sort By</span>
                                 <Arrow filterModal={filterModal} />
                             </button>
                         </div>
                         {filterModal &&
-                            <div className='filter_box1'>
+                            <div className='filter_box1' ref={modalRef}>
                                 <div className="filter_close_btn">
                                     <HiOutlineXMark onClick={toggleSortBtns} />
                                 </div>
                                 <div className='sort_modal'>
-                                    <h5>Sort by</h5>
+                                    <h5>Sort by Price</h5>
                                     <div className="sort">
-                                        <input type="radio" id='sortTypeDown' name='sortPrice' onClick={() => setFilterModal(false)} />
+                                        <input
+                                            type="radio"
+                                            id='sortTypeDown'
+                                            name='sortPrice'
+                                            onChange={() => {
+                                                setSortOrder('desc');
+                                                setFilterModal(false);
+                                            }}
+                                            checked={sortOrder === 'desc'}
+                                        />
                                         <label htmlFor="sortTypeDown">Price: High-Low</label>
                                     </div>
                                     <div className="sort">
-                                        <input type="radio" id='sortTypeUp' name='sortPrice' onClick={() => setFilterModal(false)} />
+                                        <input
+                                            type="radio"
+                                            id='sortTypeUp'
+                                            name='sortPrice'
+                                            onChange={() => {
+                                                setSortOrder('asc')
+                                                setFilterModal(false)
+                                            }}
+                                            checked={sortOrder === 'asc'}
+                                        />
                                         <label htmlFor="sortTypeUp">Price: Low-High</label>
                                     </div>
                                 </div>
                                 <div className="price_filter">
                                     <h5>Shop by Price</h5>
-                                    <div className='price_chooes'>
-                                        <input
-                                            type="radio"
-                                            name='filterPrice'
-                                            id='qiymetAll'
-                                            onChange={() => { setPriceRange('All') }} onClick={() => setFilterModal(false)} />
-                                        <label htmlFor="qiymetAll">All</label>
-                                    </div>
-                                    <div className='price_chooes'>
-                                        <input
-                                            type="radio"
-                                            name='filterPrice'
-                                            id='qiymet50'
-                                            onChange={() => { setPriceRange('0-50') }} onClick={() => setFilterModal(false)} />
-                                        <label htmlFor="qiymet50">$0 - $50</label>
-                                    </div>
-                                    <div className='price_chooes'>
-                                        <input
-                                            type="radio"
-                                            name='filterPrice'
-                                            id='qiymet100'
-                                            onChange={() => { setPriceRange('50-100') }} onClick={() => setFilterModal(false)} />
-                                        <label htmlFor="qiymet100">$50 - $100</label>
-                                    </div>
-                                    <div className='price_chooes'>
-                                        <input
-                                            type="radio"
-                                            name='filterPrice'
-                                            id='qiymet150'
-                                            onChange={() => { setPriceRange('100-150') }} onClick={() => setFilterModal(false)} />
-                                        <label htmlFor="qiymet150">$100 - $150</label>
-                                    </div>
-                                    <div className='price_chooes'>
-                                        <input
-                                            type="radio"
-                                            name='filterPrice'
-                                            id='qiymetUpper'
-                                            onChange={() => setPriceRange(`150-${maxPrice}`)} />
-                                        <label htmlFor="qiymetUpper">$150 - upper</label>
-                                    </div>
+                                    {[
+                                        { id: 'qiymet50', label: '$0 - $50', range: '0-50' },
+                                        { id: 'qiymet100', label: '$50 - $100', range: '50-100' },
+                                        { id: 'qiymet150', label: '$100 - $150', range: '100-150' },
+                                        { id: 'qiymetUpper', label: `$150 - upper`, range: `150-${maxPrice}` },
+                                    ].map(({ id, label, range }) => (
+                                        <div className='price_chooes' key={id}>
+                                            <input
+                                                type="checkbox"
+                                                id={id}
+                                                onChange={() => handlePriceChange(range)}
+                                                checked={priceRanges.includes(range)}
+                                            />
+                                            <label htmlFor={id}>{label}</label>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>}
                     </div>
@@ -108,9 +132,9 @@ function Products() {
                             <div className="category_filter">
                                 <button
                                     className={`category_btn ${selectedCat === 'All' ? 'active' : ''}`}
-                                    onClick={() => { setSelectedCat('All') }}
-                                    defaultChecked>
-                                    All</button>
+                                    onClick={() => { setSelectedCat('All') }}>
+                                    All
+                                </button>
                                 {categories &&
                                     categories?.map((item, index) => (
                                         <button
@@ -122,54 +146,33 @@ function Products() {
                                     ))}
                             </div>
                             <div className="price_filter">
-                                <div className='price_chooes'>
-                                    <input
-                                        type="radio"
-                                        name='filterPrice'
-                                        id='qiymetAll'
-                                        onChange={() => { setPriceRange('All') }} />
-                                    <label htmlFor="qiymetAll">All</label>
-                                </div>
-                                <div className='price_chooes'>
-                                    <input
-                                        type="radio"
-                                        name='filterPrice'
-                                        id='qiymet50'
-                                        onChange={() => { setPriceRange('0-50') }} />
-                                    <label htmlFor="qiymet50">$0 - $50</label>
-                                </div>
-                                <div className='price_chooes'>
-                                    <input
-                                        type="radio"
-                                        name='filterPrice'
-                                        id='qiymet100'
-                                        onChange={() => { setPriceRange('50-100') }} />
-                                    <label htmlFor="qiymet100">$50 - $100</label>
-                                </div>
-                                <div className='price_chooes'>
-                                    <input
-                                        type="radio"
-                                        name='filterPrice'
-                                        id='qiymet150'
-                                        onChange={() => { setPriceRange('100-150') }} />
-                                    <label htmlFor="qiymet150">$100 - $150</label>
-                                </div>
-                                <div className='price_chooes'>
-                                    <input
-                                        type="radio"
-                                        name='filterPrice'
-                                        id='qiymetUpper'
-                                        onChange={() => setPriceRange(`150-${maxPrice}`)} />
-                                    <label htmlFor="qiymetUpper">$150 - upper</label>
-                                </div>
+                                {[
+                                    { id: 'side50', label: '$0 - $50', range: '0-50' },
+                                    { id: 'side100', label: '$50 - $100', range: '50-100' },
+                                    { id: 'side150', label: '$100 - $150', range: '100-150' },
+                                    { id: 'sideUpper', label: `$150 - upper`, range: `150-${maxPrice}` },
+                                ].map(({ id, label, range }) => (
+                                    <div className='price_chooes' key={id}>
+                                        <input
+                                            type="checkbox"
+                                            id={id}
+                                            onChange={() => handlePriceChange(range)}
+                                            checked={priceRanges.includes(range)}
+                                        />
+                                        <label htmlFor={id}>{label}</label>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                         <div className="products_items">
                             <Items
                                 selectedCat={selectedCat}
-                                priceRange={priceRange}
+                                priceRanges={priceRanges}
                                 productsData={productsData}
-                                setProductsData={setProductsData} />
+                                sortOrder={sortOrder}
+                                searchText={searchText}
+                                setProductsData={setProductsData}
+                            />
                         </div>
                     </div>
                 </div>
@@ -178,4 +181,4 @@ function Products() {
     )
 }
 
-export default Products
+export default Products;

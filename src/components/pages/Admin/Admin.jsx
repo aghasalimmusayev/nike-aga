@@ -6,9 +6,13 @@ import AddModal from './AddModal'
 import EditModal from './EditModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../../redux/ProductsSlice';
+import { delProduct } from '../../../service/adminService';
 
 function Admin() {
 
+    useEffect(() => {
+        document.title = 'Admin Page'
+    }, [])
     const { products } = useSelector(state => state.products);
     const dispatch = useDispatch()
     useEffect(() => {
@@ -23,19 +27,31 @@ function Admin() {
         const satis = Number(item.sold) || 0;
         return acc + satis;
     }, 0);
-
     const [addOpen, setAddOpen] = useState(false)
     const [editOpen, setEditOpen] = useState(false)
-
+    const [productId, setProductId] = useState(null)
     function AddClose() {
         setAddOpen(false)
     }
     function addNewBook() {
         setAddOpen(true)
     }
-
+    function changeProduct(id) {
+        setEditOpen(true)
+        setProductId(id)
+    }
     function editClose() {
         setEditOpen(false)
+    }
+    async function deleteProduct(id) {
+        try {
+            await delProduct(id)
+            dispatch(getProducts())
+        }
+        catch (error) {
+            console.log('Delete error: ' + error)
+            alert('mehsul silinmedi', error)
+        }
     }
 
     return (
@@ -48,7 +64,7 @@ function Admin() {
                 </button>
             </div>
             {addOpen && <AddModal AddClose={AddClose} />}
-            {editOpen && <EditModal editClose={editClose} />}
+            {editOpen && <EditModal editClose={editClose} productId={productId} />}
             <div className="main_info">
                 <div className="main_info_heading">
                     <h3>All products</h3>
@@ -94,10 +110,10 @@ function Admin() {
                                     <td>{item.sold || 0}</td>
                                     <td>
                                         <div className="action-buttons">
-                                            <button className="edit-btn" >
+                                            <button className="edit-btn" onClick={() => changeProduct(item.id)} >
                                                 <SlPencil />
                                             </button>
-                                            <button className="delete-btn" >
+                                            <button className="delete-btn" onClick={() => deleteProduct(item.id)}>
                                                 <SlTrash />
                                             </button>
                                         </div>

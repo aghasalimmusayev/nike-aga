@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './Header'
 import Jordan from './JordanPic'
 import NikeFields from './NikeFields'
 import Classics from './Classics'
-import '../pageCss/mainPage.css'
 import Navigations from './Navigations'
-import SearchModal from '../../modals/SearchModal';
-import { useSelector } from 'react-redux'
+import '../pageCss/mainPage.css'
 
 function MainPage() {
 
-    const { searchToggle } = useSelector(state => state.toggleSearch)
+    useEffect(() => {
+        document.title = 'Nike. Just do It'
+    }, [])
+
     return (
         <main>
             <Header />
@@ -18,7 +19,6 @@ function MainPage() {
             <NikeFields />
             <Classics />
             <Navigations />
-            {searchToggle && <SearchModal />}
         </main>
     )
 }

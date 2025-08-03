@@ -14,7 +14,7 @@ function JordanPic() {
                 <div className="jordan_content">
                     <p className='jordan_text'>Air Jordan 3 'Starfish'</p>
                     <h4 className='jordan_heading'>Light Work, Hevvy Hiter</h4>
-                    <ButtonLink to='/' text='Shop' />
+                    <ButtonLink to='/products' text='Shop' />
                 </div>
             </div>
             <div className="jordan">
@@ -24,7 +24,7 @@ function JordanPic() {
                 <div className="jordan_content">
                     <p className='jordan_text'>Nike Universa</p>
                     <h4 className='jordan_heading'>Jordan Chiles` Go-To Leggings</h4>
-                    <ButtonLink to='/' text='Shop' />
+                    <ButtonLink to='/products' text='Shop' />
                 </div>
             </div>
         </div>

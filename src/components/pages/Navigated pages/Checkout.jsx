@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import './navigatedPage.css'
 import { useDispatch, useSelector } from 'react-redux'
 import WithAuth from '../Protection/Withauth'
@@ -9,9 +9,11 @@ import { TbArrowBackUp } from "react-icons/tb";
 
 function Checkout() {
 
+    useEffect(() => {
+        document.title = 'Complete your Payment'
+    }, [])
     const cartItems = useSelector(state => state.cartList.cartList)
     const selectedItems = useSelector(state => state.cartList.selectedItems)
-
     const checkoutItems = useMemo(
         () => cartItems.filter(item => selectedItems.includes(item.id)),
         [cartItems, selectedItems]

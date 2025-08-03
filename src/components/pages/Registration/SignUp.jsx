@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './reg.css'
 import NikeManLogo from '../../Nav/NikeManLogo'
 import Logo from '../../childComponents/Logo'
@@ -10,6 +10,9 @@ import { FaEyeSlash } from "react-icons/fa";
 
 function SignUp() {
 
+    useEffect(() => {
+        document.title = 'Join US - Nike.com'
+    }, [])
     const navigate = useNavigate()
     const [type, setType] = useState(false)
     const [typeAgain, setTypeAgain] = useState(false)
@@ -71,7 +74,7 @@ function SignUp() {
                     <NikeManLogo width={'50px'} />
                 </div>
                 <h2 className='auth_head'>Enter your informations to join us or sign in.</h2>
-                <input name='name' type="text" placeholder='Name' onChange={getValues} value={user.name} required />
+                <input name='name' type="text" placeholder='Name' onChange={getValues} value={user.name} required autoFocus />
                 <input name='surname' type="text" placeholder='Surname' onChange={getValues} value={user.surname} required />
                 <input name='phone' type="number" placeholder='Phone' onChange={getValues} value={user.phone} required />
                 <input name='email' type="email" placeholder='Email' onChange={getValues} value={user.email} required />

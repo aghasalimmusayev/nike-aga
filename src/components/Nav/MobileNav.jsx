@@ -12,7 +12,7 @@ import { VscFolder } from "react-icons/vsc";
 import { LiaStoreSolid } from "react-icons/lia";
 import { SlUserFollowing } from "react-icons/sl";
 
-function MobileNav({ setMenuBar, user, toggleDashModal }) {
+function MobileNav({ menuBar, setMenuBar, user, toggleDashModal }) {
     const { linkData } = useSelector(store => store.links)
     const [menuStep, setMenuStep] = useState(0);
     const [selectedLink, setSelectedLink] = useState(null);
@@ -37,7 +37,7 @@ function MobileNav({ setMenuBar, user, toggleDashModal }) {
     }
 
     return (
-        <div className="mobile_menu">
+        <div className={`mobile_menu ${menuBar ? 'open' : ''}`}>
             {menuStep > 0 && (
                 <button onClick={goBack} className="back_btn">
                     <SlArrowLeft style={{ fontSize: '14px' }} />

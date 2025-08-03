@@ -61,7 +61,7 @@ function Classics() {
             </div>
             <div className="classics" ref={classicRef}>
                 {classics?.map(item => (
-                    <Link to={'/'} key={item.id}>
+                    <Link to={'/products/Sport'} key={item.id}>
                         <img src={item.images[0]} alt="" />
                         <h3>{item.name}</h3>
                     </Link>
