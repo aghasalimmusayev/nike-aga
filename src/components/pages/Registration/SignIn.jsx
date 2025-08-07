@@ -28,7 +28,7 @@ function SignIn() {
     function loginSubmit(e) {
         e.preventDefault()
         if (!user.email || !user.password) {
-            alert('Please fill all fiels!')
+            showError('Please fill all fiels!')
             return
         }
         loginUser(user)
