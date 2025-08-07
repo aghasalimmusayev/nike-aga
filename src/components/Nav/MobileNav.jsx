@@ -9,7 +9,7 @@ import NikeArrowIcon from './NikeArrowIcon';
 import { IoHelpCircleOutline } from "react-icons/io5";
 import { IoBagOutline } from "react-icons/io5";
 import { VscFolder } from "react-icons/vsc";
-import { LiaStoreSolid } from "react-icons/lia";
+import { LuCalendarHeart } from "react-icons/lu";
 import { SlUserFollowing } from "react-icons/sl";
 
 function MobileNav({ menuBar, setMenuBar, user, toggleDashModal }) {
@@ -94,8 +94,8 @@ function MobileNav({ menuBar, setMenuBar, user, toggleDashModal }) {
                 </div>
             )}
             <div className="nike_logos">
-                <NikeManLogo width={'30px'} height={'30px'} />
-                <NikeArrowIcon width={'30px'} height={'30px'} />
+                <Link to={'/'}><NikeManLogo width={'30px'} height={'30px'} /></Link>
+                <Link to={'/'}><NikeArrowIcon width={'30px'} height={'30px'} /></Link>
             </div>
             <p className='becom_member'>Become a Nike Member for the best products, inspriration and stories in sport.
                 <Link onClick={() => setMenuBar(false)} to={'/'}> Learn more</Link></p>
@@ -109,21 +109,21 @@ function MobileNav({ menuBar, setMenuBar, user, toggleDashModal }) {
                     <Link onClick={() => setMenuBar(false)} to={'/signIn'}>Sign In</Link>
                 </div>}
             <div className="mobile_navigations">
-                <Link>
-                    <IoHelpCircleOutline />
-                    <span>Help</span>
-                </Link>
-                <Link>
-                    <IoBagOutline />
-                    <span>Bag</span>
-                </Link>
-                <Link>
+                <Link to={'/'}>
                     <VscFolder />
                     <span>Orders</span>
                 </Link>
-                <Link>
-                    <LiaStoreSolid />
-                    <span>Find a Store</span>
+                <Link to={'/shoppingCart'}>
+                    <IoBagOutline />
+                    <span>Bag</span>
+                </Link>
+                <Link to={'/wishlist'}>
+                    <LuCalendarHeart />
+                    <span>Favorites</span>
+                </Link>
+                <Link to={'/'}>
+                    <IoHelpCircleOutline />
+                    <span>Help</span>
                 </Link>
             </div>
         </div>

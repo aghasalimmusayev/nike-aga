@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../../../redux/ProductsSlice'
 import { useLocation, useParams } from 'react-router-dom'
 import Arrow from '../../childComponents/Arrow'
-import '../pageCss/products.css'
 import { HiOutlineXMark } from "react-icons/hi2";
+import '../pageCss/products.css'
 
 function Products() {
     const { category } = useParams();

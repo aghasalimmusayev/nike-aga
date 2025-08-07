@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const state = {
-    countryName: localStorage.getItem('CountryName') || 'United States'
+    countryName: localStorage.getItem('CountryName') || 'Select region'
 }
 
 export const countryNameSlice = createSlice({

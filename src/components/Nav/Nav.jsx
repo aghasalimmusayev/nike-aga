@@ -9,10 +9,8 @@ import HelpModal from '../modals/HelpModal'
 import MobileNav from './MobileNav';
 import Navlinks from './Navlinks'
 
-function Nav({ toggleDashModal, user }) {
+function Nav({ toggleDashModal, user, menuBar, setMenuBar }) {
 
-    const [menuBar, setMenuBar] = useState(false)
-    const { linkData, loading, error } = useSelector(store => store.links)
     const [help, setHelp] = useState(false)
     const helpRef = useRef(null)
     // Nike scroll behavior states - YENİ
@@ -65,12 +63,6 @@ function Nav({ toggleDashModal, user }) {
     const openBar = useCallback(() => {
         setMenuBar(true);
     }, []);
-    if (loading) {
-        return <p className='links_loading'>Linkler yuklenir...</p>
-    }
-    if (error) {
-        return <p className='links_error'>Error: {error}</p>
-    }
 
     return (
         <nav className={`

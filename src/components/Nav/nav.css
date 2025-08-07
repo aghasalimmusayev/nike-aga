@@ -68,6 +68,7 @@
     padding: 10px;
     cursor: pointer;
 }
+nav{overflow-x: hidden;}
 .menu_bar{display: none;}
 .mobile_menu {display: none;}
 .navlinks_bg {
@@ -256,6 +257,7 @@ nav.nav-fixed .nav_content {transition: all 0.3s ease;}
     .toplinks_bg.hide {display: none;}
     .toplinks{display: none;overflow: hidden;}
     .navlinks{display: none;}
+    .nike_logos a{color: #111;}
     .nike_logos{
         margin-top: 30px;
         display: flex;
@@ -365,6 +367,7 @@ nav.nav-fixed .nav_content {transition: all 0.3s ease;}
     }
     .mobile_menu.open{
         transform: translateX(0);
+        overflow-x: hidden;
     }
     .mobile_menu {
         position: fixed;
@@ -383,18 +386,6 @@ nav.nav-fixed .nav_content {transition: all 0.3s ease;}
         overscroll-behavior: contain;
         transition: all 0.3s ease;
     }
-    /* .mobile_menu::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        z-index: 0;
-        pointer-events: none;
-        background: rgba(0, 0, 0, 0.3);
-        transition: opacity 0.3s ease;
-    } */
     .menu_link{
         width: 100%;
         background: none;

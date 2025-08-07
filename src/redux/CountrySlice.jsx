@@ -7,7 +7,6 @@ const state = {
 
 export const getCountryLinks = createAsyncThunk("countryLinks", async () => {
     const response = await countryLinks()
-    console.log(response)
     return response
 })
 

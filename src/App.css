@@ -20,7 +20,12 @@
     font-weight: 600;
     color: #111;
 }
-
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
 
 @media (min-width: 768px) {
     .container {width: 90%;}

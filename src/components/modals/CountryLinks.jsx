@@ -66,13 +66,14 @@ function CountryLinks({ closeCModal }) {
                                     className='region_countries'
                                     ref={el => contrRef.current[index] = el}>
                                     {countryData?.filter(element => element.continent === item)
-                                        .map(country => (
+                                        .map((country, index) => (
                                             <Link
                                                 to={`/${country.code}`}
-                                                key={country.id}
+                                                key={index}
                                                 onClick={() => {
                                                     closeCModal();
                                                     dispatch(setCountryName(country.name));
+                                                    localStorage.setItem('selectedCountry', 'true')
                                                 }}>
                                                 <IoLocationOutline style={{ color: "#CACACB", fontSize: "24px" }} />
                                                 <div className="country_info">

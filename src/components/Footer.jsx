@@ -5,6 +5,7 @@ import { getFooterLinks } from '../redux/FooterSlice'
 import { IoIosArrowDown } from "react-icons/io";
 import CountryBtn from './childComponents/CountryBtn'
 import Guides from './childComponents/Footer children/Guides'
+import './pages/pageCss/footer.css'
 
 function Footer({ openCModal }) {
     const [guides, setGuides] = useState(false)

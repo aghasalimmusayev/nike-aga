@@ -20,17 +20,17 @@ function Whislist() {
                 <div className="wish_box">
                     {wishList.length > 0
                         ? wishList.map(item => (
-                            <Link to={`/details/${item.id}`} className="wishItem" key={item.id}>
-                                <div className="wish_item_img">
+                            <div className="wishItem" key={item.id}>
+                                <Link to={`/details/${item.id}`} className="wish_item_img">
                                     <img src={item.images[0]} alt="wish_img" />
-                                </div>
+                                </Link>
                                 <div className="wishItem_info">
                                     <h3 className='wishItem_name'>{item.title}</h3>
                                     <h4 className='wishItem_cat'>{item.category}</h4>
                                     <p className='wishItem_price'>Price: {item.price} $</p>
                                     <button className='wish_remove' onClick={() => dispatch(removeFromWish(item.id))}><IoTrashBin /></button>
                                 </div>
-                            </Link>
+                            </div>
                         ))
                         : <p className='empty_wish_info'>There are no items in your WishList.</p>
                     }
