@@ -6,6 +6,7 @@ import { sellProduct } from '../../../service/sellService'
 import { clearSelection } from '../../../redux/CartSlice'
 import { Link } from 'react-router-dom'
 import { TbArrowBackUp } from "react-icons/tb";
+import { paymentInfo } from '../../Notify'
 
 function Checkout() {
 
@@ -39,7 +40,7 @@ function Checkout() {
                 await sellProduct(item.id, updatedData)
             }
             dispatch(clearSelection())
-            alert('Sifaris ugurla tamamlandi')
+            paymentInfo()
         }
         catch (error) {
             console.error('Satis-da xeta: ' + error)

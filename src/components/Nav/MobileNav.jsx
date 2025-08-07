@@ -109,19 +109,19 @@ function MobileNav({ menuBar, setMenuBar, user, toggleDashModal }) {
                     <Link onClick={() => setMenuBar(false)} to={'/signIn'}>Sign In</Link>
                 </div>}
             <div className="mobile_navigations">
-                <Link to={'/'}>
+                <Link to={'/'} onClick={() => setMenuBar(false)}>
                     <VscFolder />
                     <span>Orders</span>
                 </Link>
-                <Link to={'/shoppingCart'}>
+                <Link to={'/shoppingCart'} onClick={() => setMenuBar(false)}>
                     <IoBagOutline />
                     <span>Bag</span>
                 </Link>
-                <Link to={'/wishlist'}>
+                <Link to={'/wishlist'} onClick={() => setMenuBar(false)}>
                     <LuCalendarHeart />
                     <span>Favorites</span>
                 </Link>
-                <Link to={'/'}>
+                <Link to={'/'} onClick={() => setMenuBar(false)}>
                     <IoHelpCircleOutline />
                     <span>Help</span>
                 </Link>

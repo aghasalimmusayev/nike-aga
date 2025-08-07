@@ -7,6 +7,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { addToCart } from '../../../redux/CartSlice';
 import { addToWish, removeFromWish } from '../../../redux/WishSlice';
+import { showAddToCart } from '../../Notify';
 
 function Details() {
     const { id } = useParams()
@@ -53,7 +54,10 @@ function Details() {
                             <div className="detail_btns">
                                 {inCart
                                     ? <Link to={'/shoppingCart'} className='go_to_cart' >Go to Cart</Link>
-                                    : <button className='add_to_cart' onClick={() => dispatch(addToCart(objById))}>Add to Cart</button>}
+                                    : <button className='add_to_cart' onClick={() => {
+                                        dispatch(addToCart(objById)),
+                                            showAddToCart()
+                                    }}>Add to Cart</button>}
                                 <button className='fav_btn' onClick={() => dispatch(addToWish(objById))} >
                                     <span>Favorite</span>
                                     <div className="fav_btn_icon">

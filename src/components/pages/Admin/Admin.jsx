@@ -7,6 +7,7 @@ import EditModal from './EditModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../../redux/ProductsSlice';
 import { delProduct } from '../../../service/adminService';
+import { showDeleteSuccess, showError } from '../../Notify';
 
 function Admin() {
 
@@ -47,10 +48,11 @@ function Admin() {
         try {
             await delProduct(id)
             dispatch(getProducts())
+            showDeleteSuccess()
         }
         catch (error) {
             console.log('Delete error: ' + error)
-            alert('mehsul silinmedi', error)
+            showError('Couldn`t delete the production')
         }
     }
 

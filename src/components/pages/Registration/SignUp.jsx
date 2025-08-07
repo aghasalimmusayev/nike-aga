@@ -7,6 +7,7 @@ import { nanoid } from 'nanoid'
 import { registerUser } from '../../../service/regService'
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { showError, showRegSuccess } from '../../Notify'
 
 function SignUp() {
 
@@ -44,7 +45,6 @@ function SignUp() {
                 role: 'user',
                 active: true
             }
-            console.log(userData)
             const result = await registerUser(userData)
             if (result.success) {
                 setUser({
@@ -57,11 +57,12 @@ function SignUp() {
                 })
                 setPasswordAgain('')
                 navigate('/signIn')
+                showRegSuccess()
             }
             console.log(result.message)
         }
         else {
-            alert('The password is not match')
+            showError('The password is not match')
         }
     }
 

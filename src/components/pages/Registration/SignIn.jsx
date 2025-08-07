@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../service/regService'
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { showError, showLogSuccess } from '../../Notify';
 
 function SignIn() {
 
@@ -39,9 +40,10 @@ function SignIn() {
                 })
                 if (item.role === 'SuperAdmin') navigate('/Admin')
                 else navigate('/')
+                showLogSuccess()
             })
             .catch(err => {
-                alert('Your email or password is not correct');
+                showError('Your email or password is not correct');
                 console.error('Login error:', err);
             })
     }

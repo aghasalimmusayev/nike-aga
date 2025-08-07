@@ -58,7 +58,7 @@
     height: 100%;
     object-fit: cover;
 }
-.autoplay-progress {
+/* .autoplay-progress {
     position: absolute;
     right: 116px;
     bottom: 25px;
@@ -121,7 +121,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 13;
-}
+} */
 .swiper-button-next,
 .swiper-button-prev {display: none;}
 .custom-navigation {
@@ -171,10 +171,10 @@
 
 @media (max-width: 768px) {
     .custom-navigation {display: none;}
-    .autoplay-progress {
+    /* .autoplay-progress {
         right: 20px;
         bottom: 20px;
-    }
+    } */
     .slide_content {
         bottom: 15%;
         left: 50%;

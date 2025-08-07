@@ -11,6 +11,7 @@ import ProtectedRoute from './components/pages/Protection/ProtectedRoute'
 import ErrorPage from './components/ErrorPage'
 import Scroll from './components/Scroll'
 import Loader from './components/Loader'
+import Notify from './components/Notify'
 const Wishlist = lazy(() => import('./components/pages/Navigated pages/Whislist'))
 const ShoppingCart = lazy(() => import('./components/pages/Navigated pages/ShoppingCart'))
 const Products = lazy(() => import('./components/pages/Navigated pages/Products'))
@@ -18,10 +19,12 @@ const Details = lazy(() => import('./components/pages/Navigated pages/Details'))
 const Checkout = lazy(() => import('./components/pages/Navigated pages/Checkout'))
 const Profile = lazy(() => import('./components/pages/Registration/Profile'))
 const Admin = lazy(() => import('./components/pages/Admin/Admin'))
+
 function App() {
 
   return (
     <>
+      <Notify />
       <Scroll />
       <Suspense fallback={<div className='loader'><Loader /></div>}>
         <Routes>

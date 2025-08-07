@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import { postNewProduct } from '../../../service/adminService';
 import { getProducts } from '../../../redux/ProductsSlice';
 import { useDispatch } from 'react-redux';
+import { showAddSuccess, showError } from '../../Notify';
 
 function AddModal({ AddClose }) {
 
@@ -47,14 +48,14 @@ function AddModal({ AddClose }) {
       if (res.status === 200 || res.status === 201) {
         dispatch(getProducts())
         AddClose()
-        alert('Məhsul əlavə edildi')
+        showAddSuccess()
       } else {
-        alert('Məhsul əlavə olunmadı - status: ' + res.status)
+        showError('Could not add the production - status: ' + res.status)
       }
     }
     catch (error) {
       console.error('Error caught:', error);
-      alert('Məhsul əlavə olunmadı - Error: ' + (error.message || 'Naməlum xəta'))
+      showError('Could not add the production - Error: ' + (error.message || 'Unknowen error'))
     }
   }
   return (

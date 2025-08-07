@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Nav from '../components/Nav/Nav'
-import Footer from '../components/Footer'
+import Footer from '../components/Footer/Footer'
 import CountryLinks from '../components/modals/CountryLinks'
 import DashModal from '../components/modals/DashModal'
 import { Outlet, useNavigate } from 'react-router-dom'
@@ -20,6 +20,13 @@ function Layout() {
     const [user, setUser] = useState(() => {
         return JSON.parse(localStorage.getItem('user')) || null;
     });
+    useEffect(() => {
+        if (menuBar) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }, [menuBar]);
     useEffect(() => {
         if (!dashModal) return;
         const handleClickOutside = (e) => {

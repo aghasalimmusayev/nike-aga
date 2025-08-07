@@ -1,45 +1,26 @@
 import React, { memo, useCallback, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { IoChevronBack, IoChevronForward, IoPlay, IoPause } from 'react-icons/io5';
+import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './slider.css';
-import slideV1 from '../../../assets/video/Slide1.mp4'
-import slideV2 from '../../../assets/video/Slide3.mp4'
-import slideV3 from '../../../assets/video/Slide4.mp4'
-import slide5 from '../../../assets/img/nike_boots.jpg'
-import slide6 from '../../../assets/img/nike-slider6.jpg'
-import ButtonLink from '../ButtonLink'
+import slideV1 from '../../../../assets/video/Slide1.mp4'
+import slideV2 from '../../../../assets/video/Slide3.mp4'
+import slideV3 from '../../../../assets/video/Slide4.mp4'
+import slide5 from '../../../../assets/img/nike_boots.jpg'
+import slide6 from '../../../../assets/img/nike-slider6.jpg'
+import ButtonLink from '../../../childComponents/ButtonLink'
 
 function Slider() {
     const progressCircle = useRef(null);
     const swiperRef = useRef(null);
-    const [isPlaying, setIsPlaying] = useState(true);
     const videoRef = useRef([]);
+
     const onAutoplayTimeLeft = useCallback((s, time, progress) => {
         if (progressCircle.current) {
             progressCircle.current.style.setProperty('--progress', 1 - progress);
-        }
-    }, []);
-
-    // Play/Pause toggle funksiyası
-    const toggleAutoplay = useCallback(() => {
-        if (swiperRef.current?.swiper) {
-            if (isPlaying) {
-                swiperRef.current.swiper.autoplay.pause();
-                videoRef.current.forEach(video => {
-                    if (video && !video.paused) video.pause()
-                })
-                setIsPlaying(false);
-            } else {
-                swiperRef.current.swiper.autoplay.resume();
-                videoRef.current.forEach(video => {
-                    if (video && video.paused) video.play()
-                })
-                setIsPlaying(true);
-            }
         }
     }, []);
 
@@ -64,7 +45,13 @@ function Slider() {
 
                 <SwiperSlide className='slide'>
                     <video
-                        src={slideV1} autoPlay muted loop playsInline ref={(el) => videoRef.current[0] = el} className='slide_video'>
+                        src={slideV1}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        ref={(el) => videoRef.current[0] = el}
+                        className='slide_video'>
                     </video>
                     <div className="slide_content">
                         <h1>BRING YOUR GAME</h1>
@@ -74,7 +61,13 @@ function Slider() {
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
                     <video
-                        src={slideV2} autoPlay muted loop playsInline ref={(el) => videoRef.current[1] = el} className='slide_video'>
+                        src={slideV2}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        ref={(el) => videoRef.current[1] = el}
+                        className='slide_video'>
                     </video>
                     <div className="slide_content">
                         <h1>SCARY GOOD PACK</h1>
@@ -84,7 +77,13 @@ function Slider() {
                 </SwiperSlide>
                 <SwiperSlide className='slide'>
                     <video
-                        src={slideV3} autoPlay muted loop playsInline ref={(el) => videoRef.current[2] = el} className='slide_video'>
+                        src={slideV3}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        ref={(el) => videoRef.current[2] = el}
+                        className='slide_video'>
                     </video>
                     <div className="slide_content">
                         <h1>AVA ROWER</h1>
@@ -125,11 +124,6 @@ function Slider() {
                     <svg viewBox="0 0 48 48" ref={progressCircle}>
                         <circle cx="24" cy="24" r="20"></circle>
                     </svg>
-                    <button
-                        className="play-pause-btn"
-                        onClick={toggleAutoplay}>
-                        {isPlaying ? <IoPause /> : <IoPlay />}
-                    </button>
                 </div>
             </Swiper>
         </>

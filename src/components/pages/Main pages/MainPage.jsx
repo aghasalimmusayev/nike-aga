@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Header from './Header'
+import Header from './Header/Header'
 import Jordan from './JordanPic'
 import NikeFields from './NikeFields'
 import Classics from './Classics'

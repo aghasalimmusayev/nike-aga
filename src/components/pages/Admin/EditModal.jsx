@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './adminCSS/modal.css';
-import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { editProduct } from '../../../service/adminService';
 import { getProducts } from '../../../redux/ProductsSlice';
+import { showError, showUpdateSuccess } from '../../Notify';
 
 function EditModal({ editClose, productId }) {
 
@@ -60,11 +60,11 @@ function EditModal({ editClose, productId }) {
       const res = await editProduct(productId, formData)
       dispatch(getProducts())
       editClose()
-      alert('mehsul deyisdirildi')
+      showUpdateSuccess()
     }
     catch (error) {
       console.log('Mehsul edit olmadi: ' + error)
-      alert('deyisdirilme bas vermedi')
+      showError('Unable to update production')
     }
   }
 

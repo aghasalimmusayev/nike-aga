@@ -12,11 +12,6 @@ function Navlinks({ openBar, user }) {
     const { linkData } = useSelector(store => store.links)
     const cartItems = useSelector(state => state.cartList.cartList)
     const { wishList } = useSelector(state => state.wishList)
-    // console.log('Navlinks rendered', {
-    //     linkData,
-    //     cartItemsLength: cartItems.length,
-    //     wishListLength: wishList.length
-    // });
     const [altData, setAltData] = useState([])
     const [hoverAlt, setHoverAlt] = useState(false)
     const altLinksRef = useRef(null)
@@ -25,12 +20,10 @@ function Navlinks({ openBar, user }) {
         const linkObj = linkData?.find(item => item.name === linkName);
         setAltData(linkObj.altCat);
         setHoverAlt(true)
-        console.log('ShowAlt render')
     }
     function hideAlt() {
         setAltData([])
         setHoverAlt(false)
-        console.log('HideAlt render')
     }
     useEffect(() => {
         if (altLinksRef.current) {

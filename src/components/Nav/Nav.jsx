@@ -13,17 +13,14 @@ function Nav({ toggleDashModal, user, menuBar, setMenuBar }) {
 
     const [help, setHelp] = useState(false)
     const helpRef = useRef(null)
-    // Nike scroll behavior states - YENİ
     const [isScrolled, setIsScrolled] = useState(false);
     const [scrollDirection, setScrollDirection] = useState('up');
-    // const [lastScrollY, setLastScrollY] = useState(0);
     const lastScrollY = useRef(0);
     const [isAtTop, setIsAtTop] = useState(true);
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getNavlinks())
     }, [])
-    // Nike scroll behavior - YENİ
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
@@ -47,7 +44,6 @@ function Nav({ toggleDashModal, user, menuBar, setMenuBar }) {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Desktop altLinks functions
     function showHelpModal() {
         setHelp(true)
     }
