@@ -1,5 +1,5 @@
 import './App.css'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Layout from '../src/Layout/Layout'
 import BlanckLayout from './Layout/BlanckLayout'
@@ -12,6 +12,8 @@ import ErrorPage from './components/ErrorPage'
 import Scroll from './components/Scroll'
 import Loader from './components/Loader'
 import Notify from './components/Notify'
+import { useDispatch, useSelector } from 'react-redux'
+import { getNavlinks } from './redux/LinksDataSlice'
 const Wishlist = lazy(() => import('./components/pages/Navigated pages/Whislist'))
 const ShoppingCart = lazy(() => import('./components/pages/Navigated pages/ShoppingCart'))
 const Products = lazy(() => import('./components/pages/Navigated pages/Products'))
@@ -21,7 +23,13 @@ const Profile = lazy(() => import('./components/pages/Registration/Profile'))
 const Admin = lazy(() => import('./components/pages/Admin/Admin'))
 
 function App() {
-
+  const dispatch = useDispatch()
+  const { linkData } = useSelector(state => state.links)
+  useEffect(() => {
+    if (!linkData || linkData.length === 0) {
+      dispatch(getNavlinks())
+    }
+  }, [dispatch, linkData.length])
   return (
     <>
       <Notify />

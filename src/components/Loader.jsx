@@ -4,6 +4,9 @@ import styled from 'styled-components';
 const Loader = () => {
   return (
     <StyledWrapper>
+      <p className='loading_text'>
+        Since this project uses a fake API, it may take a moment for the data to load. <br /> Please wait a little.
+      </p>
       <div className="loader">
         <div className="react-star">
           <div className="nucleus" />
@@ -20,6 +23,7 @@ const StyledWrapper = styled.div`
   .loader {
     height: 20rem;
     width: 20rem;
+    margin: auto;
     background-color: #fff;
     display: flex;
     justify-content: center;

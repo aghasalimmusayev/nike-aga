@@ -9,7 +9,7 @@ import SearchModal from '../components/modals/SearchModal';
 import Loader from '../components/Loader'
 
 function Layout() {
-    const { linkData, loading } = useSelector(state => state.links)
+    const { loading } = useSelector(state => state.links)
     const [menuBar, setMenuBar] = useState(false)
     const navigate = useNavigate()
     const [cModal, setCModal] = useState(() => {
@@ -55,7 +55,7 @@ function Layout() {
     }, [navigate])
 
     if (loading) {
-        (<div className='loader'><Loader /></div>)
+        return <div className='loader'><Loader /></div>
     }
     return (
         <>

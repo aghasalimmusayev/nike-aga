@@ -1,7 +1,5 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getNavlinks } from '../../redux/LinksDataSlice'
 import './nav.css'
 import NikeManLogo from './NikeManLogo'
 import NikeArrowIcon from './NikeArrowIcon'
@@ -17,10 +15,6 @@ function Nav({ toggleDashModal, user, menuBar, setMenuBar }) {
     const [scrollDirection, setScrollDirection] = useState('up');
     const lastScrollY = useRef(0);
     const [isAtTop, setIsAtTop] = useState(true);
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getNavlinks())
-    }, [])
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
